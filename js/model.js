@@ -1,4 +1,5 @@
-"use strict";
+var capturePhoto = (function(app) {
+    "use strict";
 
-// -------------------------------------------------- The Models ---------------------------------------------------- //
-
+    return app;
+})(capturePhoto);
