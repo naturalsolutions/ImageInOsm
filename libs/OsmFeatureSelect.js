@@ -78,12 +78,9 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
         this.mapObject.addLayer(this.dataLayer);
 
         this.dataLayer.events.on({
-            featureselected: function (e) {
-                this.trigger('change', this);
-            },
-            featureunselected: function (e) {
-                this.trigger('change', this);
-            },
+            loadend: this.triggerChange,
+            featureselected: this.triggerChange,
+            featureunselected: this.triggerChange,
             scope: this
         });
 
@@ -112,6 +109,8 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
         // /!\ Possible cross-domain request issues here
         this.dataLayer.strategies[0].load({url: 'http://api.openstreetmap.fr/api/0.6/map?bbox='+extent.left+','+extent.bottom+','+extent.right+','+extent.top});
     },
+
+    triggerChange: function() {this.trigger('change', this);},
 
     render: function() {
         this.createMap();
