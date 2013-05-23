@@ -9,7 +9,8 @@ var capturePhoto = (function(app) {
 		utils: {},
 		global: {},
 		init: function() {
-            var initalizers = [];
+            var initalizers = [],
+                dfd;
 
             // Load templates (async)
             initalizers.push(
@@ -23,7 +24,7 @@ var capturePhoto = (function(app) {
 
             // Detect current geographic position
             if (navigator.geolocation) {
-                var dfd = $.Deferred();
+                dfd = $.Deferred();
                 var callbackSuccess = $.proxy(function(position) {
                     this.global.currentPosition = {
                         lat: position.coords.latitude,
@@ -40,6 +41,7 @@ var capturePhoto = (function(app) {
                     callbackError,
                     {maximumAge: 200000, enableHighAccuracy: false}
                 );
+                initalizers.push(dfd);
             }
 
             // Detect device width
