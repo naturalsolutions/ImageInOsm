@@ -1,6 +1,16 @@
 var capturePhoto = (function(app) {
     "use strict";
 
+    app.Views.OsmSelect = Backbone.Layout.extend({
+        template: "#osm-selector-page",
+
+        afterRender: function() {
+            // Adding {manage: true} to BB.Form failed, hence this manual subview
+            var form = new Backbone.Form({model: app.models.pic, fields: ['osmid']});
+            this.$el.find('.osm-selector').empty().append(form.render().$el);
+        }
+    });
+
     app.Views.Capture = Backbone.View.extend({
         manage: true,
 

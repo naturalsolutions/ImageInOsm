@@ -44,7 +44,7 @@ var capturePhoto = (function(app) {
                 initalizers.push(dfd);
             }
 
-            // Detect device width
+            // Set map size depending on device width
             var e = window, a = 'inner';
             if (!('innerWidth' in window)) {
                 a = 'client';
@@ -54,6 +54,10 @@ var capturePhoto = (function(app) {
                 w: e[a + 'Width'],
                 h: e[a + 'Height']
             };
+            app.global.mapSize = {
+                width: (app.global.viewportSize.w - 40) + 'px',
+                height: (app.global.viewportSize.h - 100) + 'px'
+            };
 
             // Start app when everything is ready
             $.when.apply($, initalizers).done(function() {
@@ -61,7 +65,7 @@ var capturePhoto = (function(app) {
                     template: '#main-layout',
                     el: $('#content')
                 });
-                app.views.main.setView(new app.Views.Capture());
+                app.views.main.setView(new app.Views.OsmSelect());
                 app.views.main.render();
             });
         }
