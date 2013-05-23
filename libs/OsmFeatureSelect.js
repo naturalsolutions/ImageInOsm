@@ -92,6 +92,16 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
         this.selector.activate();
         
         if (this.value !== null) this.setValue(this.value);
+
+        // Add a button on the map for data loading
+        var loadButton = $('<div>')
+            .css({position: 'absolute', top: '1em', right: '1em', 'z-index': 1000})
+            .append(
+                $('<button type="button">')
+                    .addClass('btn').append($('<i>').addClass('icon-download'))
+                    .on('click', $.proxy(this.loadData, this))
+            );
+        this.$el.append(loadButton);
     },
 
     loadData: function() {
