@@ -3,6 +3,9 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
      * TODO:
      * o ajouter la possibiliter de filtrer sur tag/key
      * x sélectionner this.value lors de l'init le cas échéant
+     * o ajouter un  marqueur "vous êtes ici"
+     * o étendre OL.Protocol.HTTP pour définir filterToParams
+     * o essayer de positionner la carte en CSS (déporter le createmap ? sur quel évènement ?)
      */
 
     tagName: 'div',
@@ -25,8 +28,13 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
         if (this.mapObject !== null)
             return this.mapObject;
 
-        // Ensure the map div has a size. FIXME: crappy code, should not be necessary (size is controlled by CSS)
-        this.$el.css(this.schema.mapSize || {width: '800px', height: '300px'});
+        // Ensure the map div has a size. FIXME: crappy code, should not be necessary (sizing/positionning is normally controlled by CSS...)
+        var mapSize;
+        if ('mapSize' in this.schema.mapConfig)
+            mapSize = this.schema.mapConfig.mapSize;
+        else
+            mapSize = {width: '800px', height: '300px'};
+        this.$el.css(mapSize);
 
         // Initialize map with baselayer, projection, center, etc...
         var mapOptions = {
@@ -34,16 +42,24 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
             displayProjection: new OpenLayers.Projection('EPSG:4326'),
             layers: []
         };
-        if ('basemapUrl' in this.schema) {
-            mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', this.schema.basemapUrl, {tileOptions: {crossOriginKeyword: null}}));
+        if ('basemapUrl' in this.schema.mapConfig) {
+            mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', this.schema.mapConfig.basemapUrl, {tileOptions: {crossOriginKeyword: null}, transitionEffect: 'resize'}));
         } else {
-            mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan'));
-        }
-        if ('mapCenter' in this.schema) {
-            mapOptions.center = (new OpenLayers.LonLat([this.schema.mapCenter.lon, this.schema.mapCenter.lat])).transform(mapOptions.displayProjection, mapOptions.projection);
-            mapOptions.zoom = this.schema.mapCenter.zoom;
+            mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', null, {transitionEffect: 'resize'}));
         }
         this.mapObject = new OpenLayers.Map(this.el, mapOptions);
+        if ('currentPosition' in this.schema.mapConfig) {
+            // Zoom to a focus point if any
+            this.mapObject.setCenter(
+                (new OpenLayers.LonLat([this.schema.mapConfig.currentPosition.lon, this.schema.mapConfig.currentPosition.lat])).transform(mapOptions.displayProjection, mapOptions.projection),
+                18
+            );
+        } else {
+            // Zoom to a wide extent otherwise
+            var ext = this.schema.mapConfig.mapExtent,
+                bounds = new OpenLayers.Bounds([ext.minx, ext.miny, ext.maxx, ext.maxy]);
+            this.mapObject.zoomToExtent(bounds.transform(mapOptions.displayProjection, mapOptions.projection));
+        }
 
         // Add vector data layer
         this.dataLayer = new OpenLayers.Layer.Vector('Données', {
@@ -73,16 +89,12 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
     },
 
     loadData: function() {
-        var url;
-        if (window.location.host == '') {// Debug environment, avoid cross-domain policy issues...
-            url = 'map.osm';
-        } else {
-            var extent = this.mapObject.getExtent();
-            if (extent === null) return; // Map is not initialized yet
-            extent = extent.transform(this.mapObject.getProjectionObject(), this.mapObject.displayProjection);
-            url = 'http://api.openstreetmap.fr/api/0.6/map?bbox='+extent.left+','+extent.bottom+','+extent.right+','+extent.top;
-        }
-        this.dataLayer.strategies[0].load({url: url});
+        var extent = this.mapObject.getExtent();
+        if (extent === null) return; // Map is not initialized yet
+        if (this.mapObject.getZoom() < 17) return; // Extent is too wide
+        extent = extent.transform(this.mapObject.getProjectionObject(), this.mapObject.displayProjection);
+        // /!\ Possible cross-domain request issues here
+        this.dataLayer.strategies[0].load({url: 'http://api.openstreetmap.fr/api/0.6/map?bbox='+extent.left+','+extent.bottom+','+extent.right+','+extent.top});
     },
 
     render: function() {
