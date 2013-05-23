@@ -7,7 +7,13 @@ var capturePhoto = (function(app) {
         afterRender: function() {
             // Adding {manage: true} to BB.Form failed, hence this manual subview
             var form = new Backbone.Form({model: app.models.pic, fields: ['osmid']});
+            form.on('osmid:change', _.bind(this.onOsmSelectChange, this));
             this.$el.find('.osm-selector').empty().append(form.render().$el);
+        },
+
+        onOsmSelectChange: function(form, editor) {
+            var val = editor.getValue();
+            this.$el.find('.osm-selector-buttons button').prop('disabled', (val === null));
         }
     });
 
