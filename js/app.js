@@ -57,8 +57,12 @@ var capturePhoto = (function(app) {
 
             // Start app when everything is ready
             $.when.apply($, initalizers).done(function() {
-                app.router = new app.Router();
-                Backbone.history.start();
+                app.views.main = new Backbone.Layout({
+                    template: '#main-layout',
+                    el: $('#content')
+                });
+                app.views.main.setView(new app.Views.Capture());
+                app.views.main.render();
             });
         }
 	};
