@@ -72,7 +72,7 @@ var capturePhoto = (function(app) {
 	};
 
     // General map configuration
-    app.global.mapExtent = {minx:42.3, miny:-5.15, max:51.1, maxy:8.25};
+    app.global.mapExtent = {minx: -5.15, miny: 42.3, maxx: 8.25, maxy: 51.1};
     app.global.basemapUrl = [
         'http://a.tile.openstreetmap.fr/osmfr/${z}/${x}/${y}.png',
         'http://b.tile.openstreetmap.fr/osmfr/${z}/${x}/${y}.png',

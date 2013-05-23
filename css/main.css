@@ -3,3 +3,16 @@
 
 .waiting-spinner {position: absolute; top: 50%; left: 50%; margin: -21px 0 0 -21px; width: 42px; height: 42px; background-image: url(green-spinner.gif);}
 .waiting-text {position: absolute; left: 0; bottom: 0; width: 100%; text-align: center; margin: 1em 0.5em; font-size: xx-large;}
+
+.olMap {position: relative;}
+.olMap  img {max-width: none;}
+.olControlAttribution {
+    position      : absolute;
+    font-size     : 10px;
+    bottom        : 0 !important;
+    right         : 0 !important;
+    background    : rgba(0,0,0,0.1);
+    font-family   : sans-serif;
+    padding       : 2px 4px;
+    border-radius : 5px 0 0 0;
+}
