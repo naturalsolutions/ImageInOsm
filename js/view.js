@@ -4,16 +4,30 @@ var capturePhoto = (function(app) {
     app.Views.OsmSelect = Backbone.Layout.extend({
         template: "#osm-selector-page",
 
+        events: {
+            'submit [name="osm-selector-form"]': 'onSubmit'
+        },
+
         afterRender: function() {
             // Adding {manage: true} to BB.Form failed, hence this manual subview
-            var form = new Backbone.Form({model: app.models.pic, fields: ['osmid']});
-            form.on('osmid:change', _.bind(this.onOsmSelectChange, this));
-            this.$el.find('.osm-selector').empty().append(form.render().$el);
+            this.form = new Backbone.Form({model: app.models.pic, fields: ['osmid']});
+            this.form.on('osmid:change', _.bind(this.onOsmSelectChange, this));
+            this.$el.find('.osm-selector').empty().append(this.form.render().$el);
         },
 
         onOsmSelectChange: function(form, editor) {
             var val = editor.getValue();
             this.$el.find('.osm-selector-buttons button').prop('disabled', (val === null));
+        },
+
+        onSubmit: function(e) {
+            // Don't actually submit the <form>
+            e.preventDefault();
+
+            this.form.commit();
+
+            app.views.main.setView(new app.Views.Capture());
+            app.views.main.render();
         }
     });
 
