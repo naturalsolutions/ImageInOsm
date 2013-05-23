@@ -1,13 +1,14 @@
 var capturePhoto = (function(app) {
     "use strict";
 	app = {
+		// Classes
 		Models: {},
 		Views: {},
 		// Instances
 		views: {},
 		models: {},
-		utils: {},
 		global: {},
+		// Main function
 		init: function() {
             var initalizers = [],
                 dfd;

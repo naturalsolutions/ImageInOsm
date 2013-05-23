@@ -8,15 +8,19 @@
     </form>
 </script>
 <script id="capture-template" type="template">
+<div class="container-fluid">
+	<div class="row-fluid img-preview">
+		<img class="span12" src="" />
+    </div>
+	<div class="row-fluid img-error alert alert-error">
+        <strong>Error!</strong> Camera failed to take picture:<br />
+        <span id="img-error-msg"></span>
+    </div>
+	<div class="row-fluid osm-id">
+		<span class="span12" id="show-osmid"><%= osmid %></span>
+    </div>
 	<div class="row-fluid">
-		<div class="span12 column">
-			<button class="btn btn-inverse btn-large" type="button" id="capture">Capture Photo</button><br/><br/>
-			<button class="btn btn-inverse btn-large" type="button" id="save">Stockage Photo</button><br/><br/>
-			<button class="btn btn-inverse btn-large" type="button" id="getphotoFromLibrary">charger photo de l'album</button><br/>
-		</div>
-		<div class="span12 column">
-			<img style="display:none;width:120px;height:120px;" id="smallImage" src="" />
-			<img style="display:none;" id="largeImage" src="" />
-		</div>
+        <button class="btn span12" id="send-button" type="button"><i class="icon-ok-sign"></i> Upload to Flickr</button>
 	</div>
+</div>
 </script>
