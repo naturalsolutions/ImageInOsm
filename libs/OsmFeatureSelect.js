@@ -41,6 +41,11 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
             projection: new OpenLayers.Projection('EPSG:3857'),
             displayProjection: new OpenLayers.Projection('EPSG:4326'),
             theme: null,
+            controls: [
+                new OpenLayers.Control.Attribution(),
+                new OpenLayers.Control.TouchNavigation({dragPanOptions: {enableKinetic: true}}),
+                new OpenLayers.Control.Zoom()
+            ],
             layers: []
         };
         if ('basemapUrl' in this.schema.mapConfig) {
