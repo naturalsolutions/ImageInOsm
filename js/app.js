@@ -8,6 +8,8 @@ var capturePhoto = (function(app) {
 		views: {},
 		models: {},
 		global: {},
+		// Other
+		utils: {},
 		// Main function
 		init: function() {
             var initalizers = [],
