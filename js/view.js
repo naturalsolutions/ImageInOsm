@@ -53,13 +53,14 @@ var capturePhoto = (function(app) {
                 _.bind(this.onSuccess, this),
                 _.bind(this.onFail, this),
                 {
-                    quality: 70,
-                    destinationType: navigator.camera.DestinationType.DATA_URL
+                    quality: 50,
+                    correctOrientation: false,
+                    destinationType: navigator.camera.DestinationType.FILE_URI
                 });
         },
 
-        onSuccess: function(imageData) {
-            this.$el.find('.img-preview img').attr('src', 'data:image/jpeg;base64,' + imageData);
+        onSuccess: function(imageURI) {
+            this.$el.find('.img-preview img').attr('src', imageURI);
         },
 
         onFail: function(message) {
