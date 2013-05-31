@@ -52,13 +52,16 @@ var capturePhoto = (function(app) {
         },
 
         capturePhoto: function() {
-            // Take picture using device camera and retrieve image as base64-encoded string
+            // Take picture using device camera and retrieve image as a local path
             navigator.camera.getPicture(
                 _.bind(this.onSuccess, this),
                 _.bind(this.onFail, this),
                 {
                     quality: 50,
                     correctOrientation: false,
+                    encodingType: navigator.camera.EncodingType.JPEG,
+                    source: navigator.camera.PictureSourceType.CAMERA,
+                    targetWidth: 1024,
                     destinationType: navigator.camera.DestinationType.FILE_URI
                 });
         },
