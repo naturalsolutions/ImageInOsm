@@ -12,6 +12,11 @@ var capturePhoto = (function(app) {
                 authorizationUrl: 'http://www.flickr.com/services/oauth/authorize',
                 accessTokenUrl: 'http://www.flickr.com/services/oauth/access_token'
             }, options));
+            var storedToken = localStorage.getItem('FlickrAccessToken');
+            if (storedToken !== null) {
+                var token = JSON.parse(storedToken);
+                this.oauth.setAccessToken(token);
+            }
             this.oauth.callbackUrl = options.callbackUrl; // Force OAuth to expose callback URL.
             this._dfd = {};
             return this;
@@ -31,7 +36,10 @@ var capturePhoto = (function(app) {
                     this.oauth.setVerifier(token.oauth_verifier);
                     // OAuth step 3: Finally exchange the request token for an ACCESS TOKEN
                     this.oauth.fetchAccessToken(
-                        _.bind(function(data) {this._dfd.auth.resolve();}, this),
+                        _.bind(function(data) {
+                            localStorage.setItem('FlickrAccessToken', JSON.stringify(this.oauth.getAccessToken()));
+                            this._dfd.auth.resolve();
+                        }, this),
                         _.bind(function(data) {this._dfd.auth.reject(this.buildOAuthErrorMessage(data));}, this)
                     );
                     return false;
@@ -77,8 +85,20 @@ var capturePhoto = (function(app) {
         },
 
         sendPicture: function(imageURI, tags) {
-            // TODO: test auth status (flickr.test.login) and authenticate only when necessary
             var dfd = $.Deferred();
+            // Authenticate if user has no access token
+            if (this.oauth.getAccessTokenKey() === '') {
+                this.authenticate().then(
+                    _.bind(function () {
+                        this.self.sendPicture(imageURI, tags).then(
+                            _.bind(dfd.resolve, dfd),
+                            _.bind(dfd.reject, dfd)
+                        );
+                    }, {self: this, dfd: dfd}),
+                    _.bind(dfd.reject, dfd)
+                );
+                return dfd;
+            }
             // Check user account limits (async level 1)
             this.getSizeLimit().then(
                 _.bind(function(maxSize) {
