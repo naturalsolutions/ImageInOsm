@@ -67,6 +67,7 @@ var capturePhoto = (function(app) {
         },
 
         onSuccess: function(imageURI) {
+            app.models.pic.set({data: imageURI});
             this.$el.find('.img-preview img').attr('src', imageURI);
         },
 
@@ -87,10 +88,11 @@ var capturePhoto = (function(app) {
 
         sendPicture: function() {
             this.server.authenticate().then(
-                function() {
-                    // TODO: Check user limits
-                    // TODO: Send picture
-                },
+                _.bind(function() {
+                    var imageURI = app.models.pic.attributes.data,
+                        tags = 'osm:' + app.models.pic.attributes.osmid.toLowerCase().replace(/\./g, '=');
+                    this.server.sendPicture(imageURI, tags).fail(function (msg) {console.log(msg);});
+                }, this),
                 function(msg) {
                     // TODO: go to notification view + replace('\n', '<br/>')
                     alert(msg);
