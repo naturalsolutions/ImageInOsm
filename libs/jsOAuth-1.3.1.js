@@ -467,6 +467,47 @@ exports.OAuth = (function (global) {
                 xhr.send(query);
             };
 
+            // ----- jsOAuth extension for Flickr/PhoneGap (begin) -------------
+            // This method need OAuth internal helpers (oauth closure + getNonce() + getTimestamp()), that's why it has not been possible de implement it in a derived class
+            this.postPG = function(url, data, success, failure) {
+                // Base OAuth parameters (sent in an Authorization header but included in signature)
+                var headerParams = {
+                    'oauth_consumer_key': oauth.consumerKey,
+                    'oauth_token': oauth.accessTokenKey,
+                    'oauth_signature_method': oauth.signatureMethod,
+                    'oauth_timestamp': getTimestamp(),
+                    'oauth_nonce': getNonce(),
+                    'oauth_version': OAUTH_VERSION_1_0
+                };
+
+                // Parse url
+                var urlParts = URI(url);
+
+                var urlString = urlParts.scheme + '://' + urlParts.host + urlParts.path;
+                // Compute signature
+                var signatureString = toSignatureBaseString('POST', urlString, headerParams, data.params);
+                var signature = OAuth.signatureMethod[oauth.signatureMethod](oauth.consumerSecret, oauth.accessTokenSecret, signatureString);
+                // Append signature to Authorization header
+                headerParams.oauth_signature = signature;
+
+                // Actually send
+                var ft = new FileTransfer();
+                ft.upload(
+                    data.uri,
+                    url + '',
+                    success,
+                    failure,
+                    new FileUploadOptions(
+                        data.key,
+                        data.name,
+                        data.type,
+                        data.params,
+                        {Authorization: 'OAuth ' + toHeaderString(headerParams)}
+                    )
+                );
+            }
+            // ----- jsOAuth extension for Flickr/PhoneGap (end) ---------------
+
             return this;
         },
 
