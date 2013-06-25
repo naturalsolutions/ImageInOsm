@@ -10,6 +10,13 @@ var capturePhoto = (function(app) {
 		global: {},
 		// Other
 		utils: {},
+        // Begin user interaction
+        start: function() {
+            if ('main' in app.views) {
+                app.views.main.setView(new app.Views.OsmSelect());
+                app.views.main.render();
+            }
+        },
 		// Main function
 		init: function() {
             var initalizers = [],
@@ -26,26 +33,7 @@ var capturePhoto = (function(app) {
             );
 
             // Detect current geographic position
-            if (navigator.geolocation) {
-                dfd = $.Deferred();
-                var callbackSuccess = $.proxy(function(position) {
-                    this.global.currentPosition = {
-                        lat: position.coords.latitude,
-                        lon: position.coords.longitude
-                    };
-                    this.dfd.resolve();
-                }, {dfd: dfd, global: app.global});
-                var callbackError = $.proxy(function(position) {
-                    // Don't break initialization if geolocation fail, just rely on default values
-                    this.dfd.resolve();
-                }, {dfd: dfd});
-                navigator.geolocation.getCurrentPosition(
-                    callbackSuccess,
-                    callbackError,
-                    {maximumAge: 200000, enableHighAccuracy: false}
-                );
-                initalizers.push(dfd);
-            }
+            initalizers.push(app.utils.geolocalize());
 
             // Set map size depending on device width
             var e = window, a = 'inner';
@@ -68,8 +56,7 @@ var capturePhoto = (function(app) {
                     template: '#main-layout',
                     el: $('#content')
                 });
-                app.views.main.setView(new app.Views.OsmSelect());
-                app.views.main.render();
+                app.start();
             });
         }
 	};
