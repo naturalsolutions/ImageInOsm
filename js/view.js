@@ -40,6 +40,7 @@ var capturePhoto = (function(app) {
 
         initialize : function() {
             this.template = _.template($('#capture-template').html());
+            Backbone.View.prototype.initialize.apply(this, arguments);
         },
 
         serialize : function() {
@@ -72,9 +73,8 @@ var capturePhoto = (function(app) {
         },
 
         onFail: function(message) {
-            this.$el.find('.img-preview').hide();
-            this.$el.find('.img-error').show();
-            this.$el.find('#img-error-msg').html(message);
+            app.views.main.setView(new app.Views.Final({status: 'error', message: message}));
+            app.views.main.render();
         },
 
         onSendFlickr: function(e) {
@@ -89,7 +89,53 @@ var capturePhoto = (function(app) {
         sendPicture: function() {
             var imageURI = app.models.pic.attributes.data,
                 tags = 'osm:' + app.models.pic.attributes.osmid.toLowerCase().replace(/\./g, '=');
-            this.server.sendPicture(imageURI, tags).fail(function (msg) {console.log(msg);});
+            this.server.sendPicture(imageURI, tags).then(
+                function (msg) {
+                    app.views.main.setView(new app.Views.Final({status: 'success', message: msg}));
+                    app.views.main.render();
+                },
+                function (msg) {
+                    app.views.main.setView(new app.Views.Final({status: 'error', message: msg}));
+                    app.views.main.render();
+                }
+            );
+        }
+    });
+
+    app.Views.Final = Backbone.View.extend({
+        manage: true,
+        template: "#final-template",
+
+        events: {
+            'click #restart': 'restart',
+            'click #new-picture': 'newPicture',
+            'click #exit': 'exit'
+        },
+
+        initialize : function(options) {
+            this.status = options.status;
+            this.message = options.message;
+            Backbone.View.prototype.initialize.apply(this, arguments);
+        },
+
+        serialize: function() {
+            return {
+                status: this.status,
+                message: this.message
+            };
+        },
+
+        restart: function() {
+            app.start();
+        },
+
+        newPicture: function() {
+            app.views.main.setView(new app.Views.Capture());
+            app.views.main.render();
+        },
+
+        exit: function() {
+            navigator.app.exitApp();
         }
     });
 

@@ -161,9 +161,7 @@ var capturePhoto = (function(app) {
                                                     message: err.attr('msg')
                                                 }));
                                             } else {
-                                                this.dfd.resolve({
-                                                    photoid: resp.find('photoid').text()
-                                                });
+                                                this.dfd.resolve('Picture successfully uploaded to Flickr under the id ' + resp.find('photoid').text());
                                             }
                                         }, this),
                                         _.bind(function (err) {this.dfd.reject('An error occured while uploading the picture to Flickr (code: ' + err.code + ').');}, this)
