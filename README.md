@@ -7,9 +7,14 @@ This app let's you upload picture to you Flickr account and connect is to an OSM
 
 ![OpenStreetMap](http://blog.lambert.free.fr/images/openstreetmap.jpg)
 
-Download
-------------
-[ImageInOsm APK](http://depot.natural-solutions.eu/ImageInOsm/ImageInOsm.apk)
+Installing
+----------
+
+ImageInOsm is still in early development phase and is therefore not available on any application store.
+
+On Android, you can download and install [this test package](http://depot.natural-solutions.eu/ImageInOsm/ImageInOsm.apk).
+
+It is much more complicated to publish a test package for iOS. You will have to wait for a stable version to reach the AppStore or you can install it from the source using XCode (developer oriented).
 
 Contributing
 ------------
@@ -21,7 +26,7 @@ ImageInOsm is an open source project. Please help us by contributing to document
 Bug Repport
 -----------
 
-Please consider using [GitHub bug reporting tool (issues)] (https://github.com/NaturalSolutions/ImageInOsm/issues)
+Please consider using [GitHub bug reporting tool (issues)] (https://github.com/NaturalSolutions/ImageInOsm/issues).
 
 Twitter
 -------
@@ -37,4 +42,3 @@ Commercial Support
 ------------------
 
 We have programs for companies that require additional level of assistance through training or commercial support, need special licensing or want additional levels of capabilities. Please visit the  [Natural Solutions](http://www.natural-solutions.eu/) Website for more information  or email contact@natural-solutions.com.
-
