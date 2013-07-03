@@ -16,7 +16,7 @@ ecoRelevé is an open source project. Please help us by contributing to document
 
 Bug Repport
 ------------
-Please consider using GitHub bug reporting tool: [issues] https://github.com/NaturalSolutions/ImageInOsm/issues
+Please consider using GitHub bug reporting tool: [issues] (https://github.com/NaturalSolutions/ImageInOsm/issues)
 
 Twitter
 ------------
