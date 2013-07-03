@@ -32,5 +32,5 @@ We are grateful to the "Ville d'Orange"  for their support.
 Commercial Support
 ------------------
 
-We have programs for companies that require additional level of assistance through training or commercial support, need special licensing or want additional levels of capabilities. Please visit the  [Natural Solutions](http://www.natural-solutions.eu/) Website for more information about ecoRelevé or email contact@natural-solutions.com.
+We have programs for companies that require additional level of assistance through training or commercial support, need special licensing or want additional levels of capabilities. Please visit the  [Natural Solutions](http://www.natural-solutions.eu/) Website for more information  or email contact@natural-solutions.com.
 
