@@ -9,7 +9,7 @@ This app let's you upload picture to you Flickr account and connect is to an OSM
 
 Download
 ------------
-[ImageInOsm JAR](http://depot.natural-solutions.eu/ImageInOsm/ImageInOsm.apk)
+[ImageInOsm APK](http://depot.natural-solutions.eu/ImageInOsm/ImageInOsm.apk)
 
 Contributing
 ------------
