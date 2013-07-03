@@ -7,6 +7,10 @@ This app let's you upload picture to you Flickr account and connect is to an OSM
 
 ![OpenStreetMap](http://blog.lambert.free.fr/images/openstreetmap.jpg)
 
+Download
+------------
+![ImageInOsm JAR](http://depot.natural-solutions.eu/ImageInOsm/ImageInOsm.apk)
+
 Contributing
 ------------
 
