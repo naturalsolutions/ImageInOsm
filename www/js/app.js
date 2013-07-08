@@ -63,6 +63,10 @@ var capturePhoto = (function(app) {
 
     // General map configuration
     app.global.mapExtent = {minx: -5.15, miny: 42.3, maxx: 8.25, maxy: 51.1};
+    app.global.basemapOptions = {
+        tileOptions: {crossOriginKeyword: null},
+        numZoomLevels: 21
+    };
     app.global.basemapUrl = [
         'http://a.tile.openstreetmap.fr/osmfr/${z}/${x}/${y}.png',
         'http://b.tile.openstreetmap.fr/osmfr/${z}/${x}/${y}.png',

@@ -48,11 +48,7 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
             ],
             layers: []
         };
-        if ('basemapUrl' in this.schema.mapConfig) {
-            mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', this.schema.mapConfig.basemapUrl, {tileOptions: {crossOriginKeyword: null}, transitionEffect: 'resize'}));
-        } else {
-            mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', null, {transitionEffect: 'resize'}));
-        }
+        mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', this.schema.mapConfig.basemapUrl, _.extend({transitionEffect: 'resize'}, this.schema.mapConfig.basemapOptions)));
         this.mapObject = new OpenLayers.Map(this.el, mapOptions);
         if ('currentPosition' in this.schema.mapConfig) {
             // Zoom to a focus point if any
