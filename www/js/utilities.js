@@ -111,6 +111,20 @@ var capturePhoto = (function(app) {
             );
         },
 
+        setGeoPermissions: function(id) {
+            return this.callAPI(
+                'flickr.photos.geo.setPerms',
+                {photo_id: id, is_public: 1, is_contact: 0, is_friend: 0, is_family: 0}
+            );
+        },
+
+        setPictureLocation: function(id, location) {
+            return this.callAPI(
+                'flickr.photos.geo.setLocation',
+                {photo_id: id, lat: location.y, lon: location.x}
+            );
+        },
+
         sendPicture: function(imageURI, feature) {
             var dfd = $.Deferred();
             // Authenticate if user has no access token
@@ -127,7 +141,11 @@ var capturePhoto = (function(app) {
                 return dfd;
             }
 
-            var tags = 'osm:' + feature.fid.toLowerCase().replace(/\./g, '=');
+            var location = feature.geometry.getCentroid().transform('EPSG:3857', 'EPSG:4326');
+            var tags = 'osm:' + feature.fid.toLowerCase().replace(/\./g, '=') + ' ' +
+                       'geotagged ' +
+                       'geo:lat=' + location.y + ' ' +
+                       'geo:lon=' + location.x + ' ';
             // Check user account limits (async level 1)
             this.getSizeLimit().then(
                 _.bind(function(args) {
@@ -159,12 +177,29 @@ var capturePhoto = (function(app) {
                                                 stat = resp.attr('stat');
                                             if (stat === 'fail') {
                                                 var err = resp.find('err');
-                                                this.dfd.reject(this.flickrFail({
+                                                this.dfd.reject(this.self.buildFlickrErrorMessage({
                                                     code: err.attr('code'),
                                                     message: err.attr('msg')
                                                 }));
                                             } else {
-                                                this.dfd.resolve('Picture successfully uploaded to Flickr under the id ' + resp.find('photoid').text());
+                                                this.id = resp.find('photoid').text();
+                                                // Add Flickr-style location information to the picture (async level 4)
+                                                this.self.setPictureLocation(this.id, this.location).then(
+                                                    _.bind(function(args) {
+                                                        // Make the location public (async level 5)
+                                                        this.self.setGeoPermissions(this.id).then(
+                                                            _.bind(function(args) {
+                                                                this.dfd.resolve('Picture was successfully uploaded to Flickr under the id ' + this.id);
+                                                            }, this),
+                                                            _.bind(function(msg) {
+                                                                this.dfd.resolve('Picture was successfully uploaded to Flickr under the id ' + this.id + '. But we failed to make its location public.\Details:\n' + msg);
+                                                            }, this)
+                                                        );
+                                                    }, this),
+                                                    _.bind(function(msg) {
+                                                        this.dfd.resolve('Picture was successfully uploaded to Flickr under the id ' + this.id + '. But we failed to set its location.\Details:\n' + msg);
+                                                    }, this)
+                                                );
                                             }
                                         }, this),
                                         _.bind(function (err) {this.dfd.reject('An error occured while uploading the picture to Flickr (code: ' + err.code + ').');}, this)
@@ -175,7 +210,7 @@ var capturePhoto = (function(app) {
                         }, this),
                         _.bind(function (err) {this.dfd.reject('An error occured while getting the picture from the camera (code: ' + err.code + ').');}, this)
                     );
-                }, {dfd: dfd, imageURI: imageURI, oauth: this.oauth, tags: tags, flickrFail: this.buildFlickrErrorMessage}),
+                }, {dfd: dfd, imageURI: imageURI, oauth: this.oauth, tags: tags, self: this, location: location}),
                 _.bind(dfd.reject, dfd)
             );
             return dfd;
