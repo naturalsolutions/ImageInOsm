@@ -85,9 +85,11 @@ var capturePhoto = (function(app) {
             return this._dfd.auth;
         },
 
-        callAPI: function(method, success, fail) {
+        callAPI: function(method, params, success, fail) {
+            if (! params) params = {};
+            params.method = method;
             this.oauth.get(
-                'http://api.flickr.com/services/rest?nojsoncallback=1&format=json&method=' + method,
+                'http://api.flickr.com/services/rest?nojsoncallback=1&format=json&' + $.param(params),
                 _.bind(function(data) {
                     var args = JSON.parse(data.text);
                     if (args.stat === 'ok') {
@@ -104,6 +106,7 @@ var capturePhoto = (function(app) {
             var dfd = $.Deferred();
             this.callAPI(
                 'flickr.people.getUploadStatus',
+                {},
                 _.bind(function (args) {this.resolve(args.user.bandwidth.remainingkb);}, dfd),
                 _.bind(dfd.reject, dfd)
             );
