@@ -85,7 +85,8 @@ var capturePhoto = (function(app) {
             return this._dfd.auth;
         },
 
-        callAPI: function(method, params, success, fail) {
+        callAPI: function(method, params) {
+            var dfd = $.Deferred();
             if (! params) params = {};
             params.method = method;
             this.oauth.get(
@@ -93,24 +94,21 @@ var capturePhoto = (function(app) {
                 _.bind(function(data) {
                     var args = JSON.parse(data.text);
                     if (args.stat === 'ok') {
-                        success(args);
+                        dfd.resolve(args);
                     } else {
-                        fail(this.buildFlickrErrorMessage(args));
+                        dfd.reject(this.buildFlickrErrorMessage(args));
                     }
                 }, this),
-                _.bind(function(data) {fail(this.buildOAuthErrorMessage(data));}, this)
+                _.bind(function(data) {dfd.reject(this.buildOAuthErrorMessage(data));}, this)
             );
+            return dfd;
         },
 
         getSizeLimit: function() {
-            var dfd = $.Deferred();
-            this.callAPI(
+            return this.callAPI(
                 'flickr.people.getUploadStatus',
-                {},
-                _.bind(function (args) {this.resolve(args.user.bandwidth.remainingkb);}, dfd),
-                _.bind(dfd.reject, dfd)
+                {}
             );
-            return dfd;
         },
 
         sendPicture: function(imageURI, feature) {
@@ -132,8 +130,8 @@ var capturePhoto = (function(app) {
             var tags = 'osm:' + feature.fid.toLowerCase().replace(/\./g, '=');
             // Check user account limits (async level 1)
             this.getSizeLimit().then(
-                _.bind(function(maxSize) {
-                    this.maxSize = maxSize;
+                _.bind(function(args) {
+                    this.maxSize = args.user.bandwidth.remainingkb;
                     // Obtain a file descriptor (async level 2)
                     window.resolveLocalFileSystemURI(
                         this.imageURI,
