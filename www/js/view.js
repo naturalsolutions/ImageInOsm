@@ -10,8 +10,8 @@ var capturePhoto = (function(app) {
 
         afterRender: function() {
             // Adding {manage: true} to BB.Form failed, hence this manual subview
-            this.form = new Backbone.Form({model: app.models.pic, fields: ['osmid']});
-            this.form.on('osmid:change', _.bind(this.onOsmSelectChange, this));
+            this.form = new Backbone.Form({model: app.models.pic, fields: ['osmobject']});
+            this.form.on('osmobject:change', _.bind(this.onOsmSelectChange, this));
             this.$el.find('.osm-selector').empty().append(this.form.render().$el);
         },
 
@@ -44,7 +44,7 @@ var capturePhoto = (function(app) {
         },
 
         serialize : function() {
-            return {osmid: app.models.pic.attributes.osmid};
+            return {osmid: app.models.pic.attributes.osmobject.fid};
         },
 
         afterRender: function() {
@@ -88,8 +88,8 @@ var capturePhoto = (function(app) {
 
         sendPicture: function() {
             var imageURI = app.models.pic.attributes.data,
-                tags = 'osm:' + app.models.pic.attributes.osmid.toLowerCase().replace(/\./g, '=');
-            this.server.sendPicture(imageURI, tags).then(
+                feature = app.models.pic.attributes.osmobject;
+            this.server.sendPicture(imageURI, feature).then(
                 function (msg) {
                     app.views.main.setView(new app.Views.Final({status: 'success', message: msg}));
                     app.views.main.render();

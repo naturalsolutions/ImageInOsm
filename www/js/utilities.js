@@ -110,21 +110,23 @@ var capturePhoto = (function(app) {
             return dfd;
         },
 
-        sendPicture: function(imageURI, tags) {
+        sendPicture: function(imageURI, feature) {
             var dfd = $.Deferred();
             // Authenticate if user has no access token
             if (this.oauth.getAccessTokenKey() === '') {
                 this.authenticate().then(
                     _.bind(function () {
-                        this.self.sendPicture(imageURI, tags).then(
-                            _.bind(dfd.resolve, dfd),
-                            _.bind(dfd.reject, dfd)
+                        this.self.sendPicture(this.imageURI, this.feature).then(
+                            _.bind(this.dfd.resolve, this.dfd),
+                            _.bind(this.dfd.reject, this.dfd)
                         );
-                    }, {self: this, dfd: dfd}),
+                    }, {self: this, dfd: dfd, feature: feature, imageURI: imageURI}),
                     _.bind(dfd.reject, dfd)
                 );
                 return dfd;
             }
+
+            var tags = 'osm:' + feature.fid.toLowerCase().replace(/\./g, '=');
             // Check user account limits (async level 1)
             this.getSizeLimit().then(
                 _.bind(function(maxSize) {

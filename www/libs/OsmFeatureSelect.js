@@ -116,7 +116,7 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
 
     getValue: function() {
         if (this.dataLayer.selectedFeatures.length == 1)
-            return this.dataLayer.selectedFeatures[0].fid;
+            return this.dataLayer.selectedFeatures[0];
         return null;
     },
     setValue: function(value) {
