@@ -143,6 +143,7 @@ var capturePhoto = (function(app) {
 
             var location = feature.geometry.getCentroid().transform('EPSG:3857', 'EPSG:4326');
             var tags = 'osm:' + feature.fid.toLowerCase().replace(/\./g, '=') + ' ' +
+                       'ImageInOsm ' +
                        'geotagged ' +
                        'geo:lat=' + location.y + ' ' +
                        'geo:lon=' + location.x + ' ';
