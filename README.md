@@ -10,7 +10,7 @@ This app let's you upload picture to you Flickr account and connect is to an OSM
 Screen dump
 ----------
 
-![screendump](https://raw.github.com/NaturalSolutions/ImageInOsm/master/ImageInOsm.png)
+![screendump](https://raw.github.com/NaturalSolutions/ImageInOsm/master/docs/ImageInOsm.png)
 
 Installing
 ----------
