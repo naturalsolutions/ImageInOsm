@@ -73,7 +73,7 @@ var capturePhoto = (function(app) {
         'http://c.tile.openstreetmap.fr/osmfr/${z}/${x}/${y}.png'
     ];
 
-    if (window.PhoneGap) {
+    if (window.cordova) {
         document.addEventListener("deviceready", app.init, false);
     } else {
         $(document).ready(app.init);

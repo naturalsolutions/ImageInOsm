@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="image.in.osm" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ImageInOsm</name>
+    <description>Mobile application for collecting pictures of OSM objects.</description>
+    <author href="http://naturalsolutions.github.io/ImageInOsm/">Natural Solutions</author>
+
+    <access origin="*" />
+    <content src="index.html" />
+
+    <preference name="loglevel" value="DEBUG" />                <!-- All -->
+    <preference name="fullscreen" value="true" />               <!-- All -->
+    <preference name="orientation" value="portrait" />          <!-- All -->
+    <preference name="android-minSdkVersion" value="8" />       <!-- Android -->
+    <preference name="android-installLocation" value="auto" />  <!-- Android -->
+    <preference name="exit-on-suspend" value="true" />          <!-- iOS -->
+    <preference name="webviewbounce" value="true" />            <!-- iOS -->
+
+    <!-- Disable all permissions, then enable specific permissions -->
+    <preference name="permissions" value="none" />
+    <feature name="http://api.phonegap.com/1.0/camera" />
+    <feature name="http://api.phonegap.com/1.0/geolocation" />
+    <feature name="http://api.phonegap.com/1.0/file" />
+    <feature name="http://api.phonegap.com/1.0/file-transfer" />
+    <feature name="http://api.phonegap.com/1.0/inappbrowser" />
+</widget>

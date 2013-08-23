@@ -50,35 +50,34 @@ var capturePhoto = (function(app) {
 
         authenticate: function() {
             this._dfd.auth = $.Deferred();
-            // Handler for successful user-granted OAuth authorization
-            window.plugins.childBrowser.onLocationChange = _.bind(function(url) {
-                if (url.indexOf(this.oauth.callbackUrl) === 0) {
-                    // First, close ChildBrowser which should be trying to parse our fake callbackUrl
-                    window.plugins.childBrowser.close();
-                    // Then, parse and use querystring
-                    var params = url.substr(url.indexOf('?') + 1),
-                        token = this.oauth.parseTokenRequest(params);
-                    //this.oauth.setAccessToken([token.oauth_token, token.oauth_token_secret]);
-                    this.oauth.setVerifier(token.oauth_verifier);
-                    // OAuth step 3: Finally exchange the request token for an ACCESS TOKEN
-                    this.oauth.fetchAccessToken(
-                        _.bind(function(data) {
-                            localStorage.setItem('FlickrAccessToken', JSON.stringify(this.oauth.getAccessToken()));
-                            this._dfd.auth.resolve();
-                        }, this),
-                        _.bind(function(data) {this._dfd.auth.reject(this.buildOAuthErrorMessage(data));}, this)
-                    );
-                    return false;
-                }
-                return true;
-            }, this);
 
             // Start OAuth authentication by obtaining a REQUEST TOKEN
             this.oauth.fetchRequestToken(
-                function (url) {
+                _.bind(function (url) {
                     // OAuth step 2: present authorization page to the user and (try to) obtain a VERIFIER in return
-                    window.plugins.childBrowser.showWebPage(url + '&perms=write');
-                },
+                    var oauth_win = window.open(url + '&perms=write', '_blank', 'location=yes');
+                    // Handler for successful user-granted OAuth authorization
+                    oauth_win.addEventListener('loadstart', _.bind(function(event) {
+                        if (event.url.indexOf(this.oauth.callbackUrl) === 0) {
+                            // First, close ChildBrowser which should be trying to parse our fake callbackUrl
+                            // oauth_win.close(); // https://issues.apache.org/jira/browse/CB-4586
+                            // Then, parse and use querystring
+                            var params = event.url.substr(event.url.indexOf('?') + 1),
+                                token = this.oauth.parseTokenRequest(params);
+                            this.oauth.setVerifier(token.oauth_verifier);
+                            // OAuth step 3: Finally exchange the request token for an ACCESS TOKEN
+                            this.oauth.fetchAccessToken(
+                                _.bind(function(data) {
+                                    localStorage.setItem('FlickrAccessToken', JSON.stringify(this.oauth.getAccessToken()));
+                                    this._dfd.auth.resolve();
+                                }, this),
+                                _.bind(function(data) {this._dfd.auth.reject(this.buildOAuthErrorMessage(data));}, this)
+                            );
+                            return false;
+                        }
+                        return true;
+                    }, this));
+                }, this),
                 _.bind(function(data) {this._dfd.auth.reject(this.buildOAuthErrorMessage(data));}, this)
             );
 
