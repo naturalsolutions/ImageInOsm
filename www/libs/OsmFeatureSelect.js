@@ -41,9 +41,10 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
             projection: new OpenLayers.Projection('EPSG:3857'),
             displayProjection: new OpenLayers.Projection('EPSG:4326'),
             theme: null,
+            renderers: ['Canvas', 'SVG'],
             controls: [
                 new OpenLayers.Control.Attribution(),
-                new OpenLayers.Control.TouchNavigation({dragPanOptions: {enableKinetic: true}}),
+                new OpenLayers.Control.TouchNavigation(),
                 new OpenLayers.Control.Zoom()
             ],
             layers: []
@@ -83,7 +84,61 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
         this.selector = new OpenLayers.Control.SelectFeature(this.dataLayer, {'toggle': true});
         this.mapObject.addControl(this.selector);
         this.selector.activate();
-        
+
+        this.boxSelector = new (OpenLayers.Class(OpenLayers.Control, { // Create class and instantiate it directly
+            initialize: function(layer, selector) {
+                OpenLayers.Control.prototype.initialize.apply(this, []);
+                this.layer = layer;
+                this.mainSelector = selector;
+                this.handler = new OpenLayers.Handler.Box(this, {done: this.selectBox});
+            },
+            toggle: function () {
+                return (this.active) ? this.deactivate() : this.activate();
+            },
+            selectBox: function (position) {
+                // Adapted from SelectFeature Control
+                if (position instanceof OpenLayers.Bounds) { // position is a pixel box
+                    var minXY = this.map.getLonLatFromPixel({
+                            x: position.left,
+                            y: position.bottom
+                        }),
+                        maxXY = this.map.getLonLatFromPixel({
+                            x: position.right,
+                            y: position.top
+                        }),
+                        bounds = new OpenLayers.Bounds(
+                            minXY.lon, minXY.lat, maxXY.lon, maxXY.lat
+                        ),
+                        re = new RegExp('^OpenLayers\.Geometry\.(Point|LineString)$'),
+                        feature, firstPoint, firstLine;
+                    this.mainSelector.unselectAll(); // No multiple selection in our case
+                    this.events.triggerEvent("boxselectionstart", {layers: [this.layer]});
+                    for(var i=0, len = this.layer.features.length; i<len; ++i) {
+                        feature = this.layer.features[i];
+                        if (!feature.getVisibility()) {
+                            continue;
+                        }
+                        if (re.test(feature.geometry.CLASS_NAME)) {
+                            if (bounds.toGeometry().intersects(feature.geometry)) {
+                                // We want to select only the first point or line, no multiple selection
+                                if (feature.geometry.CLASS_NAME == 'OpenLayers.Geometry.Point' && firstPoint == null) {
+                                    firstPoint = feature;
+                                    break;
+                                } else if (firstLine == null) {
+                                    firstLine = feature;
+                                }
+                            }
+                        }
+                    }
+                    feature = (firstPoint != null) ? firstPoint : firstLine;
+                    if (feature) this.mainSelector.select(feature);
+                    this.events.triggerEvent("boxselectionend", {layers: [this.layer]}); 
+                }
+            },
+            CLASS_NAME: 'OpenLayers.Control.BoxSelectFeature'
+        }))(this.dataLayer, this.selector);
+        this.mapObject.addControl(this.boxSelector);
+
         if (this.value !== null) this.setValue(this.value);
 
         // Add a button on the map for data loading
@@ -91,10 +146,23 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
             .css({position: 'absolute', top: '1em', right: '1em', 'z-index': 1000})
             .append(
                 $('<button type="button">')
-                    .addClass('btn').append($('<i>').addClass('icon-download'))
+                    .addClass('btn').append($('<i>').addClass('icon-refresh'))
                     .on('click', $.proxy(this.loadData, this))
             );
         this.$el.append(loadButton);
+
+        // Add a button for box selection
+        var boxButton = $('<div>')
+            .css({position: 'absolute', top: '1em', right: '5em', 'z-index': 1000})
+            .append(
+                $('<button type="button">')
+                    .addClass('btn').append($('<i>').addClass('icon-retweet'))
+                    .on('click', this, function(evt) {
+                        evt.data.boxSelector.toggle();
+                        $(this).toggleClass('active');
+                    })
+            );
+        this.$el.append(boxButton);
     },
 
     loadData: function() {
