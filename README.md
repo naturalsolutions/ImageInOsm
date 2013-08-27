@@ -28,7 +28,7 @@ Want to contribute? Great!
 
 ImageInOsm is an open source project. Please help us by contributing to documentation, reporting bugs, forking the code to add features or make bug fixes or promoting us on twitter, etc.
 
-Bug Repport
+Bug Report
 -----------
 
 Please consider using [GitHub bug reporting tool (issues)] (https://github.com/NaturalSolutions/ImageInOsm/issues).
