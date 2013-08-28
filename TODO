@@ -1,0 +1,10 @@
+/!\ Note /!\
+It is preferable to document work to be done using GitHub issues:
+https://github.com/NaturalSolutions/ImageInOsm/issues
+
+o  implement some kind of user-configurable filter for OSM objects (e.g. show highway=bus_stop only)
+o  use filterToParams() optional method of OL.Protocol.HTTP in order to automatically build bboxed data URL
+o  find a cleaner solution for map positionning using CSS (make createmap() lazy? is there an event to trigger map initialization later?)
+o  unit tests...
+o  get rid of BackBone forms and Layout Manager, they are probably overkill for such a simple application
+o  finish build process (minify, etc) + include 3rd party libraries at build time, so that we can exclude them from the source tree
