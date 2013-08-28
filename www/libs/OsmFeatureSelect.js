@@ -1,12 +1,4 @@
 var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
-    /*
-     * TODO:
-     * o ajouter la possibiliter de filtrer sur tag/key
-     * x sélectionner this.value lors de l'init le cas échéant
-     * o ajouter un  marqueur "vous êtes ici"
-     * o étendre OL.Protocol.HTTP pour définir filterToParams
-     * o essayer de positionner la carte en CSS (déporter le createmap ? sur quel évènement ?)
-     */
 
     tagName: 'div',
     className: 'osm-map',
