@@ -63,3 +63,8 @@ Commercial Support
 ------------------
 
 We have programs for companies that require additional level of assistance through training or commercial support, need special licensing or want additional levels of capabilities. Please visit the  [Natural Solutions](http://www.natural-solutions.eu/) Website for more information  or email contact@natural-solutions.com.
+
+See also
+--------
+
+ImageInOsm on [Flickr App Garden](http://www.flickr.com/services/apps/72157633757559485/).
