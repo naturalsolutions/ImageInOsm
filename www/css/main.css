@@ -37,3 +37,5 @@
     padding       : 2px 4px;
     border-radius : 5px 0 0 0;
 }
+.olDrawBox {cursor: crosshair;}
+.olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
