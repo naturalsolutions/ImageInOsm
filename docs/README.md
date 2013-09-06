@@ -23,7 +23,8 @@ Built for:
 
 So far, application has been tested on:
 * Sony XPeria J
-* Samsung Galaxy Tab
+* Samsung Galaxy Tab 8.9
+* Samsung Galaxy Tab2 10.1
 * SFR StartTrail II (Android 2.3.6)
 * iPhone 3GS
 * iPhone 4
