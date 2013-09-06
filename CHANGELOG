@@ -1,0 +1,4 @@
+Version 0.1:
+* first prototype
+* implements basic 3-step process (select an OSM object, take a picture, upload)
+* Flickr support only
