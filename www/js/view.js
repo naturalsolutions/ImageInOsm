@@ -97,8 +97,7 @@ var capturePhoto = (function(app) {
             this.server = new app.utils.FlickrAPI({
                 consumerKey: '77f739a96134f39fcd38ff74c72b1fc8', // Application identifier (should be kept secret, don't use OAuth with JavaScript...)
                 consumerSecret: 'a27edc675234f748',
-                // https://issues.apache.org/jira/browse/CB-4586
-                callbackUrl: 'http://depot.natural-solutions.eu/ImageInOsm/auth-final.html' // Use any valid URL as a callback, we just use it to intercept the callback redirection
+                callbackUrl: 'http://fakeurl.com/' // Use any fake but valid URL as a callback, we just use it to intercept the callback redirection
             });
             this.sendPicture();
         },

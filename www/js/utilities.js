@@ -76,7 +76,7 @@ var capturePhoto = (function(app) {
                     oauth_win.addEventListener('loadstart', _.bind(function(event) {
                         if (event.url.indexOf(this.oauth.callbackUrl) === 0) {
                             // First, close ChildBrowser which should be trying to parse our fake callbackUrl
-                            // oauth_win.close(); // https://issues.apache.org/jira/browse/CB-4586
+                            oauth_win.close();
                             // Then, parse and use querystring
                             var params = event.url.substr(event.url.indexOf('?') + 1),
                                 token = this.oauth.parseTokenRequest(params);
