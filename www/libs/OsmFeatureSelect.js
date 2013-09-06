@@ -171,6 +171,60 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
                     })
             );
         this.$el.append(boxButton);
+
+        // Add a button to recenter on last know position
+        var recenterButton = $('<div>')
+            .css({position: 'absolute', top: '1em', right: '9em', 'z-index': 1000})
+            .append(
+                $('<button type="button">')
+                    .addClass('btn').append($('<i>').addClass('icon-screenshot'))
+                    .on('click', this, function(evt) {
+                        var pos = evt.data.schema.mapConfig.currentPosition;
+                        if (pos) {
+                            // Zoom to a focus point if any
+                            var map = evt.data.mapObject;
+                            map.setCenter(
+                                (new OpenLayers.LonLat(
+                                    pos.lon,
+                                    pos.lat
+                                )).transform(
+                                    map.displayProjection,
+                                    map.projection
+                                ),
+                                18
+                            );
+                        }
+                    })
+            );
+        this.$el.append(recenterButton);
+
+        // Show current user position (auto updating)
+        this.markers = new OpenLayers.Layer.Markers();
+        this.mapObject.addLayer(this.markers);
+        this.iAmHere = new OpenLayers.Marker();
+        navigator.geolocation.watchPosition(
+            _.bind(function(position) {
+                console.log(position);
+                this.global.currentPosition = {
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                };
+                this.markers.clearMarkers();
+                this.markers.setOpacity(1);
+                this.marker.lonlat = (new OpenLayers.LonLat(
+                    position.coords.longitude,
+                    position.coords.latitude
+                )).transform(
+                    this.map.displayProjection,
+                    this.map.projection
+                );
+                this.markers.addMarker(this.marker);
+            }, {map: this.mapObject, markers: this.markers, marker: this.iAmHere, global: this.schema.mapConfig}),
+            _.bind(function() {
+                this.markers.setOpacity(0.5);
+            }, {markers: this.markers}),
+            {maximumAge: 200000, enableHighAccuracy: false}
+        );
     },
 
     loadData: function() {
