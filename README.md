@@ -33,9 +33,9 @@ Installing
 
 ImageInOsm is still in early development phase and is therefore not available on any application store.
 
-On Android, you can download and install [this test package](http://depot.natural-solutions.eu/ImageInOsm/ImageInOsm-0.1.apk).
+If you would like to participate in beta-testing, just contact us and we will invite your to our [TestFlight](https://testflightapp.com/) team.
 
-It is much more complicated to publish a test package for iOS. You will have to wait for a stable version to reach the AppStore or you can install it from the source using XCode (developer oriented).
+Of course, you can also install it from the source using Apple XCode or Android Developer Tools (developer oriented).
 
 Contributing
 ------------
