@@ -77,7 +77,7 @@ var OsmFeatureSelector = Backbone.Form.editors.Base.extend({
             strategies: [new OpenLayers.Strategy.Fixed()],
             projection: 'EPSG:4326',
             protocol: new OpenLayers.Protocol.HTTP({
-                format: new OpenLayers.Format.OSM()
+                format: new OpenLayers.Format.OSM({checkTags: true})
             })
         });
         this.mapObject.addLayer(this.dataLayer);
