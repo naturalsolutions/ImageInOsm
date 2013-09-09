@@ -2,3 +2,8 @@ Version 0.1:
 * first prototype
 * implements basic 3-step process (select an OSM object, take a picture, upload)
 * Flickr support only
+
+Version 0.2:
+* bugfix on box selection, actually display the box to provide a minimum feedback to the user
+* better OSM parser configuration, show tagged nodes
+* show user current position and allow to center map there
