@@ -66,6 +66,12 @@ var capturePhoto = (function(app) {
                 height: (app.global.viewportSize.h - 100) + 'px'
             };
 
+            // Relay to system browser through InAppBrowser plugin
+            $(document).on('click', '.external', function (e) {
+                e.preventDefault();
+                window.open($(this).attr('href'), '_system');
+            });
+
             // Start app when everything is ready
             $.when.apply($, initalizers).done(function() {
                 app.views.main = new Backbone.Layout({

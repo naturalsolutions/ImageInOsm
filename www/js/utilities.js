@@ -129,7 +129,7 @@ var capturePhoto = (function(app) {
                                             _.bind(function(data) {
                                                 this.dfd.resolve('Picture was successfully uploaded under the name <a href="' +
                                                                  data.upload.imageinfo.descriptionurl +
-                                                                 '">' +
+                                                                 '" class="external">' +
                                                                  data.upload.filename +
                                                                  '</a>');
                                             }, this),
