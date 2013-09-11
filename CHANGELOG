@@ -7,3 +7,6 @@ Version 0.2:
 * bugfix on box selection, actually display the box to provide a minimum feedback to the user
 * better OSM parser configuration, show tagged nodes
 * show user current position and allow to center map there
+
+Version 0.3:
+* Wikimedia support, user can upload their pictures to Wikimedia Commons (test.wikimedia.org at the moment)

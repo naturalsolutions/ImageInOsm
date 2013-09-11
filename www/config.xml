@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<widget id="image.in.osm" version="0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="image.in.osm" version="0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>ImageInOsm</name>
     <description>Mobile application for collecting pictures of OSM objects.</description>
     <author href="http://naturalsolutions.github.io/ImageInOsm/">Natural Solutions</author>
