@@ -41,7 +41,7 @@ var capturePhoto = (function(app) {
             // Load templates (async)
             initalizers.push(
                 $.ajax({
-                    url: 'tpl/templates.html',
+                    url: 'templates.html',
                     dataType: 'text'
                 }).done(function(contents) {
                     $("#templates").append(contents);
