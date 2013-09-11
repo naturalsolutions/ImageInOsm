@@ -40,14 +40,32 @@ limitations under the License.
 </script>
 <script id="capture-template" type="template">
 <div class="container-fluid">
-	<div class="row-fluid img-preview">
-		<img class="span12" src="" />
+    <div class="row-fluid img-preview">
+        <img class="span12" src="" />
     </div>
-	<div class="row-fluid osm-id">
-		<span class="span12" id="show-osmid"><%= osmid %></span>
+    <div class="row-fluid osm-id">
+        <span class="span12" id="show-osmid"><%= osmid %></span>
     </div>
-	<div class="row-fluid">
-        <button class="btn btn-large span12" id="send-button-flickr" type="button"><i class="icon-ok-sign"></i> Upload to Flickr</button>
-	</div>
+
+    <div class="alert alert-info hide" id="mediawiki-disclaimer">
+        <strong>Warning!</strong> Wikimedia Commons aims to collect documents which respect a number of legal and quality constraints. If you are not sure if this picture is eligible, please take the time to read the <a href="https://commons.wikimedia.org/wiki/Help:Contents">project documentation</a>.<br>
+        Also, be aware that an image shared on Wikimedia Commons can not be easily deleted.
+    </div>
+
+    <div class="row-fluid hide" id="mediawiki-login-form">
+        <input id="mwUsername" type="text" placeholder="User name" required><br>
+        <input id="mwPassword" type="password" placeholder="Password" required>
+    </div>
+
+    <div class="row-fluid hide" id="mediawiki-upload-form">
+        <input id="mwTitle" type="text" placeholder="Title" pattern="^[^\/<>\[\]\{\}\|#%+\?]+$" required><br>
+        <textarea id="mwDescription" placeholder="Description"></textarea><br>
+        <button class="btn btn-large" id="mwSubmit" type="button" disabled>Send</button>
+    </div>
+
+    <div class="row-fluid" id="send-buttons">
+        <button class="btn btn-large span6" id="send-button-flickr" type="button"><i class="icon-ok-sign"></i> Upload to Flickr</button>
+        <button class="btn btn-large span6" id="send-button-wikimedia" type="button"><i class="icon-ok-sign"></i> Upload to Wikimedia</button>
+    </div>
 </div>
 </script>

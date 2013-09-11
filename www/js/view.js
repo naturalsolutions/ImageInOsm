@@ -47,11 +47,21 @@ var capturePhoto = (function(app) {
         }
     });
 
+    function getNotificationCB(type) {
+        return function (msg) {
+            app.views.main.setView(new app.Views.Final({status: type, message: msg}));
+            app.views.main.render();
+        }
+    };
+
     app.Views.Capture = Backbone.View.extend({
         manage: true,
 
         events: {
-            'click #send-button-flickr': 'onSendFlickr'
+            'click #send-button-flickr': 'onSendFlickr',
+            'click #send-button-wikimedia': 'displayMediaWikiForm',
+            'click #mwSubmit': 'onSendMediawiki',
+            'input #mwTitle, #mwPassword, #mwUsername': 'onChangeMediawiki'
         },
 
         initialize : function() {
@@ -88,33 +98,56 @@ var capturePhoto = (function(app) {
             this.$el.find('.img-preview img').attr('src', imageURI);
         },
 
-        onFail: function(message) {
-            app.views.main.setView(new app.Views.Final({status: 'error', message: message}));
-            app.views.main.render();
-        },
+        onFail: getNotificationCB('error'),
 
         onSendFlickr: function(e) {
+            var imageURI = app.models.pic.attributes.data,
+                feature = app.models.pic.attributes.osmobject;
             this.server = new app.utils.FlickrAPI({
                 consumerKey: '77f739a96134f39fcd38ff74c72b1fc8', // Application identifier (should be kept secret, don't use OAuth with JavaScript...)
                 consumerSecret: 'a27edc675234f748',
                 callbackUrl: 'http://fakeurl.com/' // Use any fake but valid URL as a callback, we just use it to intercept the callback redirection
             });
-            this.sendPicture();
+            this.server.sendPicture(imageURI, feature).then(
+                getNotificationCB('success'), getNotificationCB('error')
+            );
         },
 
-        sendPicture: function() {
+        onSendMediawiki: function(e) {
             var imageURI = app.models.pic.attributes.data,
-                feature = app.models.pic.attributes.osmobject;
-            this.server.sendPicture(imageURI, feature).then(
-                function (msg) {
-                    app.views.main.setView(new app.Views.Final({status: 'success', message: msg}));
-                    app.views.main.render();
-                },
-                function (msg) {
-                    app.views.main.setView(new app.Views.Final({status: 'error', message: msg}));
-                    app.views.main.render();
-                }
+                feature = app.models.pic.attributes.osmobject,
+                mwTitle = $("#mwTitle").val(),
+                mwDesc = $("#mwDescription").val() ;
+            this.server = new app.utils.WikimediaAPI({
+                username: $("#mwUsername").val(),
+                password: $("#mwPassword").val()
+            });
+            this.server.sendPicture(imageURI, feature, mwTitle, mwDesc ).then(
+                getNotificationCB('success'), getNotificationCB('error')
             );
+        },
+
+        onChangeMediawiki: function(e) {
+            var valid = document.getElementById('mwTitle').validity.valid &&
+                        document.getElementById('mwPassword').validity.valid &&
+                        document.getElementById('mwUsername').validity.valid;
+            $('#mwSubmit').attr('disabled', !valid);
+        },
+
+        displayMediaWikiForm: function(e) {
+            $("#send-buttons").hide();
+            $("#mediawiki-upload-form").removeClass('hide');
+            $("#mediawiki-disclaimer").removeClass('hide');
+            var mwUserName = localStorage.getItem('mwUsername'),
+                mwPassword = localStorage.getItem('mwPassword');
+            if (mwUserName === null) {
+                $("#mediawiki-login-form").removeClass('hide');
+                $("#mwUsername").focus();
+            } else {
+                $("#mwUsername").val(mwUserName);
+                $("#mwPassword").val(mwPassword);
+                $("#mwTitle").focus();
+            }
         }
     });
 

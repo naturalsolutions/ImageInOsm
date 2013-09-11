@@ -43,6 +43,124 @@ var capturePhoto = (function(app) {
         return dfd;
     };
 
+    app.utils.WikimediaAPI = function(options) {
+        return this.initialize(options);
+    };
+
+    app.utils.WikimediaAPI.prototype = {
+        initialize: function(options) {
+            this.client = new NS.MediaWikiApiClient('http://test.wikipedia.org/w/api.php');
+            this.username = options.username;
+            this.password = options.password;
+            this.dfd = $.Deferred();
+
+            // override upload method using cordova FileTransfer
+            this.client.doApiCallUpload = function (token, fileToUpload, fileName, filetxt) {
+                var dfd = $.Deferred(),
+                    ft = new FileTransfer(),
+                    options = new FileUploadOptions(),
+                    url = this.basePath +
+                          '?action=upload&format=json&filename=' +
+                          encodeURIComponent(fileName) +
+                          '&ignorewarnings=1&token=' +
+                          encodeURIComponent(token);
+
+                options.fileKey = 'file';
+                options.fileName = fileName;
+                options.mimeType = fileToUpload.type;
+                options.params = {text: filetxt};
+                options.chunkedMode = false;
+
+                ft.upload(
+                    fileToUpload.fullPath,
+                    url,
+                    function(resp) {
+                        var data = JSON.parse(resp.response);
+                        if (data.upload)
+                            dfd.resolve(data);
+                        else
+                            dfd.reject({status: 3, msg: data.error.info}) ;
+                    },
+                    function(error){
+                        dfd.reject({
+                            status: error.code,
+                            msg: "An error has occurred: Code = " +
+                                 error.code +
+                                 "upload error source " +
+                                 error.source +
+                                 "upload error target " +
+                                 error.target
+                        });
+                    },
+                    options
+                );
+
+                return dfd.promise();
+            };
+        },
+
+        sendPicture: function(imageURI, feature, title, description) {
+            this.feature = feature;
+            this.title = title;
+            this.description = description;
+            this.client.login(this.username, this.password).then(
+                _.bind(function() {
+                    localStorage.setItem('mwUsername', this.username);
+                    localStorage.setItem('mwPassword', this.password);
+                    window.resolveLocalFileSystemURI(
+                        imageURI,
+                        _.bind(function(fe) {
+                            fe.file(
+                                _.bind(function(f) {
+                                    this.client.getUniqueFileName(this.title, f.type).done(_.bind(function(fileName) {
+                                        var location = this.feature.geometry.getCentroid().transform('EPSG:3857', 'EPSG:4326'),
+                                            content = '{{Information \n'+
+                                                      '|Description=' + this.description + '\n' +
+                                                      '|Source={{Self-photographed}}\n' +
+                                                      '|Date=' + new Date().toJSON() + '\n' +
+                                                      '|Author=' + (this.username ? '[[User:' + this.username + '|' + this.username + ']]' : '') + '\n' +
+                                                      '|Permission={{Self|cc-by-3.0}}}}\n\n' +
+                                                      '{{location dec|' + location.y + '|' + location.x + '}}\n\n' +
+                                                      '{{On OSM|type=' +
+                                                       (this.feature.geometry instanceof OpenLayers.Geometry.Point ? 'node' : 'way') +
+                                                       '|OSM_ID=' + this.feature.osm_id + '}}\n\n' +
+                                                       '[[Category:OSM]][[Category:ImageInOsm]]\n';
+                                        this.client.uploadFile(f, fileName, false, content).then(
+                                            _.bind(function(data) {
+                                                this.dfd.resolve('Picture was successfully uploaded under the name <a href="' +
+                                                                 data.upload.imageinfo.descriptionurl +
+                                                                 '">' +
+                                                                 data.upload.filename +
+                                                                 '</a>');
+                                            }, this),
+                                            _.bind(function(err) {
+                                                this.dfd.reject('Cannot upload this file. WikiMedia API return code ' + err.status +
+                                                                ' and said: "' + err.msg + '".');
+                                            }, this)
+                                        );
+                                    }, this)).fail(_.bind(function(err) {
+                                        this.dfd.reject('Cannot find a unique name for this file. WikiMedia API return code ' + err.status +
+                                                        ' and said: "' + err.msg + '".');
+                                    }, this));
+                                }, this),
+                                _.bind(function(err) {
+                                    this.dfd.reject('Cannot read camera output (code: ' + err.code + ').');
+                                }, this)
+                            );
+                        }, this),
+                        _.bind(function(err) {
+                            this.dfd.reject('An error occured while getting the picture from the camera (code: ' + err.code + ').');
+                        }, this)
+                    );
+                }, this),
+                _.bind(function(err) {
+                    this.dfd.reject('Authentication failed. WikiMedia API return code ' + err.status + ' and said: "' + err.msg + '".');
+                }, this)
+            );
+            return this.dfd;
+        },
+    };
+
     app.utils.FlickrAPI = function(options) {
         return this.initialize(options);
     };
