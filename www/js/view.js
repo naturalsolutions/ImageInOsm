@@ -17,48 +17,6 @@
 var capturePhoto = (function(app) {
     "use strict";
 
-    app.Views.OsmSelect = Backbone.Layout.extend({
-        template: "#osm-selector-page",
-
-        events: {
-            'click #capture-button': 'onCamera',
-            'click #gallery-button': 'onGallery'
-        },
-
-        afterRender: function() {
-            // Adding {manage: true} to BB.Form failed, hence this manual subview
-            this.form = new Backbone.Form({model: app.models.pic, fields: ['osmobject']});
-            this.form.on('osmobject:change', _.bind(this.onOsmSelectChange, this));
-            this.$el.find('.osm-selector').empty().append(this.form.render().$el);
-        },
-
-        onOsmSelectChange: function(form, editor) {
-            var val = editor.getValue();
-            this.$el.find('.osm-selector-buttons button').prop('disabled', (val === null));
-        },
-
-        onCamera: function(e) {
-            e.preventDefault();
-
-            this.form.commit();
-			
-			tab[0] = 0;
-            app.views.main.setView(new app.Views.Capture());
-            app.views.main.render();
-			
-        },
-		
-		onGallery: function(e) {
-			e.preventDefault();
-
-			tab[0] = 1;
-            this.form.commit();
-			app.views.main.setView(new app.Views.Capture());
-			app.views.main.render();
-        }
-		
-    });
-
     function getNotificationCB(type) {
         return function (msg) {
             app.views.main.setView(new app.Views.Final({status: type, message: msg}));
@@ -83,7 +41,7 @@ var capturePhoto = (function(app) {
         },
 
         serialize : function() {
-            return {osmid: app.models.pic.attributes.osmobject.fid};
+            return {osmid: app.models.pic.attributes.osmfeature.fid};
         },
 
         afterRender: function() {
@@ -127,7 +85,7 @@ var capturePhoto = (function(app) {
 
         onSendFlickr: function(e) {
             var imageURI = app.models.pic.attributes.data,
-                feature = app.models.pic.attributes.osmobject;
+                feature = app.models.pic.attributes.osmfeature;
             this.server = new app.utils.FlickrAPI({
                 consumerKey: '77f739a96134f39fcd38ff74c72b1fc8', // Application identifier (should be kept secret, don't use OAuth with JavaScript...)
                 consumerSecret: 'a27edc675234f748',
@@ -140,7 +98,7 @@ var capturePhoto = (function(app) {
 
         onSendMediawiki: function(e) {
             var imageURI = app.models.pic.attributes.data,
-                feature = app.models.pic.attributes.osmobject,
+                feature = app.models.pic.attributes.osmfeature,
                 mwTitle = $("#mwTitle").val(),
                 mwDesc = $("#mwDescription").val() ;
             this.server = new app.utils.WikimediaAPI({

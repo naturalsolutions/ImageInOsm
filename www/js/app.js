@@ -29,7 +29,7 @@ var capturePhoto = (function(app) {
         // Begin user interaction
         start: function() {
             if ('main' in app.views) {
-                app.views.main.setView(new app.Views.OsmSelect());
+                app.views.main.setView(new app.Views.Map());
                 app.views.main.render();
             }
         },

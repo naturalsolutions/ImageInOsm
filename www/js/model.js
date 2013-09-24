@@ -20,10 +20,7 @@ var capturePhoto = (function(app) {
     app.Models.OSMPicture = Backbone.Model.extend({
         schema: {
             data: {type: 'Text'},
-            osmobject: {
-                type: OsmFeatureSelector,
-                mapConfig: app.global
-            }
+            osmfeature: {type: 'Object'}
         }
     });
 
