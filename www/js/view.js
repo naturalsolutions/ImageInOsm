@@ -70,7 +70,7 @@ var capturePhoto = (function(app) {
                     quality: 50,
                     correctOrientation: false,
                     encodingType: navigator.camera.EncodingType.JPEG,
-                    source: source,
+                    sourceType: source,
                     targetWidth: 1024,
                     destinationType: navigator.camera.DestinationType.FILE_URI
                 });
