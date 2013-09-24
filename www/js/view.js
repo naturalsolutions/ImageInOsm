@@ -13,9 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var tab = new Array();
-
-
 
 var capturePhoto = (function(app) {
     "use strict";
@@ -79,10 +76,9 @@ var capturePhoto = (function(app) {
             'input #mwTitle, #mwPassword, #mwUsername': 'onChangeMediawiki'
         },
 
-        initialize : function(mode) {
+        initialize : function(options) {
             this.template = _.template($('#capture-template').html());
-			//this.mode = mode;
-			//var test= this.mode;
+            this.mode = options.mode;
             Backbone.View.prototype.initialize.apply(this, arguments);
         },
 
@@ -92,20 +88,23 @@ var capturePhoto = (function(app) {
 
         afterRender: function() {
             // Immediatly launch camera when view is rendered
-			switch(tab[0]) {
-				case 1:
-					
-					this.gallery();
-					break;
-				default :
-					this.capturePhoto();
-					break;
-			
-			}
+            this.capturePhoto();
         },
 
         capturePhoto: function() {
-            // Take picture using device camera and retrieve image as a local path
+            // Retrieve an image as a local path
+
+            var source;
+            switch (this.mode) {
+                case 'camera': // User camera
+                    source = navigator.camera.PictureSourceType.CAMERA;
+                    break;
+                case 'gallery': // Use local album
+                    source = navigator.camera.PictureSourceType.SAVEDPHOTOALBUM;
+                    break;
+                default: // Should never happen
+                    return;
+            }
             navigator.camera.getPicture(
                 _.bind(this.onSuccess, this),
                 _.bind(this.onFail, this),
@@ -113,21 +112,7 @@ var capturePhoto = (function(app) {
                     quality: 50,
                     correctOrientation: false,
                     encodingType: navigator.camera.EncodingType.JPEG,
-                    source: navigator.camera.PictureSourceType.CAMERA,
-                    targetWidth: 1024,
-                    destinationType: navigator.camera.DestinationType.FILE_URI
-                });
-        },
-		
-		gallery: function() {
-            // Take picture using device camera and retrieve image as a local path
-            navigator.camera.getPicture(
-                _.bind(this.onSuccess, this),
-                _.bind(this.onFail, this),
-                {
-                    quality: 50,
-                    encodingType: navigator.camera.EncodingType.JPEG,
-                    sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
+                    source: source,
                     targetWidth: 1024,
                     destinationType: navigator.camera.DestinationType.FILE_URI
                 });
