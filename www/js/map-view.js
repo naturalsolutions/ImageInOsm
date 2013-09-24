@@ -177,19 +177,25 @@ var ImageInOsm = (function(app) {
             this.$el.append(boxButton);
 
             // Add a button to recenter on last know position
-            var recenterButton = $('<div>')
-                .css({position: 'absolute', top: '1em', right: '9em', 'z-index': 1000})
-                .append(
-                    $('<button type="button">')
-                        .addClass('btn').append($('<i>').addClass('icon-screenshot'))
-                        .on('click', {pos: app.models.pos, ctx: this}, function(evt) {
-                            var coords = evt.data.pos.get('coords');
-                            if (coords) {
-                                evt.data.ctx.centerMap(coords);
-                            }
-                        })
-                );
-            this.$el.append(recenterButton);
+            var recenterButton = $('<button type="button">')
+                    .addClass('btn').append($('<i>').addClass('icon-screenshot'))
+                    .on('click', {pos: app.models.pos, ctx: this}, function(evt) {
+                        var coords = evt.data.pos.get('coords');
+                        if (coords) {
+                            evt.data.ctx.centerMap(coords);
+                        }
+                    }),
+                recenterDiv = $('<div>')
+                    .css({position: 'absolute', top: '1em', right: '9em', 'z-index': 1000})
+                    .append(recenterButton);
+            this.$el.append(recenterDiv);
+            // Update the above button when position change
+            var updateRecenterButton = function(model) {
+                var coords = model.get('coords');
+                this.prop('disabled', typeof(coords) === 'undefined');
+            }
+            app.models.pos.on('change:coords', updateRecenterButton, recenterButton);
+            updateRecenterButton.call(recenterButton, app.models.pos); // Force one first call, in case change:coords event has already fired
 
             // Show current user position (auto updating)
             this.markers = new OpenLayers.Layer.Markers();
