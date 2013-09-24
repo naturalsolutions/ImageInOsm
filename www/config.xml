@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<widget id="image.in.osm" version="0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="image.in.osm" version="0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>ImageInOsm</name>
     <description>Mobile application for collecting pictures of OSM objects.</description>
     <author href="http://naturalsolutions.github.io/ImageInOsm/">Natural Solutions</author>
@@ -37,4 +37,35 @@ limitations under the License.
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/file-transfer" />
     <feature name="http://api.phonegap.com/1.0/inappbrowser" />
+	
+	<icon src="icon.png" gap:role="default" />
+	
+	
+	<icon src="icon/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
+	<icon src="icon/android/mdpi.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="icon/android/hdpi.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="icon/android/xhdpi.png" gap:platform="android" gap:density="xhdpi" />
+	
+	<icon src="icon/iOS/iosm_29.png" gap:platform="ios" width="29" height="29" />
+	<icon src="icon/iOS/iosm_40.png" gap:platform="ios" width="40" height="40" />
+	<icon src="icon/iOS/iosm_50.png" gap:platform="ios" width="50" height="50" />
+	<icon src="icon/iOS/iosm_57.png" gap:platform="ios" width="57" height="57" />
+	<icon src="icon/iOS/iosm_58.png" gap:platform="ios" width="58" height="58" />
+	<icon src="icon/iOS/iosm_60.png" gap:platform="ios" width="60" height="60" />
+	<icon src="icon/iOS/iosm_72.png" gap:platform="ios" width="72" height="72" />
+	<icon src="icon/iOS/iosm_76.png" gap:platform="ios" width="76" height="76" />
+	<icon src="icon/iOS/iosm_100.png" gap:platform="ios" width="100" height="100" />
+	<icon src="icon/iOS/iosm_114.png" gap:platform="ios" width="114" height="114" />
+	<icon src="icon/iOS/iosm_120.png" gap:platform="ios" width="120" height="120" />
+	<icon src="icon/iOS/iosm_144.png" gap:platform="ios" width="144" height="144" />
+	<icon src="icon/iOS/iosm_152.png" gap:platform="ios" width="152" height="152" />
+	<icon src="icon/iOS/iosm_512.png" gap:platform="ios" width="512" height="512" />
+	<icon src="icon/iOS/iosm_1024.png" gap:platform="ios" width="1024" height="1024" />
+	
+	<icon src="icon/Windows/imageInOSM_110.png" gap:platform="winphone" width="110" height="110" />
+	<icon src="icon/Windows/imageInOSM_202.png" gap:platform="winphone" width="202" height="202" />
+	<icon src="icon/Windows/imageInOSM_flip_159.png" gap:platform="winphone" width="159" height="159" />
+	<icon src="icon/Windows/imageInOSM_flip_336" gap:platform="winphone" width="336" height="336" />
+	<icon src="icon/Windows/imageInOSM_wide_691" gap:platform="winphone" width="691" height="691" />
+	
 </widget>
