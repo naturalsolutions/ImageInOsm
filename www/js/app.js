@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-var capturePhoto = (function(app) {
+var ImageInOsm = (function(app) {
     "use strict";
-	app = {
-		// Classes
-		Models: {},
-		Views: {},
-		// Instances
-		views: {},
-		models: {},
-		global: {},
-		// Other
-		utils: {},
+
+    app = {
+        // Classes
+        Models: {},
+        Views: {},
+        // Instances
+        views: {},
+        models: {},
+        global: {},
+        // Other
+        utils: {},
         // Begin user interaction
         start: function() {
             if ('main' in app.views) {
@@ -33,8 +34,8 @@ var capturePhoto = (function(app) {
                 app.views.main.render();
             }
         },
-		// Main function
-		init: function() {
+        // Main function
+        init: function() {
             var initalizers = [],
                 dfd;
 
@@ -92,7 +93,7 @@ var capturePhoto = (function(app) {
                 app.start();
             });
         }
-	};
+    };
 
     // General map configuration
     app.global.mapExtent = {minx: -5.15, miny: 42.3, maxx: 8.25, maxy: 51.1};
@@ -113,4 +114,4 @@ var capturePhoto = (function(app) {
     }
 
     return app;
-})(capturePhoto);
+})(ImageInOsm);

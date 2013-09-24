@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var capturePhoto = (function(app) {
+var ImageInOsm = (function(app) {
     "use strict";
 
     function getNotificationCB(type) {
@@ -172,4 +172,4 @@ var capturePhoto = (function(app) {
     });
 
     return app;
-})(capturePhoto);
+})(ImageInOsm);

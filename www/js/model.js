@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var capturePhoto = (function(app) {
+var ImageInOsm = (function(app) {
     "use strict";
 
     app.Models.OSMPicture = Backbone.Model.extend({
@@ -29,4 +29,4 @@ var capturePhoto = (function(app) {
     app.models.pos = new app.Models.Position();
 
     return app;
-})(capturePhoto);
+})(ImageInOsm);

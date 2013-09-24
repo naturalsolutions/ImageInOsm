@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var capturePhoto = (function(app) {
+var ImageInOsm = (function(app) {
     "use strict";
 
     app.Views.Map = Backbone.Layout.extend({
@@ -265,4 +265,4 @@ var capturePhoto = (function(app) {
     });
 
     return app;
-})(capturePhoto);
+})(ImageInOsm);

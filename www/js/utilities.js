@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-var capturePhoto = (function(app) {
+var ImageInOsm = (function(app) {
     "use strict";
 
     app.utils.WikimediaAPI = function(options) {
@@ -339,4 +339,4 @@ var capturePhoto = (function(app) {
     };
 
     return app;
-})(capturePhoto);
+})(ImageInOsm);
