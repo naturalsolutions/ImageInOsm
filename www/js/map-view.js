@@ -59,10 +59,11 @@ var capturePhoto = (function(app) {
             };
             mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', app.global.basemapUrl, _.extend({transitionEffect: 'resize'}, app.global.basemapOptions)));
             this.mapObject = new OpenLayers.Map(this.$map[0], mapOptions);
-            if ('currentPosition' in app.global) {
+            var coords = app.models.pos.get('coords');
+            if (coords) {
                 // Zoom to a focus point if any
                 this.mapObject.setCenter(
-                    (new OpenLayers.LonLat([app.global.currentPosition.lon, app.global.currentPosition.lat])).transform(mapOptions.displayProjection, mapOptions.projection),
+                    (new OpenLayers.LonLat([coords.longitude, coords.latitude])).transform(mapOptions.displayProjection, mapOptions.projection),
                     18
                 );
             } else {
@@ -181,20 +182,10 @@ var capturePhoto = (function(app) {
                 .append(
                     $('<button type="button">')
                         .addClass('btn').append($('<i>').addClass('icon-screenshot'))
-                        .on('click', {config: app.global, map: this.mapObject}, function(evt) {
-                            var pos = evt.data.config.currentPosition;
-                            if (pos) {
-                                // Zoom to a focus point if any
-                                evt.data.map.setCenter(
-                                    (new OpenLayers.LonLat(
-                                        pos.lon,
-                                        pos.lat
-                                    )).transform(
-                                        evt.data.map.displayProjection,
-                                        evt.data.map.projection
-                                    ),
-                                    18
-                                );
+                        .on('click', {pos: app.models.pos, ctx: this}, function(evt) {
+                            var coords = evt.data.pos.get('coords');
+                            if (coords) {
+                                evt.data.ctx.centerMap(coords);
                             }
                         })
                 );
@@ -203,28 +194,43 @@ var capturePhoto = (function(app) {
             // Show current user position (auto updating)
             this.markers = new OpenLayers.Layer.Markers();
             this.mapObject.addLayer(this.markers);
-            this.iAmHere = new OpenLayers.Marker();
-            navigator.geolocation.watchPosition(
-                _.bind(function(position) {
-                    this.global.currentPosition = {
-                        lat: position.coords.latitude,
-                        lon: position.coords.longitude
-                    };
-                    this.markers.clearMarkers();
-                    this.markers.setOpacity(1);
-                    this.marker.lonlat = (new OpenLayers.LonLat(
-                        position.coords.longitude,
-                        position.coords.latitude
+            app.models.pos.on('change:coords', this.showCurrentPosition, this);
+            this.showCurrentPosition(app.models.pos); // Force one first call, in case change:coords event has already fired
+        },
+
+        showCurrentPosition: function(model) {
+            var coords = model.get('coords');
+            if (coords) {
+                // Reset marker layer from any previous change
+                this.markers.clearMarkers();
+                this.markers.setOpacity(1);
+                // Add a marker on current position
+                var lonlat =(new OpenLayers.LonLat(
+                        coords.longitude,
+                        coords.latitude
                     )).transform(
-                        this.map.displayProjection,
-                        this.map.projection
-                    );
-                    this.markers.addMarker(this.marker);
-                }, {map: this.mapObject, markers: this.markers, marker: this.iAmHere, global: app.global}),
-                _.bind(function() {
-                    this.markers.setOpacity(0.5);
-                }, {markers: this.markers}),
-                {maximumAge: 200000, enableHighAccuracy: false}
+                        this.mapObject.displayProjection,
+                        this.mapObject.projection
+                    ),
+                    marker = new OpenLayers.Marker(lonlat);
+                this.markers.addMarker(marker);
+            } else {
+                // Dim marker to show loss of signal
+                this.markers.setOpacity(0.5);
+            }
+        },
+
+        centerMap: function(coords) {
+            // Zoom to a focus point if any
+            this.mapObject.setCenter(
+                (new OpenLayers.LonLat(
+                    coords.longitude,
+                    coords.latitude
+                )).transform(
+                    this.mapObject.displayProjection,
+                    this.mapObject.projection
+                ),
+                18
             );
         },
 

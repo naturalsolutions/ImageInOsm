@@ -17,32 +17,6 @@
 var capturePhoto = (function(app) {
     "use strict";
 
-    app.utils.geolocalize = function() {
-        var dfd = $.Deferred();
-        if (navigator.geolocation) {
-            var callbackSuccess = $.proxy(function(position) {
-                this.global.currentPosition = {
-                    lat: position.coords.latitude,
-                    lon: position.coords.longitude
-                };
-                this.dfd.resolve();
-            }, {dfd: dfd, global: app.global});
-            var callbackError = $.proxy(function(position) {
-                // Don't break any process if geolocation fail, just rely on default values
-                this.dfd.resolve();
-            }, {dfd: dfd});
-            navigator.geolocation.getCurrentPosition(
-                callbackSuccess,
-                callbackError,
-                {maximumAge: 200000, enableHighAccuracy: false}
-            );
-        } else {
-            // Don't break any process if geolocation fail, just rely on default values
-            dfd.resolve();
-        }
-        return dfd;
-    };
-
     app.utils.WikimediaAPI = function(options) {
         return this.initialize(options);
     };

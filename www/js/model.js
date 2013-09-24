@@ -23,8 +23,10 @@ var capturePhoto = (function(app) {
             osmfeature: {type: 'Object'}
         }
     });
-
     app.models.pic = new app.Models.OSMPicture();
+
+    app.Models.Position = Backbone.Model.extend({});
+    app.models.pos = new app.Models.Position();
 
     return app;
 })(capturePhoto);

@@ -48,8 +48,19 @@ var capturePhoto = (function(app) {
                 })
             );
 
-            // Detect current geographic position
-            initalizers.push(app.utils.geolocalize());
+            // Watch current geographic position
+            navigator.geolocation.watchPosition(
+                function(position) {
+                    app.models.pos.set({'coords': position.coords});
+                },
+                function(position) {
+                    app.models.pos.clear();
+                },
+                {
+                    maximumAge: 200000,
+                    enableHighAccuracy: false
+                }
+            );
 
             // Set map size depending on device width
             var e = window, a = 'inner';
