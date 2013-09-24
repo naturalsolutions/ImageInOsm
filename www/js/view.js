@@ -13,6 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+var tab = new Array();
+
+
 
 var capturePhoto = (function(app) {
     "use strict";
@@ -21,7 +24,8 @@ var capturePhoto = (function(app) {
         template: "#osm-selector-page",
 
         events: {
-            'submit [name="osm-selector-form"]': 'onSubmit'
+            'click #capture-button': 'onCamera',
+            'click #gallery-button': 'onGallery'
         },
 
         afterRender: function() {
@@ -36,15 +40,26 @@ var capturePhoto = (function(app) {
             this.$el.find('.osm-selector-buttons button').prop('disabled', (val === null));
         },
 
-        onSubmit: function(e) {
-            // Don't actually submit the <form>
+        onCamera: function(e) {
             e.preventDefault();
 
             this.form.commit();
-
+			
+			tab[0] = 0;
             app.views.main.setView(new app.Views.Capture());
             app.views.main.render();
+			
+        },
+		
+		onGallery: function(e) {
+			e.preventDefault();
+
+			tab[0] = 1;
+            this.form.commit();
+			app.views.main.setView(new app.Views.Capture());
+			app.views.main.render();
         }
+		
     });
 
     function getNotificationCB(type) {
@@ -64,8 +79,10 @@ var capturePhoto = (function(app) {
             'input #mwTitle, #mwPassword, #mwUsername': 'onChangeMediawiki'
         },
 
-        initialize : function() {
+        initialize : function(mode) {
             this.template = _.template($('#capture-template').html());
+			//this.mode = mode;
+			//var test= this.mode;
             Backbone.View.prototype.initialize.apply(this, arguments);
         },
 
@@ -75,7 +92,16 @@ var capturePhoto = (function(app) {
 
         afterRender: function() {
             // Immediatly launch camera when view is rendered
-            this.capturePhoto();
+			switch(tab[0]) {
+				case 1:
+					
+					this.gallery();
+					break;
+				default :
+					this.capturePhoto();
+					break;
+			
+			}
         },
 
         capturePhoto: function() {
@@ -88,6 +114,20 @@ var capturePhoto = (function(app) {
                     correctOrientation: false,
                     encodingType: navigator.camera.EncodingType.JPEG,
                     source: navigator.camera.PictureSourceType.CAMERA,
+                    targetWidth: 1024,
+                    destinationType: navigator.camera.DestinationType.FILE_URI
+                });
+        },
+		
+		gallery: function() {
+            // Take picture using device camera and retrieve image as a local path
+            navigator.camera.getPicture(
+                _.bind(this.onSuccess, this),
+                _.bind(this.onFail, this),
+                {
+                    quality: 50,
+                    encodingType: navigator.camera.EncodingType.JPEG,
+                    sourceType: navigator.camera.PictureSourceType.SAVEDPHOTOALBUM,
                     targetWidth: 1024,
                     destinationType: navigator.camera.DestinationType.FILE_URI
                 });
