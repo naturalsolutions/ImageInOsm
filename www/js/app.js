@@ -29,6 +29,7 @@ var ImageInOsm = (function(app) {
         utils: {},
         // Begin user interaction
         start: function() {
+            var nav = new app.Views.Navigation();
             Backbone.history.start();
             app.routeur.navigate('maps', {trigger: true});
         },
