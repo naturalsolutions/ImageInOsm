@@ -29,10 +29,8 @@ var ImageInOsm = (function(app) {
         utils: {},
         // Begin user interaction
         start: function() {
-            if ('main' in app.views) {
-                app.views.main.setView(new app.Views.Map());
-                app.views.main.render();
-            }
+            Backbone.history.start();
+            app.routeur.navigate('maps', {trigger: true});
         },
         // Main function
         init: function() {
@@ -91,10 +89,6 @@ var ImageInOsm = (function(app) {
 
             // Start app when everything is ready
             $.when.apply($, initalizers).done(function() {
-                app.views.main = new Backbone.Layout({
-                    template: '#main-layout',
-                    el: $('#content')
-                });
                 app.start();
             });
         }

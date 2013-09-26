@@ -19,8 +19,7 @@ var ImageInOsm = (function(app) {
 
     function getNotificationCB(type) {
         return function (msg) {
-            app.views.main.setView(new app.Views.Final({status: type, message: msg}));
-            app.views.main.render();
+            app.routeur.navigate('final', {trigger: true});
         }
     };
 
@@ -41,7 +40,10 @@ var ImageInOsm = (function(app) {
         },
 
         serialize : function() {
-            return {osmid: app.models.pic.attributes.osmfeature.fid};
+            return {
+                osmid: this.model.attributes.osmfeature.fid,
+                imgsrc: this.model.attributes.data
+            };
         },
 
         afterRender: function() {
@@ -145,8 +147,8 @@ var ImageInOsm = (function(app) {
         },
 
         initialize : function(options) {
-            this.status = options.status;
-            this.message = options.message;
+            this.status = 'TODO';
+            this.message = 'TODO';
             Backbone.View.prototype.initialize.apply(this, arguments);
         },
 
@@ -162,8 +164,7 @@ var ImageInOsm = (function(app) {
         },
 
         newPicture: function() {
-            app.views.main.setView(new app.Views.Capture());
-            app.views.main.render();
+            app.routeur.navigate('capture', {trigger: true});
         },
 
         exit: function() {

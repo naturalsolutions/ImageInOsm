@@ -258,15 +258,13 @@ var ImageInOsm = (function(app) {
         onCamera: function(e) {
             e.preventDefault();
 
-            app.views.main.setView(new app.Views.Capture({mode: 'camera'}));
-            app.views.main.render();
+            app.routeur.navigate('capture/camera', {trigger: true});
         },
 
         onGallery: function(e) {
             e.preventDefault();
 
-            app.views.main.setView(new app.Views.Capture({mode: 'gallery'}));
-            app.views.main.render();
+            app.routeur.navigate('capture/gallery', {trigger: true});
         }
     });
 
