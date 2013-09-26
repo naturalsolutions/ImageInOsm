@@ -79,8 +79,8 @@ var ImageInOsm = (function(app) {
                 h: e[a + 'Height']
             };
             app.global.mapSize = {
-                width: (app.global.viewportSize.w - 40) + 'px',
-                height: (app.global.viewportSize.h - 100) + 'px'
+                width: document.getElementById('content').offsetWidth + 'px',
+                height: document.getElementById('content').offsetHeight + 'px'
             };
 
             // Relay to system browser through InAppBrowser plugin
