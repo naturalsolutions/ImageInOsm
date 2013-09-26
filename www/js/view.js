@@ -171,6 +171,43 @@ var ImageInOsm = (function(app) {
             navigator.app.exitApp();
         }
     });
+    
+    app.Views.Navigation = Backbone.View.extend({
+    
+        template: '#navigate-template',
+        
+        el: $('#navigate-content'),
+        
+        events: {
+            'click #btn1' : 'maps',
+            'click #btn2' : 'takePicture',
+            'click #btn3' : 'sendPicture',
+            'click #btn4' : 'savedPicture'
+        },
+        initialize: function() {
+            for(i=0; i<4; i++) {
+                num = i+1;
+                $('#navigate-content').append('<li><button class="btn-nav" id="btn' + num + '">'+ num +'</button></li>');
+            }
+        },
+        
+        maps: function() {
+            app.routeur.navigate('maps', {trigger: true});
+        },
+        takePicture: function() {
+            app.routeur.navigate('capture', {trigger: true});
+            
+        },
+        sendPicture: function() {
+            app.routeur.navigate('form', {trigger: true});
+            
+        },
+        savedPicture: function() {
+            app.routeur.navigate('final', {trigger: true});
+            
+        }
+        
+    });
 
     return app;
 })(ImageInOsm);
