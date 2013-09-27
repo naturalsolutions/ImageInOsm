@@ -113,10 +113,6 @@ li {list-style: none;}
         opacity: 0.8;
         z-index: 5000;
     }
-    #navigate-content ul {
-        
-        
-    }
     #navigate-content li {
         display: inline; 
         padding: 61% 0 62% 0;
@@ -132,6 +128,63 @@ li {list-style: none;}
         border: none;
         margin: 0 auto;
         
+    }
+    #content button {
+        background: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 75px;
+    }
+    #content img {
+        width: 75%; 
+    }
+    #content #refresh {
+        position: absolute;
+        bottom: 13%;
+        right: 0;
+    }
+    #content #zone {
+        position: absolute;
+        bottom: 9%;
+        right: 0;
+    }
+    #content #position {
+        position: absolute;
+        bottom: 5%;
+        right: 0;
+    }
+    #content #zoomIn {
+        position: absolute;
+        top: 15%;
+        right: -1.1%;
+        z-index: 2000;
+        margin: 0;
+        padding: 0;
+    }
+    #content #zoomOut {
+        position: absolute;
+        top: 19%;
+        right: -1.1%;
+        z-index: 2000;
+        margin: 0;
+        padding: 0;
+    }
+    .osm-selector-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        z-index: 2000;
+        background: #fff;
+        border: 1px solid #333;
+        width: 200px;
+    }
+    
+    /**/
+    .img-preview img {
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
     }
 }
 @media (orientation: landscape) and (max-width: 640px) {
@@ -173,6 +226,63 @@ li {list-style: none;}
         border: none;
         margin: 0 auto;
         
+    }
+    #navigate-content .last {
+        border-bottom: none;
+    }
+    #navigate-content button img {
+        margin-bottom: 7px;
+    }
+     /**/
+    #content button {
+        background: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 75px;
+    }
+    #content img {
+        width: 75%; 
+    }
+    #content #refresh {
+        position: absolute;
+        bottom: 19%;
+        right: 0;
+    }
+    #content #zone {
+        position: absolute;
+        bottom: 12%;
+        right: 0;
+    }
+    #content #position {
+        position: absolute;
+        bottom: 5%;
+        right: 0;
+    }
+    #content #zoomIn {
+        position: absolute;
+        top: 10%;
+        right: -0.8%;
+        z-index: 2000;
+        margin: 0;
+        padding: 0;
+    }
+    #content #zoomOut {
+        position: absolute;
+        top: 17%;
+        right: -0.8%;
+        z-index: 2000;
+        margin: 0;
+        padding: 0;
+    }
+    .osm-selector-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        z-index: 2000;
+        background: #fff;
+        border: 1px solid #333;
+        width: 200px;
     }
 }
 @media (orientation: landscape) and (min-width: 800px) {
