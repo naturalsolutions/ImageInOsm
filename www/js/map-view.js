@@ -52,8 +52,7 @@ var ImageInOsm = (function(app) {
                 renderers: ['Canvas', 'SVG'],
                 controls: [
                     new OpenLayers.Control.Attribution(),
-                    new OpenLayers.Control.TouchNavigation(),
-                    new OpenLayers.Control.Zoom()
+                    new OpenLayers.Control.TouchNavigation()
                 ],
                 layers: []
             };
@@ -154,21 +153,23 @@ var ImageInOsm = (function(app) {
             this.mapObject.addControl(this.boxSelector);
 
             // Add a button on the map for data loading
-            var loadButton = $('<div>')
-                .css({position: 'absolute', top: '1em', right: '1em', 'z-index': 1000})
+            var loadButton = $('<div  id="refresh">')
+                .css({position: 'absolute', 'z-index': 2000})
                 .append(
                     $('<button type="button">')
-                        .addClass('btn').append($('<i>').addClass('icon-refresh'))
+                        .addClass('btn')
+                        .append($('<button type="button">'), '<img src="img/refresh.png" id="refresh" />')
                         .on('click', $.proxy(this.loadData, this))
                 );
             this.$el.append(loadButton);
 
             // Add a button for box selection
-            var boxButton = $('<div>')
-                .css({position: 'absolute', top: '1em', right: '5em', 'z-index': 1000})
+            var boxButton = $('<div  id="zone">')
+                .css({position: 'absolute', 'z-index': 2000})
                 .append(
                     $('<button type="button">')
-                        .addClass('btn').append($('<i>').addClass('icon-retweet'))
+                        .addClass('btn')
+                        .append($('<button type="button">'), '<img src="img/zone.png" id="zone" />')
                         .on('click', this, function(evt) {
                             evt.data.boxSelector.toggle();
                             $(this).toggleClass('active');
@@ -178,15 +179,16 @@ var ImageInOsm = (function(app) {
 
             // Add a button to recenter on last know position
             var recenterButton = $('<button type="button">')
-                    .addClass('btn').append($('<i>').addClass('icon-screenshot'))
+                    .addClass('btn')
+                    .append($('<button type="button">'), '<img src="img/position.png" id="position" />')
                     .on('click', {pos: app.models.pos, ctx: this}, function(evt) {
                         var coords = evt.data.pos.get('coords');
                         if (coords) {
                             evt.data.ctx.centerMap(coords);
                         }
                     }),
-                recenterDiv = $('<div>')
-                    .css({position: 'absolute', top: '1em', right: '9em', 'z-index': 1000})
+                recenterDiv = $('<div  id="position">')
+                    .css({position: 'absolute', 'z-index': 2000})
                     .append(recenterButton);
             this.$el.append(recenterDiv);
             // Update the above button when position change
@@ -203,6 +205,7 @@ var ImageInOsm = (function(app) {
             app.models.pos.on('change:coords', this.showCurrentPosition, this);
             this.showCurrentPosition(app.models.pos); // Force one first call, in case change:coords event has already fired
         },
+
 
         showCurrentPosition: function(model) {
             var coords = model.get('coords');
