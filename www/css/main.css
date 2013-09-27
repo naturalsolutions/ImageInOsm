@@ -13,12 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+body {margin: 0; padding: 0; font-family: Verdana}
+li {list-style: none;}
 #template {diplay: none;}
-#content {width: 100%; height: 100%; padding: 0; margin: 0;}
 
-.waiting-spinner {position: absolute; top: 50%; left: 50%; margin: -21px 0 0 -21px; width: 42px; height: 42px; background-image: url(green-spinner.gif);}
-.waiting-text {position: absolute; left: 0; bottom: 0; width: 100%; text-align: center; margin: 1em 0.5em; font-size: xx-large;}
+#spinner-content {
+    background: url(../img/splash.jpg) no-repeat;
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.waiting-spinner {position: absolute; bottom: 20%; left: 40%; margin: -21px 0 0 -21px; width: 42px; height: 42px; background-image: url(../img/spinner.gif);}
+.waiting-text {position: absolute; left: -11%; bottom: 0; width: 100%; text-align: center; margin: 1em 0.5em; font-size: xx-large;}
 
 .img-preview img {width: 90%; height: auto;}
 .img-error {display: none;}
@@ -39,3 +47,234 @@
 }
 .olDrawBox {cursor: crosshair;}
 .olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
+
+
+
+@media (orientation: portrait) and (max-width: 640px) {
+    #content {
+        position: absolute; 
+        bottom: 0;
+        width: 100%;
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1000;
+    }
+    /**/
+    #navigate-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
+        height: 10% !important;
+        background: #000;
+        opacity: 0.8;
+        z-index: 5000;
+    }
+    #navigate-content li {
+        display: inline; 
+        padding: 61% 0 62% 0;
+    }
+    #navigate-content button {
+        color: #fff;
+        width: 25%;
+        height: 100%;
+        padding: 0 25px 25px 25px;
+        text-align: center;
+        background: none;
+        border: none;
+        margin: 0 auto;
+        
+    }
+    #navigate-content img {
+        vertical-align:middle
+    }
+   
+}
+@media (orientation: portrait) and (min-width: 800px) {
+    #content {
+        position: absolute; 
+        bottom: 0;
+        width: 100%;
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1000;
+    }
+    /**/
+    
+    #navigate-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
+        height: 10% !important;
+        background: #000;
+        opacity: 0.8;
+        z-index: 5000;
+    }
+    #navigate-content ul {
+        
+        
+    }
+    #navigate-content li {
+        display: inline; 
+        padding: 61% 0 62% 0;
+    }
+    #navigate-content button {
+        letter-spacing: 1px;
+        color: #fff;
+        width: 25%;
+        height: 100%;
+        padding: 0 50px 50px 50px;
+        text-align: center;
+        background: none;
+        border: none;
+        margin: 0 auto;
+        
+    }
+}
+@media (orientation: landscape) and (max-width: 640px) {
+    #content {
+        position: absolute; 
+        top: 0; 
+        right: 0; 
+        width: 100%; 
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1000;
+    }
+    #navigate-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 12%; 
+        height: 100% !important;
+        background: #000;
+        opacity: 0.8;
+        z-index: 5000;
+    }
+    #navigate-content ul {
+        
+        
+    }
+    #navigate-content li {
+        display: block; 
+        padding: 12% 0 12% 0;
+        border-bottom: 1px solid #fff;
+    }
+    #navigate-content button {
+        color: #fff;
+        width: 100%;
+        padding: 0 5px 0 5px;
+        text-align: center;
+        background: none;
+        border: none;
+        margin: 0 auto;
+        
+    }
+}
+@media (orientation: landscape) and (min-width: 800px) {
+    #content {
+        position: absolute; 
+        top: 0; 
+        right: 0; 
+        width: 100%; 
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1000;
+    }
+    
+    #navigate-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 7%; 
+        height: 100% !important;
+        background: #000;
+        opacity: 0.7;
+        z-index: 5000;
+    }
+    #navigate-content li {
+        display: block; 
+        padding: 58% 0 57% 0;
+        border-bottom: 1px solid #fff;
+    }
+    #navigate-content button {
+        letter-spacing: 1px;
+        color: #fff;
+        width: 100%;
+        padding: 0 15px 0 15px;
+        text-align: center;
+        background: none;
+        border: none;
+        margin: 0 auto;   
+        font-family: Helvetica;
+    }
+    #navigate-content .last {
+        border-bottom: none;
+    }
+    #navigate-content button img {
+        margin-bottom: 7px;
+    }
+     /**/
+    #content button {
+        background: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: 75px;
+    }
+    #content img {
+        width: 75%; 
+    }
+    #content #refresh {
+        position: absolute;
+        bottom: 19%;
+        right: 0;
+    }
+    #content #zone {
+        position: absolute;
+        bottom: 12%;
+        right: 0;
+    }
+    #content #position {
+        position: absolute;
+        bottom: 5%;
+        right: 0;
+    }
+    #content #zoomIn {
+        position: absolute;
+        top: 10%;
+        right: -0.8%;
+        z-index: 2000;
+        margin: 0;
+        padding: 0;
+    }
+    #content #zoomOut {
+        position: absolute;
+        top: 17%;
+        right: -0.8%;
+        z-index: 2000;
+        margin: 0;
+        padding: 0;
+    }
+    .osm-selector-buttons {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        z-index: 2000;
+        background: #fff;
+        border: 1px solid #333;
+        width: 200px;
+    }
+    
+    /**/
+    .img-preview img {
+        width: auto;
+        height: 100%;
+        margin: 0 auto;
+    }
+}
