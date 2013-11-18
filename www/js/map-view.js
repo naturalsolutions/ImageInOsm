@@ -52,9 +52,12 @@ var ImageInOsm = (function(app) {
                 renderers: ['Canvas', 'SVG'],
                 controls: [
                     new OpenLayers.Control.Attribution(),
-                    new OpenLayers.Control.TouchNavigation()
+                    new OpenLayers.Control.TouchNavigation(),
+                    new OpenLayers.Control.Zoom()
                 ],
-                layers: []
+                layers: [],
+                center: [0, 0],
+                zoom: 1
             };
             mapOptions.layers.push(new OpenLayers.Layer.OSM('Fond de plan', app.global.basemapUrl, _.extend({transitionEffect: 'resize'}, app.global.basemapOptions)));
             this.mapObject = new OpenLayers.Map(this.$map[0], mapOptions);
