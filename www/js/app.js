@@ -51,7 +51,7 @@ var ImageInOsm = (function(app) {
             // Wait first response of Geolocation API before starting app
             dfd = $.Deferred();
             app.models.pos.once('change:coords', function() {this.resolve();}, dfd)
-            initalizers.push(dfd);
+            //initalizers.push(dfd);
 
             // Watch current geographic position
             navigator.geolocation.watchPosition(
