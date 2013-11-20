@@ -260,14 +260,18 @@ var ImageInOsm = (function(app) {
 
         onCamera: function(e) {
             e.preventDefault();
-
+            
             app.routeur.navigate('capture/camera', {trigger: true});
+            
+            $('#btn2').prop('disabled', false);
         },
 
         onGallery: function(e) {
             e.preventDefault();
-
+            
             app.routeur.navigate('capture/gallery', {trigger: true});
+            
+            $('#btn2').prop('disabled', false);
         }
     });
 
