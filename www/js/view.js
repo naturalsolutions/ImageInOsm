@@ -81,6 +81,9 @@ var ImageInOsm = (function(app) {
         onSuccess: function(imageURI) {
             app.models.pic.set({data: imageURI});
             this.$el.find('.img-preview img').attr('src', imageURI);
+            
+            $('#btn1').prop('disabled', false);
+            $('#btn3').prop('disabled', false);
         },
 
         onFail: getNotificationCB('error'),
@@ -160,6 +163,7 @@ var ImageInOsm = (function(app) {
         },
 
         restart: function() {
+            app.nav.remove();
             app.start();
         },
 
@@ -168,7 +172,7 @@ var ImageInOsm = (function(app) {
         },
 
         exit: function() {
-            navigator.app.exitApp();
+            app.exitApp();
         }
     });
     
