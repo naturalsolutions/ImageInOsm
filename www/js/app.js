@@ -29,9 +29,15 @@ var ImageInOsm = (function(app) {
         utils: {},
         // Begin user interaction
         start: function() {
-            var nav = new app.Views.Navigation();
-            Backbone.history.start();
+            if (! (nav)) {
+                var nav = new app.Views.Navigation();
+                Backbone.history.start();
+                
+                $('#btn2').prop('disabled', true);
+                $('#btn3').prop('disabled', true);
+            }
             app.routeur.navigate('maps', {trigger: true});
+            $('#btn4').prop('disabled', true);
         },
         // Main function
         init: function() {
