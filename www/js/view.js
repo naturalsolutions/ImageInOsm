@@ -185,12 +185,8 @@ var ImageInOsm = (function(app) {
             'click #btn4' : 'savedPicture'
         },
         initialize: function() {
-          /*  for(i=0; i<4; i++) {
-                num = i+1;
-                $('#navigate-content').append('<li><button class="btn-nav" id="btn' + num + '">'+ num +'</button></li>');
-            }*/
             $('#navigate-content').append('<li><button class="btn-nav" id="btn1"><img src="img/maps.png" /><span>Select</span></button></li>');
-            $('#navigate-content').append('<li><button class="btn-nav" id="btn2"><img src="img/camera.png" /><span>Snap it</span></button></li>');
+            $('#navigate-content').append('<li><button class="btn-nav" id="btn2"><img src="img/camera.png" /><span>Snap</span></button></li>');
             $('#navigate-content').append('<li><button class="btn-nav" id="btn3"><img src="img/upload.png" /><span>Upload</span></button></li>');
             $('#navigate-content').append('<li class="last"><button class="btn-nav" id="btn4"><img src="img/finish.png" /><span>Finish</span></button></li>');
         },
