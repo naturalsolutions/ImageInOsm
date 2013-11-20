@@ -43,6 +43,8 @@ var ImageInOsm = (function(app) {
                 function(imageURI) {
                     app.models.pic.set({data: imageURI});
                     app.routeur.navigate('form', {trigger: true});
+                    
+                    $('#btn3').prop('disabled', false);
                 },
                 function(msg) {},
                 {
