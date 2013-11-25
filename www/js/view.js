@@ -23,7 +23,7 @@ var ImageInOsm = (function(app) {
         }
     };
 
-    app.Views.Capture = Backbone.View.extend({
+    app.Views.Form = Backbone.View.extend({
         manage: true,
 
         events: {
@@ -34,9 +34,10 @@ var ImageInOsm = (function(app) {
         },
 
         initialize : function(options) {
-            this.template = _.template($('#capture-template').html());
+            this.template = _.template($('#form-template').html());
             this.mode = options.mode;
             Backbone.View.prototype.initialize.apply(this, arguments);
+            this.listenTo(this.model, 'change:data', this.onModelChange);
         },
 
         serialize : function() {
@@ -46,47 +47,9 @@ var ImageInOsm = (function(app) {
             };
         },
 
-        afterRender: function() {
-            // Immediatly launch camera when view is rendered
-            this.capturePhoto();
+        onModelChange: function() {
+            this.$el.find('.img-preview img').attr('src', this.model.get('data'));
         },
-
-        capturePhoto: function() {
-            // Retrieve an image as a local path
-
-            var source;
-            switch (this.mode) {
-                case 'camera': // User camera
-                    source = navigator.camera.PictureSourceType.CAMERA;
-                    break;
-                case 'gallery': // Use local album
-                    source = navigator.camera.PictureSourceType.SAVEDPHOTOALBUM;
-                    break;
-                default: // Should never happen
-                    return;
-            }
-            navigator.camera.getPicture(
-                _.bind(this.onSuccess, this),
-                _.bind(this.onFail, this),
-                {
-                    quality: 50,
-                    correctOrientation: false,
-                    encodingType: navigator.camera.EncodingType.JPEG,
-                    sourceType: source,
-                    targetWidth: 1024,
-                    destinationType: navigator.camera.DestinationType.FILE_URI
-                });
-        },
-
-        onSuccess: function(imageURI) {
-            app.models.pic.set({data: imageURI});
-            this.$el.find('.img-preview img').attr('src', imageURI);
-            
-            $('#btn1').prop('disabled', false);
-            $('#btn3').prop('disabled', false);
-        },
-
-        onFail: getNotificationCB('error'),
 
         onSendFlickr: function(e) {
             var imageURI = app.models.pic.attributes.data,

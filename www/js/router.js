@@ -46,16 +46,20 @@ var ImageInOsm = (function(app) {
             }
             navigator.camera.getPicture(
                 function(imageURI) {
-                    app.models.pic.set({data: imageURI});
                     app.routeur.navigate('form', {trigger: true});
+                    app.models.pic.set({data: imageURI});
                     
+                    $('#btn1').prop('disabled', false);
                     $('#btn3').prop('disabled', false);
                 },
                 function(msg) {
+                    // Todo: show an error message?
+                    // It is actually a good idea to just remain on the current view
                 },
                 {
                     quality: 50,
-                    correctOrientation: false,
+                    allowEdit : true,
+                    correctOrientation: true,
                     encodingType: navigator.camera.EncodingType.JPEG,
                     sourceType: source,
                     targetWidth: 1024,
@@ -66,7 +70,7 @@ var ImageInOsm = (function(app) {
             $('body').css('background', '#111111');
             $('#content > *').detach();
             if (! (app.views.form)) {
-                app.views.form = new app.Views.Capture({model: app.models.pic});
+                app.views.form = new app.Views.Form({model: app.models.pic});
                 app.views.form.render();
             }
             app.views.form.$el.appendTo('#content');
