@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-body {margin: 0; padding: 0; font-family: Verdana}
+body {margin: 0; padding: 0; font-family: Verdana;}
 li {list-style: none;}
 #template {diplay: none;}
 
@@ -28,7 +28,7 @@ li {list-style: none;}
 .waiting-spinner {position: absolute; bottom: 20%; left: 40%; margin: -21px 0 0 -21px; width: 42px; height: 42px; background-image: url(../img/spinner.gif);}
 .waiting-text {position: absolute; left: -11%; bottom: 0; width: 100%; text-align: center; margin: 1em 0.5em; font-size: xx-large;}
 
-.img-preview img {width: 90%; height: auto;}
+/* .img-preview img {width: 90%; height: auto;} */
 .img-error {display: none;}
 #img-error-msg {font-style: italic;}
 .osm-id {text-align: center;}
@@ -47,7 +47,46 @@ li {list-style: none;}
 }
 .olDrawBox {cursor: crosshair;}
 .olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
-
+#form-upload h2, #noticeLink {color: #fff;}
+#form-upload input[type=text], #form-upload input[type=password] {
+    width: 92%;
+    border-radius: 0;
+    padding: 3%;
+}
+#form-upload textarea {
+    width: 92%;
+    border-radius: 0;
+    padding: 3%;
+}
+#form-upload #mwSubmit:enabled {
+    color: #fff;
+    background: #1da98c;
+    border-bottom: 3px solid #12735f;
+}
+#form-upload #mwSubmit {
+    margin-top: 3%;
+    width: 98%;
+    border-radius: 0;
+}
+#bg-mediawiki {
+    position: absolute;
+    top: 0;
+    background: url("../img/bg_form.png") repeat;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 3000;
+}
+#mediawiki-disclaimer {
+    position: relative;
+    top: 20%;
+    left: -1%;
+}
+#close-notice{
+    position: absolute;
+    top: 3%;
+    right: 3%;
+}
 
 @media (orientation: portrait) and (max-width: 240px){
     #content {
@@ -273,8 +312,204 @@ li {list-style: none;}
         position: absolute;
         right: 0;
     }
+    .container-fluid  {
+        position: absolute; 
+        bottom: 0;
+        width: 100%;
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1001;
+        overflow: scroll;
+    }
+    .img-preview {
+        position: absolute;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .img-preview img {
+        position: absolute;
+        top: 70px;
+        z-index: -1;
+    }
+    #send-buttons {
+        position: absolute;
+        bottom: 0;
+    }
+    #send-button-flickr {
+        border-radius: 0;
+    }
+    #send-button-wikimedia {
+        border-radius: 0;
+    }
+    #form-upload {
+        background: url("../img/bg_form.png") repeat;
+        width: 100%;
+        height: 100%;
+        z-index: 3000;
+    }
+    #form-upload-content {
+        position: absolute;
+        top: 15%;
+        left: 3%;
+        width: 96%;
+    }
 }
 @media (orientation: portrait) and (min-width: 360px) and (max-width: 480px) {
+    #content {
+        position: absolute; 
+        bottom: 0;
+        width: 100%;
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1000;
+    }
+    #navigate-content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; 
+        height: 12% !important;
+        background: #000;
+        opacity: 0.8;
+        z-index: 1001;
+    }
+    #navigate-content li {
+        display: inline; 
+    }
+    #navigate-content button {
+        color: #fff;
+        width: 25%;
+        height: 100%;
+        text-align: center;
+        background: none;
+        border: none;
+        margin: 0 auto;
+    }
+    #navigate-content span {
+        display: block; 
+    } 
+    #navigate-content img {
+        vertical-align:middle;
+        width: 50%;
+    }
+    .olControlZoom{
+        float: right !important;
+        position: relative !important;
+        top: 15% !important;
+        left: auto !important;
+        right: -1% !important;
+        background: none !important;
+        width: 12% !important;
+        z-index: 10000 !important;
+        margin: 0 3% 0 0 !important;
+    }
+    .olControlZoom a { 
+        margin: 0 !important;
+        font-size: 20px;
+    }
+    #content .olControlZoomIn {
+        z-index: 2000 !important;
+        background: #000;
+        padding: 25%;
+        z-index: 10000 !important;
+        border-radius: 7px 0 0 0 !important;
+    }
+    #content .olControlZoomOut {
+        z-index: 2000 !important;
+        background: #000;
+        padding: 25%;
+        z-index: 10000 !important;
+        border-radius: 0 0 0 7px !important;
+    }
+    #content #refresh {
+        position: absolute;
+        bottom: 21%;
+        right: 0;
+        width: 50px;
+    }
+    #content #zone {
+        position: absolute;
+        bottom: 14%;
+        right: 0;
+        width: 50px;
+    }
+    #content #position {
+        position: absolute;
+        bottom: 7%;
+        right: 0;
+        width: 50px;
+    }
+    .osm-selector-buttons {
+        position: absolute;
+        bottom: 0.3%;
+        z-index: 2000;
+        background: #fff;
+        border-top: 1px solid #222;
+        width: 100%;
+        height: 5%;
+    }
+    .osm-selector-buttons button {
+        clear: both;
+        width: 50% !important;
+        border: none;
+        padding: 2% 0 1.5% 0 !important;
+        border-radius: 0;
+    }
+    .osm-selector-buttons #capture-button {
+        position: absolute;
+        left: 0;
+        border-right: 1px solid #222;
+    }
+    .osm-selector-buttons #gallery-button {
+        position: absolute;
+        right: 0;
+    }
+    .container-fluid  {
+        position: absolute; 
+        bottom: 0;
+        width: 100%;
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1001;
+        overflow: scroll;
+    }
+    .img-preview {
+        position: absolute;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .img-preview img {
+        position: absolute;
+        top: 70px;
+        z-index: -1;
+    }
+    #send-buttons {
+        position: absolute;
+        bottom: 0;
+    }
+    #send-button-flickr {
+        border-radius: 0;
+    }
+    #send-button-wikimedia {
+        border-radius: 0;
+    }
+    #form-upload {
+        background: url("../img/bg_form.png") repeat;
+        width: 100%;
+        height: 100%;
+        z-index: 3000;
+    }
+    #form-upload-content {
+        position: absolute;
+        top: 15%;
+        left: 3%;
+        width: 96%;
+    }
+}
+@media (orientation: portrait) and (min-width: 540px) and (max-width: 620px) {
     #content {
         position: absolute; 
         bottom: 0;
@@ -426,13 +661,6 @@ li {list-style: none;}
         vertical-align:middle;
         width: 50%;
     }
-    #content button {
-        background: none;
-        /* border: none; */
-        margin: 0;
-        padding: 0;
-        width: 75px;
-    }
     #content #refresh {
         position: absolute;
         bottom: 14%;
@@ -493,7 +721,7 @@ li {list-style: none;}
     }
     .osm-selector-buttons button {
         clear: both;
-        width: 49% !important;
+        width: 50% !important;
         border: 0;
         padding: 2% 0 1.5% 0 !important;
         border-radius: 0;
@@ -507,9 +735,73 @@ li {list-style: none;}
         position: absolute;
         right: 0;
     }
-    .img-preview img {
+    .container-fluid  {
+        position: absolute; 
+        bottom: 0;
         width: 100%;
-        height: auto;
-        margin: 0 auto;
+        height: 100%; 
+        padding: 0; 
+        margin: 0;
+        z-index: 1001;
+        overflow: scroll;
+    }
+    .img-preview {
+        position: absolute;
+        min-width: 100%;
+        min-height: 100%;
+    }
+    .img-preview img {
+        position: absolute;
+        top: 70px;
+        z-index: -1;
+    }
+    #send-buttons {
+        position: absolute;
+        bottom: 0;
+    }
+    #send-button-flickr {
+        border-radius: 0;
+        width: 50%;
+        margin: 0;
+    }
+    #send-button-wikimedia {
+        border-radius: 0;
+        width: 50%;
+        margin: 0;
+    }
+    #form-upload {
+        background: url("../img/bg_form.png") repeat;
+        width: 100%;
+        height: 100%;
+        z-index: 3000;
+        font-size: 20px;
+    }
+    #form-upload-content {
+        position: absolute;
+        top: 15%;
+        left: 3%;
+        width: 96%;
+    }
+    #form-upload h2 {
+        font-size: 42px;
+        margin-bottom: 5%;
+    }
+    #noticeLink {
+        margin-top: 10%;
+    }
+    #form-upload input[type=text], #form-upload input[type=password], #form-upload textarea, #form-upload #mwSubmit, #noticeLink {
+        font-size: 20px;
+    }
+    #form-upload #mwSubmit {
+        padding: 3% 0 3% 0;
+    }
+    #btn-final {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+    }
+    #restart, #new-picture, #exit {
+        border-radius: 0;
+        width: 100%;
     }
 }
