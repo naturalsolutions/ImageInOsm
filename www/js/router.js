@@ -20,12 +20,13 @@ var ImageInOsm = (function(app) {
     var Routeur = Backbone.Router.extend({
         routes: {
             'maps' : 'maps',
-            'capture/:mode' : 'capture',
+            'capture(/:mode)' : 'capture',
             'form' : 'form',
             'final' : 'finalScreen',
         },
         maps: function() {
-            $('#content').empty();
+            $('body').css('background', '#fff');
+            $('#content > *').detach();
             if (! (app.views.map)) {
                 app.views.map = new app.Views.Map();
                 app.views.map.render();
@@ -33,7 +34,11 @@ var ImageInOsm = (function(app) {
             app.views.map.$el.appendTo('#content');
         },
         capture: function(mode) {
-            var source ;
+            var source;
+            if (mode === null) {
+                mode = this.lastCaptureMode;
+            }
+            this.lastCaptureMode = mode;
             if (mode == 'gallery') {
                 source = navigator.camera.PictureSourceType.SAVEDPHOTOALBUM;
             } else {
@@ -46,7 +51,8 @@ var ImageInOsm = (function(app) {
                     
                     $('#btn3').prop('disabled', false);
                 },
-                function(msg) {},
+                function(msg) {
+                },
                 {
                     quality: 50,
                     correctOrientation: false,
@@ -57,7 +63,8 @@ var ImageInOsm = (function(app) {
                 });
         },
         form: function() {
-            $('#content').empty();
+            $('body').css('background', '#111111');
+            $('#content > *').detach();
             if (! (app.views.form)) {
                 app.views.form = new app.Views.Capture({model: app.models.pic});
                 app.views.form.render();
@@ -65,7 +72,7 @@ var ImageInOsm = (function(app) {
             app.views.form.$el.appendTo('#content');
         },
         finalScreen: function() {
-            $('#content').empty();
+            $('#content > *').detach();
             if (! (app.views.notification)) {
                 app.views.notification = new app.Views.Final();
                 app.views.notification.render();
