@@ -80,6 +80,17 @@ li {list-style: none;}
     background: #fff;
     color: #111;
 }
+#send-buttons {
+    position: absolute;
+    bottom: 0;
+}
+#send-buttons button {
+    color: #fff;
+    background: #1da98c;
+    border-radius: 0;
+    border: none;
+    text-shadow: none;
+}
 #form-upload h2, #noticeLink {color: #fff;}
 #form-upload input[type=text], #form-upload input[type=password] {
     width: 92%;
@@ -362,17 +373,16 @@ li {list-style: none;}
     }
     .img-preview img {
         position: absolute;
-        top: 70px;
+        top: 12%;
         z-index: -1;
     }
     #send-buttons {
         position: absolute;
         bottom: 0;
     }
-    #send-button-flickr {
-        border-radius: 0;
-    }
-    #send-button-wikimedia {
+    #send-buttons button {
+        color: #fff;
+        background: #1da98c;
         border-radius: 0;
     }
     #form-upload {
@@ -525,18 +535,8 @@ li {list-style: none;}
     }
     .img-preview img {
         position: absolute;
-        top: 70px;
+        top: 12%;
         z-index: -1;
-    }
-    #send-buttons {
-        position: absolute;
-        bottom: 0;
-    }
-    #send-button-flickr {
-        border-radius: 0;
-    }
-    #send-button-wikimedia {
-        border-radius: 0;
     }
     #form-upload {
         background: url("../img/bg_form.png") repeat;
@@ -807,22 +807,19 @@ li {list-style: none;}
     }
     .img-preview img {
         position: absolute;
-        top: 70px;
+        top: 100px;
         z-index: -1;
     }
-    #send-buttons {
-        position: absolute;
-        bottom: 0;
-    }
-    #send-button-flickr {
+    #send-buttons button {
+        color: #fff;
+        background: #1da98c;
         border-radius: 0;
         width: 50%;
         margin: 0;
+        padding: 3% 0 3% 0;
     }
-    #send-button-wikimedia {
-        border-radius: 0;
-        width: 50%;
-        margin: 0;
+    #send-buttons #send-button-flickr {
+        border-right: 1px solid #108a71;
     }
     #form-upload {
         background: url("../img/bg_form.png") repeat;

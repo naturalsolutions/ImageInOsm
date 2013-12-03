@@ -89,8 +89,8 @@ var ImageInOsm = (function(app) {
 
         displayMediaWikiForm: function(e) {
             $("#send-buttons").hide();
-            $("#mediawiki-upload-form").removeClass('hide');
-            $("#mediawiki-disclaimer").removeClass('hide');
+            $("#form-upload").removeClass('hide');
+
             var mwUserName = localStorage.getItem('mwUsername'),
                 mwPassword = localStorage.getItem('mwPassword');
             if (mwUserName === null) {
