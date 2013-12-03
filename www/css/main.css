@@ -80,6 +80,39 @@ li {list-style: none;}
     background: #fff;
     color: #111;
 }
+#content .olControlZoomIn:active, #content .olControlZoomOut:active  {
+    background: #444;
+}
+.osm-selector-buttons {
+    position: absolute;
+    bottom: 0;
+    z-index: 2000;
+    background: #fff;
+    width: 100%;
+    height: 7.9%;
+}
+.osm-selector-buttons button {
+    clear: both;
+    width: 50% !important;
+    padding: 4% 0 4% 0 !important;
+    border: 1px solid #333;
+    border-radius: 0;
+}
+.osm-selector-buttons button:enabled {
+    color: #fff;
+    background: #1da98c;
+    text-shadow: none;
+    border-top: 1px solid #108a71;
+    border-right: 1px solid #108a71;
+}
+.osm-selector-buttons #capture-button {
+    position: absolute;
+    left: 0;
+}
+.osm-selector-buttons #gallery-button {
+    position: absolute;
+    right: 0;
+}
 #send-buttons {
     position: absolute;
     bottom: 0;
@@ -148,6 +181,47 @@ li {list-style: none;}
     bottom: 0;
     width: 100%;
 }
+
+/* map tools */
+#refresh {
+    position: absolute;
+    right: 0;
+    background-image: url("../img/refresh.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2000;
+    background-color: #000;
+    border-radius: 7px 0 0 0;
+}
+#zone {
+    position: absolute;
+    right: 0;
+    background-image: url("../img/zone.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2000;
+    background-color: #000;
+}
+#position {
+    position: absolute;
+    right: 0;
+    background-image: url("../img/position.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2000;
+    background-color: #000;
+    border-radius: 0 0 0 7px;
+}
+#refresh.active, #zone.active, #position.active {
+    background-color: #444;
+}
+#refresh.active {
+    /* FIXME: animation doesn't work... */
+    -moz-animation: spin 2s infinite linear;
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+}
+
 @media (orientation: portrait) and (max-width: 240px){
     #content {
         position: absolute; 
@@ -217,48 +291,29 @@ li {list-style: none;}
         z-index: 10000 !important;
         border-radius: 0 0 0 7px !important;
     }
-    #content #refresh {
-        position: absolute;
+
+    /* map tools */
+    #refresh {
         bottom: 27%;
-        right: 0;
         width: 50px;
+        height: 50px;
     }
-    #content #zone {
-        position: absolute;
+    #zone {
         bottom: 17%;
-        right: 0;
         width: 50px;
+        height: 50px;
     }
-    #content #position {
-        position: absolute;
+    #position {
         bottom: 7%;
-        right: 0;
         width: 50px;
+        height: 50px;
     }
+
     .osm-selector-buttons {
-        position: absolute;
-        bottom: 0;
-        z-index: 2000;
-        background: #fff;
-        border-top: 1px solid #222;
-        width: 100%;
         height: 6.5%;
     }
     .osm-selector-buttons button {
-        clear: both;
-        width: 50% !important;
-        border: none;
         padding: 2% 0 1.5% 0 !important;
-        border-radius: 0;
-    }
-    .osm-selector-buttons #capture-button {
-        position: absolute;
-        left: 0;
-        border-right: 1px solid #222;
-    }
-    .osm-selector-buttons #gallery-button {
-        position: absolute;
-        right: 0;
     }
 }
 @media (orientation: portrait) and (min-width: 320px) and (max-width: 359px) {
@@ -330,49 +385,24 @@ li {list-style: none;}
         z-index: 10000 !important;
         border-radius: 0 0 0 7px !important;
     }
-    #content #refresh {
-        position: absolute;
-        bottom: 23.9%;
-        right: 0;
+
+    /* map tools */
+    #refresh {
+        bottom: 26%;
         width: 50px;
+        height: 50px;
     }
-    #content #zone {
-        position: absolute;
-        bottom: 15%;
-        right: 0;
+    #zone {
+        bottom: 18%;
         width: 50px;
+        height: 50px;
     }
-    #content #position {
-        position: absolute;
-        bottom: 7%;
-        right: 0;
+    #position {
+        bottom: 10%;
         width: 50px;
+        height: 50px;
     }
-    .osm-selector-buttons {
-        position: absolute;
-        bottom: 0.3%;
-        z-index: 2000;
-        background: #fff;
-        border-top: 1px solid #222;
-        width: 100%;
-        height: 5%;
-    }
-    .osm-selector-buttons button {
-        clear: both;
-        width: 50% !important;
-        border: none;
-        padding: 2% 0 1.5% 0 !important;
-        border-radius: 0;
-    }
-    .osm-selector-buttons #capture-button {
-        position: absolute;
-        left: 0;
-        border-right: 1px solid #222;
-    }
-    .osm-selector-buttons #gallery-button {
-        position: absolute;
-        right: 0;
-    }
+
     .container-fluid  {
         position: absolute; 
         bottom: 0;
@@ -492,49 +522,24 @@ li {list-style: none;}
         z-index: 10000 !important;
         border-radius: 0 0 0 7px !important;
     }
-    #content #refresh {
-        position: absolute;
-        bottom: 21%;
-        right: 0;
-        width: 50px;
+
+    /* map tools */
+    #refresh {
+        bottom: 24%;
+        width: 55px;
+        height: 55px;
     }
-    #content #zone {
-        position: absolute;
-        bottom: 14%;
-        right: 0;
-        width: 50px;
+    #zone {
+        bottom: 17%;
+        width: 55px;
+        height: 55px;
     }
-    #content #position {
-        position: absolute;
-        bottom: 7%;
-        right: 0;
-        width: 50px;
+    #position {
+        bottom: 10%;
+        width: 55px;
+        height: 55px;
     }
-    .osm-selector-buttons {
-        position: absolute;
-        bottom: 0.3%;
-        z-index: 2000;
-        background: #fff;
-        border-top: 1px solid #222;
-        width: 100%;
-        height: 5%;
-    }
-    .osm-selector-buttons button {
-        clear: both;
-        width: 50% !important;
-        border: none;
-        padding: 2% 0 1.5% 0 !important;
-        border-radius: 0;
-    }
-    .osm-selector-buttons #capture-button {
-        position: absolute;
-        left: 0;
-        border-right: 1px solid #222;
-    }
-    .osm-selector-buttons #gallery-button {
-        position: absolute;
-        right: 0;
-    }
+
     .container-fluid  {
         position: absolute; 
         bottom: 0;
@@ -635,49 +640,23 @@ li {list-style: none;}
         z-index: 10000 !important;
         border-radius: 0 0 0 7px !important;
     }
-    #content #refresh {
-        position: absolute;
+
+    /* map tools */
+    #refresh {
         bottom: 21%;
-        right: 0;
         width: 50px;
+        height: 50px;
     }
-    #content #zone {
-        position: absolute;
+    #zone {
         bottom: 14%;
-        right: 0;
         width: 50px;
+        height: 50px;
     }
-    #content #position {
-        position: absolute;
+    #position {
         bottom: 7%;
-        right: 0;
         width: 50px;
-    }
-    .osm-selector-buttons {
-        position: absolute;
-        bottom: 0.3%;
-        z-index: 2000;
-        background: #fff;
-        border-top: 1px solid #222;
-        width: 100%;
-        height: 5%;
-    }
-    .osm-selector-buttons button {
-        clear: both;
-        width: 50% !important;
-        border: none;
-        padding: 2% 0 1.5% 0 !important;
-        border-radius: 0;
-    }
-    .osm-selector-buttons #capture-button {
-        position: absolute;
-        left: 0;
-        border-right: 1px solid #222;
-    }
-    .osm-selector-buttons #gallery-button {
-        position: absolute;
-        right: 0;
-    }
+        height: 50px;
+   }
 }
 @media (orientation: portrait) and (min-width: 800px) and (max-width: 1280px) {
     .waiting-logo p {
@@ -732,27 +711,6 @@ li {list-style: none;}
         vertical-align:middle;
         width: 50%;
     }
-    #content #refresh {
-        position: absolute;
-        bottom: 14%;
-        right: 0;
-        width: 60px;
-    }
-    #content #zone {
-        position: absolute;
-        bottom: 9.5%;
-        right: 0;
-        width: 60px;
-    }
-    #content #position {
-        position: absolute;
-        bottom: 5%;
-        right: 0;
-        width: 60px;
-    }
-    #btn-map img {
-        float: right;
-    }
     .olControlZoom{
         float: right;
         position: relative !important;
@@ -781,30 +739,29 @@ li {list-style: none;}
         z-index: 10000 !important;
         border-radius: 0 0 0 12px !important;
     }
+
+    /* map tools */
+    #refresh {
+        bottom: 14%;
+        width: 60px;
+        height: 60px
+    }
+    #zone {
+        bottom: 9.5%;
+        width: 60px;
+        height: 60px;
+    }
+    #position {
+        bottom: 5%;
+        width: 60px;
+        height: 60px;
+    }
+
     .osm-selector-buttons {
-        position: absolute;
-        bottom: 0;
-        z-index: 2000;
-        background: #fff;
-        border-top: 1px solid #333;
-        width: 100%;
         height: 4%;
     }
     .osm-selector-buttons button {
-        clear: both;
-        width: 50% !important;
-        border: 0;
         padding: 2% 0 1.5% 0 !important;
-        border-radius: 0;
-    }
-    .osm-selector-buttons #capture-button {
-        position: absolute;
-        left: 0;
-        border-right: 1px solid #222;
-    }
-    .osm-selector-buttons #gallery-button {
-        position: absolute;
-        right: 0;
     }
     .container-fluid  {
         position: absolute; 
