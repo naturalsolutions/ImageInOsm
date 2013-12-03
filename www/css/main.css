@@ -18,16 +18,41 @@ li {list-style: none;}
 #template {diplay: none;}
 
 #spinner-content {
-    background: url(../img/splash.jpg) no-repeat;
+    background-color: #1da88c;
     width: 100% !important;
     height: 100% !important;
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
 }
-.waiting-spinner {position: absolute; bottom: 20%; left: 40%; margin: -21px 0 0 -21px; width: 42px; height: 42px; background-image: url(../img/spinner.gif);}
-.waiting-text {position: absolute; left: -11%; bottom: 0; width: 100%; text-align: center; margin: 1em 0.5em; font-size: xx-large;}
-
+.waiting-logo {
+    position: relative;
+    top: 30%;
+    width: 100%;
+}
+.waiting-logo img {
+    width: 40%;
+}
+.waiting-logo p {
+    text-align: center;
+    font-size: x-large;
+    color: #111;
+}
+#loaderImage{
+    margin: 0 auto;
+    position: relative;
+    top: 35%;
+    z-index: 3000;
+}
+#content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: 1000;
+}
 /* .img-preview img {width: 90%; height: auto;} */
 .img-error {display: none;}
 #img-error-msg {font-style: italic;}
@@ -622,6 +647,9 @@ li {list-style: none;}
     }
 }
 @media (orientation: portrait) and (min-width: 800px) and (max-width: 1280px) {
+    .waiting-logo p {
+        font-size: xx-large;
+    }
     #content {
         position: absolute; 
         bottom: 0;

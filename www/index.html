@@ -33,13 +33,16 @@ limitations under the License.
 	<div id="navigate-content"></div>
     <div id="content">
         <div id="spinner-content">
-            <div class="waiting-logo"></div>
-            <div class="waiting-spinner"></div>
-            <div class="waiting-text">Loading...</div>
+            <div class="waiting-logo">
+                <p><img src="img/icon.png" /><p>
+                <p class="waiting-text">Photomapping</p>
+            </div>
+            <div id="loaderImage"></div>
         </div>
     </div>
 
     <!-- Scripts -->
+    <script type="text/javascript" src="libs/spinner.js"></script>
     <script type="text/javascript" src="libs/jquery_1.9.1/jquery-1.9.1.js"></script>
     <script type="text/javascript" src="libs/underscore_1.4.4/underscore.js"></script>
     <script type="text/javascript" src="libs/backbone_1.0.0/backbone.js"></script>
