@@ -164,15 +164,12 @@ var ImageInOsm = (function(app) {
         },
         takePicture: function() {
             app.routeur.navigate('capture', {trigger: true});
-            
         },
         sendPicture: function() {
             app.routeur.navigate('form', {trigger: true});
-            
         },
         savedPicture: function() {
             app.routeur.navigate('final', {trigger: true});
-            
         }
         
     });
