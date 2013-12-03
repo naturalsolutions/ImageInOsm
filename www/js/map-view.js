@@ -260,18 +260,45 @@ var ImageInOsm = (function(app) {
 
         onCamera: function(e) {
             e.preventDefault();
-            
+
             app.routeur.navigate('capture/camera', {trigger: true});
-            
+
+            $('#btn1').removeClass('lastSelect');
             $('#btn2').prop('disabled', false);
+            $('#btn2').removeClass('disable').addClass('active lastSelect');
+            $('#btn2 img').removeAttr('src').attr('src', 'img/camera.png');
+
+            if($('#btn3').prop('class', 'active')) {
+                $('#btn3').removeClass('active').addClass('disable');
+                $('#btn3 img').removeAttr('src').attr('src', 'img/Uupload.png');
+            }
+            if($('#btn4').prop('class', 'active')) {
+                $('#btn4').removeClass('active').addClass('disable');
+                $('#btn4 img').removeAttr('src').attr('src', 'img/Ufinish.png');
+            }
         },
 
         onGallery: function(e) {
             e.preventDefault();
-            
+
             app.routeur.navigate('capture/gallery', {trigger: true});
-            
+
+            $('#btn1').removeClass('lastSelect');
             $('#btn2').prop('disabled', false);
+            $('#btn2').removeClass('disable').addClass('active lastSelect');
+            $('#btn2').removeClass('disable').addClass('active');
+            $('#btn2 img').removeAttr('src').attr('src', 'img/camera.png');
+
+            if( $('#btn3').prop('class', 'active') ) {
+                $('#btn3').prop('disabled', true);
+                $('#btn3').removeClass('active').addClass('disable');
+                $('#btn3 img').removeAttr('src').attr('src', 'img/Uupload.png');
+            }
+            if($('#btn4').prop('class', 'active')) {
+                $('#btn4').prop('disabled', true);
+                $('#btn4').removeClass('active').addClass('disable');
+                $('#btn4 img').removeAttr('src').attr('src', 'img/Ufinish.png');
+            }
         }
     });
 

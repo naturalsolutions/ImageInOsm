@@ -72,6 +72,14 @@ li {list-style: none;}
 }
 .olDrawBox {cursor: crosshair;}
 .olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
+
+#navigate-content .active {
+    background: #000;
+}
+#navigate-content .disable {
+    background: #fff;
+    color: #111;
+}
 #form-upload h2, #noticeLink {color: #fff;}
 #form-upload input[type=text], #form-upload input[type=password] {
     width: 92%;
@@ -227,22 +235,12 @@ li {list-style: none;}
     }
 }
 @media (orientation: portrait) and (min-width: 320px) and (max-width: 359px) {
-    #content {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1000;
-    }
     #navigate-content {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%; 
         height: 12% !important;
-        background: #000;
         opacity: 0.8;
         z-index: 1001;
     }
@@ -250,6 +248,7 @@ li {list-style: none;}
         display: inline; 
     }
     #navigate-content button {
+        position: relative;
         color: #fff;
         width: 25%;
         height: 100%;
@@ -258,9 +257,19 @@ li {list-style: none;}
         border: none;
         margin: 0 auto;
     }
+    #navigate-content .lastSelect:after {
+        position: absolute;
+        top: 0;
+        right: -14%;
+        background: url("../img/breadcrum.png") no-repeat right;
+        content: "";
+        height: 68px;
+        width: 11px;
+        z-index: 3000;
+    }
     #navigate-content span {
         display: block; 
-    } 
+    }
     #navigate-content img {
         vertical-align:middle;
         width: 50%;
@@ -345,7 +354,6 @@ li {list-style: none;}
         padding: 0; 
         margin: 0;
         z-index: 1001;
-        overflow: scroll;
     }
     .img-preview {
         position: absolute;
@@ -396,7 +404,6 @@ li {list-style: none;}
         left: 0;
         width: 100%; 
         height: 12% !important;
-        background: #000;
         opacity: 0.8;
         z-index: 1001;
     }
@@ -404,6 +411,7 @@ li {list-style: none;}
         display: inline; 
     }
     #navigate-content button {
+        position: relative;
         color: #fff;
         width: 25%;
         height: 100%;
@@ -411,6 +419,16 @@ li {list-style: none;}
         background: none;
         border: none;
         margin: 0 auto;
+    }
+    #navigate-content .lastSelect:after {
+        position: absolute;
+        top: 0;
+        right: -15%;
+        background: url("../img/breadcrum.png") no-repeat right;
+        content: "";
+        height: 76px;
+        width: 13px;
+        z-index: 3000;
     }
     #navigate-content span {
         display: block; 
@@ -499,7 +517,6 @@ li {list-style: none;}
         padding: 0; 
         margin: 0;
         z-index: 1001;
-        overflow: scroll;
     }
     .img-preview {
         position: absolute;
@@ -665,7 +682,6 @@ li {list-style: none;}
         left: 0;
         width: 100%; 
         height: 10% !important;
-        background: #000;
         opacity: 0.8;
         z-index: 1001;
     }
@@ -673,6 +689,7 @@ li {list-style: none;}
         display: inline; 
     }
     #navigate-content button {
+        position: relative;
         letter-spacing: 1px;
         color: #fff;
         width: 25%;
@@ -681,6 +698,16 @@ li {list-style: none;}
         background: none;
         border: none;
         margin: 0 auto;
+    }
+    #navigate-content .lastSelect:after {
+        position: absolute;
+        top: 0;
+        right: -9.5%;
+        background: url("../img/breadcrum.png") no-repeat right;
+        content: "";
+        height: 127px;
+        width: 19px;
+        z-index: 3000;
     }
     #navigate-content span {
         display: block; 

@@ -35,9 +35,9 @@ var ImageInOsm = (function(app) {
                 
                 $('#btn2').prop('disabled', true);
                 $('#btn3').prop('disabled', true);
+                $('#btn4').prop('disabled', true);
             }
             app.routeur.navigate('maps', {trigger: true});
-            $('#btn4').prop('disabled', true);
         },
         // Main function
         init: function() {

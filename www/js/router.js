@@ -49,8 +49,10 @@ var ImageInOsm = (function(app) {
                     app.routeur.navigate('form', {trigger: true});
                     app.models.pic.set({data: imageURI});
                     
-                    $('#btn1').prop('disabled', false);
+                    $('#btn2').removeClass('lastSelect');
                     $('#btn3').prop('disabled', false);
+                    $('#btn3').removeClass('disable').addClass('active lastSelect');
+                    $('#btn3 img').removeAttr('src').attr('src', 'img/upload.png');
                 },
                 function(msg) {
                     // Todo: show an error message?
@@ -67,6 +69,12 @@ var ImageInOsm = (function(app) {
                 });
         },
         form: function() {
+            if($('#btn4').prop('class', 'active')) {
+                $('#btn4').prop('disabled', true);
+                $('#btn4').removeClass('active').addClass('disable');
+                $('#btn4 img').removeAttr('src').attr('src', 'img/Ufinish.png');
+                $('#btn3').addClass('lastSelect');
+            }
             $('body').css('background', '#111111');
             $('#content > *').detach();
             if (! (app.views.form)) {

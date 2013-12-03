@@ -76,6 +76,8 @@ var ImageInOsm = (function(app) {
             this.server.sendPicture(imageURI, feature, mwTitle, mwDesc ).then(
                 getNotificationCB('success'), getNotificationCB('error')
             );
+            $('#btn4').removeClass('disable').addClass('active');
+            $('#btn4 img').removeAttr('src').attr('src', 'img/finish.png');
         },
 
         onChangeMediawiki: function(e) {
@@ -126,7 +128,6 @@ var ImageInOsm = (function(app) {
         },
 
         restart: function() {
-            app.nav.remove();
             app.start();
         },
 
@@ -152,10 +153,10 @@ var ImageInOsm = (function(app) {
             'click #btn4' : 'savedPicture'
         },
         initialize: function() {
-            $('#navigate-content').append('<li><button class="btn-nav" id="btn1"><img src="img/maps.png" /><span>Select</span></button></li>');
-            $('#navigate-content').append('<li><button class="btn-nav" id="btn2"><img src="img/camera.png" /><span>Snap</span></button></li>');
-            $('#navigate-content').append('<li><button class="btn-nav" id="btn3"><img src="img/upload.png" /><span>Upload</span></button></li>');
-            $('#navigate-content').append('<li class="last"><button class="btn-nav" id="btn4"><img src="img/finish.png" /><span>Finish</span></button></li>');
+            $('#navigate-content').append('<li><button class="btn-nav active lastSelect" id="btn1"><img src="img/maps.png" /><span>Select</span></button></li>');
+            $('#navigate-content').append('<li><button class="btn-nav disable" id="btn2"><img src="img/Ucam.png" /><span>Snap</span></button></li>');
+            $('#navigate-content').append('<li><button class="btn-nav disable" id="btn3"><img src="img/Uupload.png" /><span>Upload</span></button></li>');
+            $('#navigate-content').append('<li class="last"><button class="btn-nav disable" id="btn4"><img src="img/Ufinish.png" /><span>Finish</span></button></li>');
         },
         
         maps: function() {
