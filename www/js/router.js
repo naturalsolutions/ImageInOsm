@@ -84,6 +84,8 @@ var ImageInOsm = (function(app) {
             app.views.form.$el.appendTo('#content');
         },
         finalScreen: function() {
+            $('body').css('background', '#111111');
+            $('#btn3').removeClass('lastSelect');
             $('#content > *').detach();
             if (! (app.views.notification)) {
                 app.views.notification = new app.Views.Final();

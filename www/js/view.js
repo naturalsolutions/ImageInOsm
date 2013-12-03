@@ -108,12 +108,6 @@ var ImageInOsm = (function(app) {
         manage: true,
         template: "#final-template",
 
-        events: {
-            'click #restart': 'restart',
-            'click #new-picture': 'newPicture',
-            'click #exit': 'exit'
-        },
-
         initialize : function(options) {
             this.status = 'TODO';
             this.message = 'TODO';
@@ -125,18 +119,6 @@ var ImageInOsm = (function(app) {
                 status: this.status,
                 message: this.message
             };
-        },
-
-        restart: function() {
-            app.start();
-        },
-
-        newPicture: function() {
-            app.routeur.navigate('capture', {trigger: true});
-        },
-
-        exit: function() {
-            app.exitApp();
         }
     });
     

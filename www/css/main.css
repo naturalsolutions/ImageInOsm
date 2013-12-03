@@ -131,7 +131,23 @@ li {list-style: none;}
     top: 3%;
     right: 3%;
 }
-
+#success {
+    font-size: XX-large;
+    color: #fff;
+    width: 50%;
+    height: 50%;
+    margin: 30% auto 30% auto;
+    text-align: center;
+}
+#success p {
+    margin: 5%;
+    line-height: 40px;
+}
+#btn-final {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 @media (orientation: portrait) and (max-width: 240px){
     #content {
         position: absolute; 
@@ -846,14 +862,5 @@ li {list-style: none;}
     }
     #form-upload #mwSubmit {
         padding: 3% 0 3% 0;
-    }
-    #btn-final {
-        position: absolute;
-        top: 50%;
-        width: 100%;
-    }
-    #restart, #new-picture, #exit {
-        border-radius: 0;
-        width: 100%;
     }
 }
