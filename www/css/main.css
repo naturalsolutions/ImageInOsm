@@ -16,7 +16,18 @@
 body {margin: 0; padding: 0; font-family: Verdana;}
 li {list-style: none;}
 #template {diplay: none;}
+.container-fluid  {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    z-index: 1001;
+    overflow: scroll;
+}
 
+/* splash screen */
 #spinner-content {
     background-color: #1da88c;
     width: 100% !important;
@@ -53,65 +64,19 @@ li {list-style: none;}
     margin: 0;
     z-index: 1000;
 }
-/* .img-preview img {width: 90%; height: auto;} */
 .img-error {display: none;}
 #img-error-msg {font-style: italic;}
-.osm-id {text-align: center;}
 
-.olMap {position: relative;}
-.olMap  img {max-width: none;}
-.olControlAttribution {
-    position      : absolute;
-    font-size     : 10px;
-    bottom        : 0 !important;
-    right         : 0 !important;
-    background    : rgba(0,0,0,0.1);
-    font-family   : sans-serif;
-    padding       : 2px 4px;
-    border-radius : 5px 0 0 0;
-}
-.olDrawBox {cursor: crosshair;}
-.olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
-
-#navigate-content .active {
-    background: #000;
-}
-#navigate-content .disable {
-    background: #fff;
-    color: #111;
-}
-#content .olControlZoomIn:active, #content .olControlZoomOut:active  {
-    background: #444;
-}
-.osm-selector-buttons {
+/* upload screen */
+.img-preview {
     position: absolute;
-    bottom: 0;
-    z-index: 2000;
-    background: #fff;
-    width: 100%;
-    height: 7.9%;
+    min-width: 100%;
+    min-height: 100%;
 }
-.osm-selector-buttons button {
-    clear: both;
-    width: 50% !important;
-    padding: 4% 0 4% 0 !important;
-    border: 1px solid #333;
-    border-radius: 0;
-}
-.osm-selector-buttons button:enabled {
-    color: #fff;
-    background: #1da98c;
-    text-shadow: none;
-    border-top: 1px solid #108a71;
-    border-right: 1px solid #108a71;
-}
-.osm-selector-buttons #capture-button {
+.img-preview img {
     position: absolute;
-    left: 0;
-}
-.osm-selector-buttons #gallery-button {
-    position: absolute;
-    right: 0;
+    top: 12%;
+    z-index: -1;
 }
 #send-buttons {
     position: absolute;
@@ -124,7 +89,19 @@ li {list-style: none;}
     border: none;
     text-shadow: none;
 }
-#form-upload h2, #noticeLink {color: #fff;}
+#form-upload {
+    background: url("../img/bg_form.png") repeat;
+    width: 100%;
+    height: 100%;
+    z-index: 3000;
+}
+#form-upload-content {
+    position: absolute;
+    top: 15%;
+    left: 3%;
+    width: 96%;
+}
+#form-upload h2 {color: #fff;}
 #form-upload input[type=text], #form-upload input[type=password] {
     width: 92%;
     border-radius: 0;
@@ -159,11 +136,8 @@ li {list-style: none;}
     top: 20%;
     left: -1%;
 }
-#close-notice{
-    position: absolute;
-    top: 3%;
-    right: 3%;
-}
+
+/* final screen */
 #success {
     font-size: XX-large;
     color: #fff;
@@ -180,6 +154,56 @@ li {list-style: none;}
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+
+/* navigation bar */
+#navigate-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    height: 12% !important;
+    /*background: #000;*/
+    opacity: 0.8;
+    z-index: 1001;
+}
+#navigate-content li {
+    display: inline; 
+    /*padding: 61% 0 62% 0;*/
+}
+#navigate-content button {
+    position: relative;
+    color: #fff;
+    width: 25%;
+    height: 100%;
+    text-align: center;
+    background: none;
+    border: none;
+    margin: 0 auto;
+}
+#navigate-content span {
+    display: block; 
+} 
+#navigate-content img {
+    vertical-align:middle;
+    width: 50%;
+}
+#navigate-content .active {
+    background: #000;
+}
+#navigate-content .disable {
+    background: #fff;
+    color: #111;
+}
+#navigate-content .lastSelect:after {
+    position: absolute;
+    top: 0;
+    right: -14%;
+    background: url("../img/breadcrum.png") no-repeat right;
+    content: "";
+    height: 68px;
+    width: 11px;
+    z-index: 3000;
 }
 
 /* map tools */
@@ -221,77 +245,81 @@ li {list-style: none;}
     -webkit-animation: spin 2s infinite linear;
     animation: spin 2s infinite linear;
 }
+.olControlZoom {
+    float: right !important;
+    position: relative !important;
+    top: 15% !important;
+    left: auto !important;
+    right: 0 !important;
+    background: none !important;
+    width: 12% !important;
+    z-index: 10000 !important;
+    margin: 0 3% 0 0;
+}
+.olControlZoom a { 
+    margin: 0 !important;
+    font-size: 20px;
+}
+#content .olControlZoomIn, #content .olControlZoomOut  {
+    background: #000;
+    padding: 25%;
+    z-index: 10000 !important;
+}
+#content .olControlZoomIn:active, #content .olControlZoomOut:active  {
+    background: #444;
+}
+#content .olControlZoomIn {
+    border-radius: 7px 0 0 0 !important;
+}
+#content .olControlZoomOut {
+    border-radius: 0 0 0 7px !important;
+}
+.olMap {position: relative;}
+.olMap img {max-width: none;}
+.olControlAttribution {
+    position      : absolute;
+    font-size     : 10px;
+    bottom        : 0 !important;
+    right         : 0 !important;
+    background    : rgba(0,0,0,0.1);
+    font-family   : sans-serif;
+    padding       : 2px 4px;
+    border-radius : 5px 0 0 0;
+}
+.olDrawBox {cursor: crosshair;}
+.olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
+.osm-selector-buttons {
+    position: absolute;
+    bottom: 0;
+    z-index: 2000;
+    background: #fff;
+    width: 100%;
+    height: 7.9%;
+}
+.osm-selector-buttons button {
+    clear: both;
+    width: 50% !important;
+    padding: 4% 0 4% 0 !important;
+    border: 1px solid #333;
+    border-radius: 0;
+}
+.osm-selector-buttons button:enabled {
+    color: #fff;
+    background: #1da98c;
+    text-shadow: none;
+    border-top: 1px solid #108a71;
+    border-right: 1px solid #108a71;
+}
+.osm-selector-buttons #capture-button {
+    position: absolute;
+    left: 0;
+}
+.osm-selector-buttons #gallery-button {
+    position: absolute;
+    right: 0;
+}
 
-@media (orientation: portrait) and (max-width: 240px){
-    #content {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1000;
-    }
-    #navigate-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%; 
-        height: 12% !important;
-        background: #000;
-        opacity: 0.8;
-        z-index: 1001;
-    }
-    #navigate-content li {
-        display: inline; 
-        padding: 61% 0 62% 0;
-    }
-    #navigate-content button {
-        color: #fff;
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        background: none;
-        border: none;
-        margin: 0 auto;
-    }
-    #navigate-content span {
-        display: block; 
-    } 
-    #navigate-content img {
-        vertical-align:middle;
-        width: 50%;
-    }
-    .olControlZoom{
-        float: right;
-        position: relative !important;
-        top: 15% !important;
-        left: auto !important;
-        right: 0 !important;
-        background: none !important;
-        width: 12% !important;
-        z-index: 10000 !important;
-        margin: 0 3% 0 0;
-    }
-    .olControlZoom a { 
-        margin: 0 !important;
-        font-size: 20px;
-    }
-    #content .olControlZoomIn {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 7px 0 0 0 !important;
-    }
-    #content .olControlZoomOut {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 0 0 0 7px !important;
-    }
-
+@media (orientation: portrait) and (max-width: 319px){
     /* map tools */
     #refresh {
         bottom: 27%;
@@ -317,75 +345,6 @@ li {list-style: none;}
     }
 }
 @media (orientation: portrait) and (min-width: 320px) and (max-width: 359px) {
-    #navigate-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%; 
-        height: 12% !important;
-        opacity: 0.8;
-        z-index: 1001;
-    }
-    #navigate-content li {
-        display: inline; 
-    }
-    #navigate-content button {
-        position: relative;
-        color: #fff;
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        background: none;
-        border: none;
-        margin: 0 auto;
-    }
-    #navigate-content .lastSelect:after {
-        position: absolute;
-        top: 0;
-        right: -14%;
-        background: url("../img/breadcrum.png") no-repeat right;
-        content: "";
-        height: 68px;
-        width: 11px;
-        z-index: 3000;
-    }
-    #navigate-content span {
-        display: block; 
-    }
-    #navigate-content img {
-        vertical-align:middle;
-        width: 50%;
-    }
-    .olControlZoom{
-        float: right !important;
-        position: relative !important;
-        top: 15% !important;
-        left: auto !important;
-        right: 0 !important;
-        background: none !important;
-        width: 12% !important;
-        z-index: 10000 !important;
-        margin: 0 3% 0 0 !important;
-    }
-    .olControlZoom a { 
-        margin: 0 !important;
-        font-size: 20px;
-    }
-    #content .olControlZoomIn {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 7px 0 0 0 !important;
-    }
-    #content .olControlZoomOut {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 0 0 0 7px !important;
-    }
-
     /* map tools */
     #refresh {
         bottom: 26%;
@@ -402,125 +361,13 @@ li {list-style: none;}
         width: 50px;
         height: 50px;
     }
-
-    .container-fluid  {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1001;
-    }
-    .img-preview {
-        position: absolute;
-        min-width: 100%;
-        min-height: 100%;
-    }
-    .img-preview img {
-        position: absolute;
-        top: 12%;
-        z-index: -1;
-    }
-    #send-buttons {
-        position: absolute;
-        bottom: 0;
-    }
-    #send-buttons button {
-        color: #fff;
-        background: #1da98c;
-        border-radius: 0;
-    }
-    #form-upload {
-        background: url("../img/bg_form.png") repeat;
-        width: 100%;
-        height: 100%;
-        z-index: 3000;
-    }
-    #form-upload-content {
-        position: absolute;
-        top: 15%;
-        left: 3%;
-        width: 96%;
-    }
 }
-@media (orientation: portrait) and (min-width: 360px) and (max-width: 480px) {
-    #content {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1000;
-    }
-    #navigate-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%; 
-        height: 12% !important;
-        opacity: 0.8;
-        z-index: 1001;
-    }
-    #navigate-content li {
-        display: inline; 
-    }
-    #navigate-content button {
-        position: relative;
-        color: #fff;
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        background: none;
-        border: none;
-        margin: 0 auto;
-    }
+@media (orientation: portrait) and (min-width: 360px) and (max-width: 479px) {
+    /* navigation bar */
     #navigate-content .lastSelect:after {
-        position: absolute;
-        top: 0;
         right: -15%;
-        background: url("../img/breadcrum.png") no-repeat right;
-        content: "";
         height: 76px;
         width: 13px;
-        z-index: 3000;
-    }
-    #navigate-content span {
-        display: block; 
-    } 
-    #navigate-content img {
-        vertical-align:middle;
-        width: 50%;
-    }
-    .olControlZoom{
-        float: right !important;
-        position: relative !important;
-        top: 15% !important;
-        left: auto !important;
-        right: -1% !important;
-        background: none !important;
-        width: 12% !important;
-        z-index: 10000 !important;
-        margin: 0 3% 0 0 !important;
-    }
-    .olControlZoom a { 
-        margin: 0 !important;
-        font-size: 20px;
-    }
-    #content .olControlZoomIn {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 7px 0 0 0 !important;
-    }
-    #content .olControlZoomOut {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 0 0 0 7px !important;
     }
 
     /* map tools */
@@ -539,108 +386,11 @@ li {list-style: none;}
         width: 55px;
         height: 55px;
     }
-
-    .container-fluid  {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1001;
-    }
-    .img-preview {
-        position: absolute;
-        min-width: 100%;
-        min-height: 100%;
-    }
-    .img-preview img {
-        position: absolute;
-        top: 12%;
-        z-index: -1;
-    }
-    #form-upload {
-        background: url("../img/bg_form.png") repeat;
-        width: 100%;
-        height: 100%;
-        z-index: 3000;
-    }
-    #form-upload-content {
-        position: absolute;
-        top: 15%;
-        left: 3%;
-        width: 96%;
+    .olControlZoom{
+        right: -1% !important;
     }
 }
-@media (orientation: portrait) and (min-width: 540px) and (max-width: 620px) {
-    #content {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1000;
-    }
-    #navigate-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%; 
-        height: 12% !important;
-        background: #000;
-        opacity: 0.8;
-        z-index: 1001;
-    }
-    #navigate-content li {
-        display: inline; 
-    }
-    #navigate-content button {
-        color: #fff;
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        background: none;
-        border: none;
-        margin: 0 auto;
-    }
-    #navigate-content span {
-        display: block; 
-    } 
-    #navigate-content img {
-        vertical-align:middle;
-        width: 50%;
-    }
-    .olControlZoom{
-        float: right !important;
-        position: relative !important;
-        top: 15% !important;
-        left: auto !important;
-        right: -1% !important;
-        background: none !important;
-        width: 12% !important;
-        z-index: 10000 !important;
-        margin: 0 3% 0 0 !important;
-    }
-    .olControlZoom a { 
-        margin: 0 !important;
-        font-size: 20px;
-    }
-    #content .olControlZoomIn {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 7px 0 0 0 !important;
-    }
-    #content .olControlZoomOut {
-        z-index: 2000 !important;
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 0 0 0 7px !important;
-    }
-
+@media (orientation: portrait) and (min-width: 480px) and (max-width: 619px) {
     /* map tools */
     #refresh {
         bottom: 21%;
@@ -656,88 +406,28 @@ li {list-style: none;}
         bottom: 7%;
         width: 50px;
         height: 50px;
-   }
+    }
+    .olControlZoom{
+        right: -1% !important;
+    }
 }
-@media (orientation: portrait) and (min-width: 800px) and (max-width: 1280px) {
+@media (orientation: portrait) and (min-width: 620px) {
+    /* splash screen */
     .waiting-logo p {
         font-size: xx-large;
     }
-    #content {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1000;
-    }
+
+    /* navigation bar */
     #navigate-content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%; 
         height: 10% !important;
-        opacity: 0.8;
-        z-index: 1001;
-    }
-    #navigate-content li {
-        display: inline; 
     }
     #navigate-content button {
-        position: relative;
         letter-spacing: 1px;
-        color: #fff;
-        width: 25%;
-        height: 100%;
-        text-align: center;
-        background: none;
-        border: none;
-        margin: 0 auto;
     }
     #navigate-content .lastSelect:after {
-        position: absolute;
-        top: 0;
         right: -9.5%;
-        background: url("../img/breadcrum.png") no-repeat right;
-        content: "";
         height: 127px;
         width: 19px;
-        z-index: 3000;
-    }
-    #navigate-content span {
-        display: block; 
-    } 
-    #navigate-content img {
-        vertical-align:middle;
-        width: 50%;
-    }
-    .olControlZoom{
-        float: right;
-        position: relative !important;
-        top: 15% !important;
-        left: auto !important;
-        right: 0% !important;
-        background: none !important;
-        width: 7% !important;
-        z-index: 10000 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-    .olControlZoom a { 
-        margin: 0 !important;
-        font-size: 20px;
-    }
-    #content .olControlZoomIn {
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 12px 0 0 0 !important;
-    }
-    #content .olControlZoomOut {
-        background: #000;
-        padding: 25%;
-        z-index: 10000 !important;
-        border-radius: 0 0 0 12px !important;
     }
 
     /* map tools */
@@ -756,6 +446,17 @@ li {list-style: none;}
         width: 60px;
         height: 60px;
     }
+    .olControlZoom {
+        width: 7% !important;
+        z-index: 10000 !important;
+        margin: 0 !important;
+    }
+    .olControlZoomIn {
+        border-radius: 12px 0 0 0 !important;
+    }
+    .olControlZoomOut {
+        border-radius: 0 0 0 12px !important;
+    }
 
     .osm-selector-buttons {
         height: 4%;
@@ -763,30 +464,10 @@ li {list-style: none;}
     .osm-selector-buttons button {
         padding: 2% 0 1.5% 0 !important;
     }
-    .container-fluid  {
-        position: absolute; 
-        bottom: 0;
-        width: 100%;
-        height: 100%; 
-        padding: 0; 
-        margin: 0;
-        z-index: 1001;
-        overflow: scroll;
-    }
-    .img-preview {
-        position: absolute;
-        min-width: 100%;
-        min-height: 100%;
-    }
     .img-preview img {
-        position: absolute;
         top: 100px;
-        z-index: -1;
     }
     #send-buttons button {
-        color: #fff;
-        background: #1da98c;
-        border-radius: 0;
         width: 50%;
         margin: 0;
         padding: 3% 0 3% 0;
@@ -795,26 +476,13 @@ li {list-style: none;}
         border-right: 1px solid #108a71;
     }
     #form-upload {
-        background: url("../img/bg_form.png") repeat;
-        width: 100%;
-        height: 100%;
-        z-index: 3000;
         font-size: 20px;
-    }
-    #form-upload-content {
-        position: absolute;
-        top: 15%;
-        left: 3%;
-        width: 96%;
     }
     #form-upload h2 {
         font-size: 42px;
         margin-bottom: 5%;
     }
-    #noticeLink {
-        margin-top: 10%;
-    }
-    #form-upload input[type=text], #form-upload input[type=password], #form-upload textarea, #form-upload #mwSubmit, #noticeLink {
+    #form-upload input[type=text], #form-upload input[type=password], #form-upload textarea, #form-upload #mwSubmit {
         font-size: 20px;
     }
     #form-upload #mwSubmit {
