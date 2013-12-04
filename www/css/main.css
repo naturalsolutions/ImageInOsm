@@ -215,6 +215,9 @@ li {list-style: none;}
     z-index: 2000;
     background-color: #000;
     border-radius: 7px 0 0 0;
+    bottom: 150px;
+    width: 50px;
+    height: 50px;
 }
 #zone {
     position: absolute;
@@ -224,6 +227,9 @@ li {list-style: none;}
     background-repeat: no-repeat;
     z-index: 2000;
     background-color: #000;
+    bottom: 100px;
+    width: 50px;
+    height: 50px;
 }
 #position {
     position: absolute;
@@ -234,6 +240,9 @@ li {list-style: none;}
     z-index: 2000;
     background-color: #000;
     border-radius: 0 0 0 7px;
+    bottom: 50px;
+    width: 50px;
+    height: 50px;
 }
 #refresh.active, #zone.active, #position.active {
     background-color: #444;
@@ -320,22 +329,6 @@ li {list-style: none;}
 
 @media (orientation: portrait) and (max-width: 319px){
     /* map tools */
-    #refresh {
-        bottom: 27%;
-        width: 50px;
-        height: 50px;
-    }
-    #zone {
-        bottom: 17%;
-        width: 50px;
-        height: 50px;
-    }
-    #position {
-        bottom: 7%;
-        width: 50px;
-        height: 50px;
-    }
-
     .olControlAttribution {
         bottom: 6.5% !important;
     }
@@ -347,22 +340,6 @@ li {list-style: none;}
     }
 }
 @media (orientation: portrait) and (min-width: 320px) and (max-width: 359px) {
-    /* map tools */
-    #refresh {
-        bottom: 26%;
-        width: 50px;
-        height: 50px;
-    }
-    #zone {
-        bottom: 18%;
-        width: 50px;
-        height: 50px;
-    }
-    #position {
-        bottom: 10%;
-        width: 50px;
-        height: 50px;
-    }
 }
 @media (orientation: portrait) and (min-width: 360px) and (max-width: 479px) {
     /* navigation bar */
@@ -373,17 +350,17 @@ li {list-style: none;}
 
     /* map tools */
     #refresh {
-        bottom: 24%;
+        bottom: 165px;
         width: 55px;
         height: 55px;
     }
     #zone {
-        bottom: 17%;
+        bottom: 110px;
         width: 55px;
         height: 55px;
     }
     #position {
-        bottom: 10%;
+        bottom: 55px;
         width: 55px;
         height: 55px;
     }
@@ -394,19 +371,19 @@ li {list-style: none;}
 @media (orientation: portrait) and (min-width: 480px) and (max-width: 619px) {
     /* map tools */
     #refresh {
-        bottom: 21%;
-        width: 50px;
-        height: 50px;
+        bottom: 160px;
+        width: 55px;
+        height: 55px;
     }
     #zone {
-        bottom: 14%;
-        width: 50px;
-        height: 50px;
+        bottom: 105px;
+        width: 55px;
+        height: 55px;
     }
     #position {
-        bottom: 7%;
-        width: 50px;
-        height: 50px;
+        bottom: 50px;
+        width: 55px;
+        height: 55px;
     }
     .olControlZoom{
         right: -1% !important;
@@ -432,17 +409,17 @@ li {list-style: none;}
 
     /* map tools */
     #refresh {
-        bottom: 14%;
+        bottom: 190px;
         width: 60px;
         height: 60px
     }
     #zone {
-        bottom: 9.5%;
+        bottom: 130px;
         width: 60px;
         height: 60px;
     }
     #position {
-        bottom: 5%;
+        bottom: 70px;
         width: 60px;
         height: 60px;
     }
