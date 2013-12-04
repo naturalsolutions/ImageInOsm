@@ -163,13 +163,11 @@ li {list-style: none;}
     left: 0;
     width: 100%; 
     height: 12% !important;
-    /*background: #000;*/
     opacity: 0.8;
     z-index: 1001;
 }
 #navigate-content li {
     display: inline; 
-    /*padding: 61% 0 62% 0;*/
 }
 #navigate-content button {
     position: relative;
@@ -199,9 +197,10 @@ li {list-style: none;}
     position: absolute;
     top: 0;
     right: -14%;
-    background: url("../img/breadcrum.png") no-repeat right;
+    background: url("../img/breadcrum.png") no-repeat left;
+    background-size: contain;
     content: "";
-    height: 68px;
+    height: 100%;
     width: 11px;
     z-index: 3000;
 }
@@ -366,7 +365,6 @@ li {list-style: none;}
     /* navigation bar */
     #navigate-content .lastSelect:after {
         right: -15%;
-        height: 76px;
         width: 13px;
     }
 
@@ -426,7 +424,6 @@ li {list-style: none;}
     }
     #navigate-content .lastSelect:after {
         right: -9.5%;
-        height: 127px;
         width: 19px;
     }
 
