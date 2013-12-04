@@ -31,6 +31,8 @@ var ImageInOsm = (function(app) {
         start: function() {
             if (! (nav)) {
                 var nav = new app.Views.Navigation();
+                nav.render();
+                nav.$el.insertAfter('#templates');
                 Backbone.history.start();
                 
                 $('#btn2').prop('disabled', true);

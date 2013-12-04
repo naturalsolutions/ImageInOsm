@@ -123,10 +123,8 @@ var ImageInOsm = (function(app) {
     });
     
     app.Views.Navigation = Backbone.View.extend({
-    
-        template: '#navigate-template',
-        
-        el: $('#navigate-content'),
+        manage: true,
+        el: false,
         
         events: {
             'click #btn1' : 'maps',
@@ -134,12 +132,13 @@ var ImageInOsm = (function(app) {
             'click #btn3' : 'sendPicture',
             'click #btn4' : 'savedPicture'
         },
-        initialize: function() {
-            $('#navigate-content').append('<li><button class="btn-nav active lastSelect" id="btn1"><img src="img/maps.png" /><span>Select</span></button></li>');
-            $('#navigate-content').append('<li><button class="btn-nav disable" id="btn2"><img src="img/Ucam.png" /><span>Snap</span></button></li>');
-            $('#navigate-content').append('<li><button class="btn-nav disable" id="btn3"><img src="img/Uupload.png" /><span>Upload</span></button></li>');
-            $('#navigate-content').append('<li class="last"><button class="btn-nav disable" id="btn4"><img src="img/Ufinish.png" /><span>Finish</span></button></li>');
+
+        initialize : function(options) {
+            this.template = _.template($('#navigate-template').html());
+            Backbone.View.prototype.initialize.apply(this, arguments);
         },
+
+        serialize: function() {},
         
         maps: function() {
             app.routeur.navigate('maps', {trigger: true});
