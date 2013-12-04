@@ -327,7 +327,7 @@ li {list-style: none;}
     right: 0;
 }
 
-@media (orientation: portrait) and (max-width: 319px){
+@media (orientation: portrait) and (max-width: 359px){
     /* map tools */
     .olControlAttribution {
         bottom: 6.5% !important;
@@ -338,8 +338,6 @@ li {list-style: none;}
     .osm-selector-buttons button {
         padding: 2% 0 1.5% 0 !important;
     }
-}
-@media (orientation: portrait) and (min-width: 320px) and (max-width: 359px) {
 }
 @media (orientation: portrait) and (min-width: 360px) and (max-width: 479px) {
     /* navigation bar */
