@@ -278,12 +278,12 @@ li {list-style: none;}
 .olControlAttribution {
     position      : absolute;
     font-size     : 10px;
-    bottom        : 0 !important;
-    right         : 0 !important;
+    bottom        : 7.9% !important;
+    left         : 0 !important;
     background    : rgba(0,0,0,0.1);
     font-family   : sans-serif;
     padding       : 2px 4px;
-    border-radius : 5px 0 0 0;
+    border-radius : 0 5px 0 0;
 }
 .olDrawBox {cursor: crosshair;}
 .olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
@@ -336,6 +336,9 @@ li {list-style: none;}
         height: 50px;
     }
 
+    .olControlAttribution {
+        bottom: 6.5% !important;
+    }
     .osm-selector-buttons {
         height: 6.5%;
     }
@@ -454,7 +457,9 @@ li {list-style: none;}
     .olControlZoomOut {
         border-radius: 0 0 0 12px !important;
     }
-
+    .olControlAttribution {
+        bottom: 4% !important;
+    }
     .osm-selector-buttons {
         height: 4%;
     }
