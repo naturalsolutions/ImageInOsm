@@ -39,6 +39,13 @@ limitations under the License.
     <feature name="http://api.phonegap.com/1.0/file-transfer" />
     <feature name="http://api.phonegap.com/1.0/inappbrowser" />
 
+    <!-- Add reference to Cordova pugins for Phonegap Build -->
+    <gap:plugin name="org.apache.cordova.camera" version="0.2.3" />
+    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.2" />
+    <gap:plugin name="org.apache.cordova.file" version="0.2.4" />
+    <gap:plugin name="org.apache.cordova.file-transfer" version="0.3.3" />
+    <gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.3" />
+
     <icon src="icon.png" gap:role="default" />
 
     <icon src="icon/android/ldpi.png" gap:platform="android" gap:density="ldpi" />
@@ -67,5 +74,4 @@ limitations under the License.
     <icon src="icon/Windows/imageInOSM_flip_159.png" gap:platform="winphone" width="159" height="159" />
     <icon src="icon/Windows/imageInOSM_flip_336" gap:platform="winphone" width="336" height="336" />
     <icon src="icon/Windows/imageInOSM_wide_691" gap:platform="winphone" width="691" height="691" />
-
 </widget>
