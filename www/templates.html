@@ -41,14 +41,18 @@ limitations under the License.
     <div class="row-fluid img-preview">
         <img class="span12" src="<%= imgsrc %>" />
         <div class="row-fluid" id="send-buttons">
-            <button class="btn btn-large span6" id="send-button-flickr" type="button"><i class="icon-ok-sign"></i> Upload to Flickr</button>
-            <button class="btn btn-large span6" id="send-button-wikimedia" type="button"><i class="icon-ok-sign"></i> Upload to Wikimedia</button>
+            <button class="btn btn-large span6 send-button" id="send-button-flickr" type="button"><i class="icon-ok-sign"></i> Upload to Flickr</button>
+            <button class="btn btn-large span6 send-button" id="send-button-wikimedia" type="button"><i class="icon-ok-sign"></i> Upload to Wikimedia</button>
         </div>
+    </div>
+    <div id="upload-progress" data-progress="0">
+        <!-- I tried with HTML5 <progress> but it's not well supported at the moment -->
+        <img src="img/loading.gif" />
     </div>
     <div id="form-upload" class="hide">
         <div id="form-upload-content">
             <h2>Wikimedia Commons</h2>
-            <div class="row-fluid" id="mediawiki-login-form">
+            <div class="row-fluid hide" id="mediawiki-login-form">
                 <input id="mwUsername" type="text" placeholder="User name" required><br>
                 <input id="mwPassword" type="password" placeholder="Password" required>
             </div>
@@ -62,7 +66,7 @@ limitations under the License.
                 Also, be aware that an image shared on Wikimedia Commons can not be easily deleted.
             </div>
 
-            <button class="btn btn-large" id="mwSubmit" type="button" disabled>Send</button>
+            <button class="btn btn-large send-button" id="mwSubmit" type="button" disabled>Send</button>
         </div>
     </div>
 </div>

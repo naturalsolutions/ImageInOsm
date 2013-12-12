@@ -270,7 +270,6 @@ var ImageInOsm = (function(app) {
                                         this.dfd.reject('Upload failed, you\'ve reached your Flickr monthly bandwith limit.');
                                     }
                                     // Finally, send the data
-                                    // TODO: take advantage of onprogress + HTML5 progressBar
                                     this.oauth.postPG(
                                         'http://api.flickr.com/services/upload/',
                                         {

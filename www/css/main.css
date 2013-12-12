@@ -136,6 +136,23 @@ li {list-style: none;}
     top: 20%;
     left: -1%;
 }
+#upload-progress {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 2em;
+    text-align: center;
+    padding: 2em;
+    margin-left: -4em;
+    background-color: rgba(100, 100, 100, 0.7);
+    border-radius: 0.5em;
+    z-index: 4000;
+}
+#upload-progress img {
+    width: 4.5em;
+    height: 1em;
+}
 
 /* final screen */
 #success {

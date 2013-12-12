@@ -17,12 +17,6 @@
 var ImageInOsm = (function(app) {
     "use strict";
 
-    function getNotificationCB(type) {
-        return function (msg) {
-            app.routeur.navigate('final', {trigger: true});
-        }
-    };
-
     app.Views.Form = Backbone.View.extend({
         manage: true,
 
@@ -51,6 +45,16 @@ var ImageInOsm = (function(app) {
             this.$el.find('.img-preview img').attr('src', this.model.get('data'));
         },
 
+        beforeSend: function() {
+            this.$el.find('#upload-progress').show();
+            this.$el.find('.send-button').prop('disabled', true);
+        },
+
+        afterSend: function() {
+            this.$el.find('#upload-progress').hide();
+            this.$el.find('.send-button').prop('disabled', false);
+        },
+
         onSendFlickr: function(e) {
             var imageURI = app.models.pic.attributes.data,
                 feature = app.models.pic.attributes.osmfeature;
@@ -59,8 +63,17 @@ var ImageInOsm = (function(app) {
                 consumerSecret: 'a27edc675234f748',
                 callbackUrl: 'http://fakeurl.com/' // Use any fake but valid URL as a callback, we just use it to intercept the callback redirection
             });
+            this.beforeSend();
             this.server.sendPicture(imageURI, feature).then(
-                getNotificationCB('success'), getNotificationCB('error')
+                _.bind(function(msg) {
+                    this.afterSend();
+                    app.routeur.navigate('final', {trigger: true});
+                }, this),
+                _.bind(function(msg) {
+                    this.afterSend();
+                    // TODO relay error message
+                    app.routeur.navigate('final', {trigger: true});
+                }, this)
             );
         },
 
@@ -73,8 +86,18 @@ var ImageInOsm = (function(app) {
                 username: $("#mwUsername").val(),
                 password: $("#mwPassword").val()
             });
+            this.beforeSend();
             this.server.sendPicture(imageURI, feature, mwTitle, mwDesc ).then(
-                getNotificationCB('success'), getNotificationCB('error')
+                _.bind(function(msg) {
+                    this.afterSend();
+                    app.routeur.navigate('final', {trigger: true});
+                }, this),
+                _.bind(function(msg) {
+                    this.afterSend();
+                    // TODO relay error message
+                    console.log('WM sending error : ' + msg);
+                    app.routeur.navigate('final', {trigger: true});
+                }, this)
             );
             $('#btn4').removeClass('disable').addClass('active');
             $('#btn4 img').removeAttr('src').attr('src', 'img/finish.png');
