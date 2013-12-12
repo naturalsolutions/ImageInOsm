@@ -19,7 +19,10 @@ limitations under the License.
     <description>Mobile application for collecting pictures of OSM objects.</description>
     <author href="http://naturalsolutions.github.io/ImageInOsm/">Natural Solutions</author>
 
-    <access origin="*" />
+    <access origin="http://*.flickr.com" />
+    <access origin="http://test.wikipedia.org" />
+    <access origin="http://*.openstreetmap.fr" />
+
     <content src="index.html" />
 
     <preference name="phonegap-version" value="3.0.0" />        <!-- All -->
