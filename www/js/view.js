@@ -72,7 +72,7 @@ var ImageInOsm = (function(app) {
                 _.bind(function(msg) {
                     this.afterSend();
                     // TODO relay error message
-                    app.routeur.navigate('final', {trigger: true});
+                    app.routeur.navigate('final/error', {trigger: true});
                 }, this)
             );
         },
@@ -95,8 +95,7 @@ var ImageInOsm = (function(app) {
                 _.bind(function(msg) {
                     this.afterSend();
                     // TODO relay error message
-                    console.log('WM sending error : ' + msg);
-                    app.routeur.navigate('final', {trigger: true});
+                    app.routeur.navigate('final/error', {trigger: true});
                 }, this)
             );
             $('#btn4').removeClass('disable').addClass('active');
@@ -132,8 +131,14 @@ var ImageInOsm = (function(app) {
         template: "#final-template",
 
         initialize : function(options) {
-            this.status = 'TODO';
-            this.message = 'TODO';
+            options = options || {};
+            if (options.status === 'error') {
+                this.status = 'error';
+                this.message = 'Upload failed';
+            } else {
+                this.status = 'success';
+                this.message = 'Upload successful';
+            }
             Backbone.View.prototype.initialize.apply(this, arguments);
         },
 

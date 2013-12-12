@@ -22,7 +22,7 @@ var ImageInOsm = (function(app) {
             'maps' : 'maps',
             'capture(/:mode)' : 'capture',
             'form' : 'form',
-            'final' : 'finalScreen',
+            'final(/:status)' : 'finalScreen',
         },
         maps: function() {
             $('body').css('background', '#fff');
@@ -83,14 +83,17 @@ var ImageInOsm = (function(app) {
             }
             app.views.form.$el.appendTo('#content');
         },
-        finalScreen: function() {
+        finalScreen: function(status) {
             $('body').css('background', '#111111');
             $('#btn3').removeClass('lastSelect');
             $('#content > *').detach();
-            if (! (app.views.notification)) {
-                app.views.notification = new app.Views.Final();
-                app.views.notification.render();
+            if (app.views.notification) {
+                app.views.notification.remove();
             }
+            app.views.notification = new app.Views.Final({
+                status: status === 'error' ? 'error' : 'success'
+            });
+            app.views.notification.render();
             app.views.notification.$el.appendTo('#content');
         }
     });
