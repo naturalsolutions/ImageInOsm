@@ -80,8 +80,8 @@ var ImageInOsm = (function(app) {
         onSendMediawiki: function(e) {
             var imageURI = app.models.pic.attributes.data,
                 feature = app.models.pic.attributes.osmfeature,
-                mwTitle = $("#mwTitle").val(),
-                mwDesc = $("#mwDescription").val() ;
+                mwTitle = $("#mwTitle").val().replace(/ /g, '_'),
+                mwDesc = $("#mwDescription").val();
             this.server = new app.utils.WikimediaAPI({
                 username: $("#mwUsername").val(),
                 password: $("#mwPassword").val()
@@ -107,7 +107,7 @@ var ImageInOsm = (function(app) {
             var valid = document.getElementById('mwTitle').validity.valid &&
                         document.getElementById('mwPassword').validity.valid &&
                         document.getElementById('mwUsername').validity.valid;
-            $('#mwSubmit').attr('disabled', !valid);
+            this.$el.find('#mwSubmit').prop('disabled', !valid);
         },
 
         displayMediaWikiForm: function(e) {
