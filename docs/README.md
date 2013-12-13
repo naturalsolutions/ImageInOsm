@@ -52,3 +52,30 @@ If you want to contribute to ImageInOsm, you will need to deploy a development e
     git pull origin master
 
 The official [Cordova doc](http://cordova.apache.org/docs/en/3.0.0/index.html) may be useful.
+
+Notes about dependencies
+========================
+
+jQuery has been replaced by a custom build of Zepto (lighter with a compatible
+API). To update the build (newer version or adding modules), just follow the
+[official procedure] (https://github.com/madrobby/zepto#building).
+
+A custom build of OpenLayers has been made. The file listing enabled
+components is `ImageInOsm.cfg`. To update the build, follow the guideline in
+OpenLayers `build` directory in the source package.
+
+Minifying JavaScript files
+==========================
+
+So far, JavaScript compression is handled manually with Google Closure using
+these commands:
+
+    cd www/libs/
+    java -jar ../../compiler.jar --js jsOAuth-1.3.1.js --js_output_file jsOAuth-1.3.1.min.js
+    java -jar ../../compiler.jar --js spinner.js --js_output_file spinner.min.js
+    cd backbone.layoutmanager_0.8.7/
+    java -jar ../../../compiler.jar --js backbone.layoutmanager.js --js_output_file backbone.layoutmanager.min.js
+    cd ../NS.MediaWikiApiClient
+    java -jar ../../../compiler.jar --js client.js --js_output_file client.min.js
+    cd ../../js/
+    java -jar ../../compiler.jar --js app.js --js map-view.js --js model.js --js router.js --js utilities.js --js view.js --js_output_file ImageInOsm.min.js
