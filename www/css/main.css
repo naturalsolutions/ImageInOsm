@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+* {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);} /* Taken from OpenLayers mobile stylesheet */
 body {margin: 0; padding: 0; font-family: Verdana;}
 li {list-style: none;}
 #template {diplay: none;}
@@ -266,33 +267,41 @@ li {list-style: none;}
     animation: spin 2s infinite linear;
 }
 .olControlZoom {
-    float: right !important;
-    position: relative !important;
-    top: 15% !important;
-    left: auto !important;
-    right: 0 !important;
-    background: none !important;
-    width: 12% !important;
-    z-index: 10000 !important;
+    float: right;
+    position: relative;
+    top: 15%;
+    left: auto;
+    right: 0;
+    width: 12%;
+    z-index: 10000;
     margin: 0 3% 0 0;
+    padding: 2px;
 }
 .olControlZoom a { 
-    margin: 0 !important;
-    font-size: 20px;
-}
-#content .olControlZoomIn, #content .olControlZoomOut  {
-    background: #000;
+    display: block;
+    margin: 0;
     padding: 25%;
-    z-index: 10000 !important;
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    height: 32px;
+    width: 32px;
+    line-height: 28px;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
+    background: #000;
+    z-index: 10000;
 }
-#content .olControlZoomIn:active, #content .olControlZoomOut:active  {
+.olControlZoom a:active {
     background: #444;
 }
-#content .olControlZoomIn {
-    border-radius: 7px 0 0 0 !important;
+.olControlZoomIn {
+    border-radius: 7px 0 0 0;
 }
-#content .olControlZoomOut {
-    border-radius: 0 0 0 7px !important;
+.olControlZoomOut {
+    border-radius: 0 0 0 7px;
 }
 .olMap {position: relative;}
 .olMap img {max-width: none;}
@@ -308,6 +317,17 @@ li {list-style: none;}
 }
 .olDrawBox {cursor: crosshair;}
 .olHandlerBoxZoomBox {border: 2px solid red; position: absolute; background-color: white; opacity: 0.50; font-size: 1px; filter: alpha(opacity=50);}
+.olLayerGrid .olTileImage {
+    -webkit-transition: opacity 0.2s linear;
+    -moz-transition: opacity 0.2s linear;
+    -o-transition: opacity 0.2s linear;
+    transition: opacity 0.2s linear;
+}
+@media (-webkit-transform-3d) {
+    img.olTileImage {
+        -webkit-transform: translate3d(0, 0, 0);
+    }
+}
 .osm-selector-buttons {
     position: absolute;
     bottom: 0;
@@ -434,15 +454,15 @@ li {list-style: none;}
         height: 60px;
     }
     .olControlZoom {
-        width: 7% !important;
-        z-index: 10000 !important;
-        margin: 0 !important;
+        width: 7%;
+        z-index: 10000;
+        margin: 0;
     }
     .olControlZoomIn {
-        border-radius: 12px 0 0 0 !important;
+        border-radius: 12px 0 0 0;
     }
     .olControlZoomOut {
-        border-radius: 0 0 0 12px !important;
+        border-radius: 0 0 0 12px;
     }
     .olControlAttribution {
         bottom: 4% !important;
