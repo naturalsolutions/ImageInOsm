@@ -22,7 +22,7 @@ var ImageInOsm = (function(app) {
             'maps' : 'maps',
             'capture(/:mode)' : 'capture',
             'form' : 'form',
-            'final(/:status)' : 'finalScreen',
+            'final(/:status)' : 'finalScreen'
         },
         maps: function() {
             $('body').css('background', '#fff');

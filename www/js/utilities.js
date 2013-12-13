@@ -132,7 +132,7 @@ var ImageInOsm = (function(app) {
                 }, this)
             );
             return this.dfd;
-        },
+        }
     };
 
     app.utils.FlickrAPI = function(options) {

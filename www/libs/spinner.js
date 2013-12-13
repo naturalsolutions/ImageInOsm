@@ -45,7 +45,7 @@ var cSpeed=6;
 	
 	function stopAnimation(){//stops animation
 		clearTimeout(cPreloaderTimeout);
-		cPreloaderTimeout=false;q
+		cPreloaderTimeout=false;
 	}
 	
 	function imageLoader(s, fun)//Pre-loads the sprites image

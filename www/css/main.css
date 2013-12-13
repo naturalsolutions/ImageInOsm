@@ -16,7 +16,6 @@
 * {-webkit-tap-highlight-color: rgba(0, 0, 0, 0);} /* Taken from OpenLayers mobile stylesheet */
 body {margin: 0; padding: 0; font-family: Verdana;}
 li {list-style: none;}
-#template {diplay: none;}
 .container-fluid  {
     position: absolute;
     bottom: 0;
