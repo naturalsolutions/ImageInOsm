@@ -13,3 +13,9 @@ Version 0.3:
 
 Version 0.4:
 * Graphics and usability update
+
+Version 0.5:
+* Notify the user when upload fails
+* Add a visual feedback when uploading
+* Clean-up, reduce size of denpencies in expectation of a production release
+
