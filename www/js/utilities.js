@@ -280,7 +280,8 @@ var ImageInOsm = (function(app) {
                                             params: {is_public: '1', tags: this.tags}
                                         },
                                         _.bind(function (data) {
-                                            var resp = $($.parseXML(data.response)).children(),
+                                            var p = new DOMParser(),
+                                                resp = $(p.parseFromString(data.response, "text/xml")).children(),
                                                 stat = resp.attr('stat');
                                             if (stat === 'fail') {
                                                 var err = resp.find('err');
