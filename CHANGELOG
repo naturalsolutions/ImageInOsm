@@ -19,3 +19,5 @@ Version 0.5:
 * Add a visual feedback when uploading
 * Clean-up, reduce size of denpencies in expectation of a production release
 
+Version 0.5.1:
+* Fix a regression on iOS (square resizing enabled)
