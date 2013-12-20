@@ -60,11 +60,10 @@ var ImageInOsm = (function(app) {
                 },
                 {
                     quality: 50,
-                    allowEdit : true,
+                    allowEdit : false,
                     correctOrientation: true,
                     encodingType: navigator.camera.EncodingType.JPEG,
                     sourceType: source,
-                    targetWidth: 1024,
                     destinationType: navigator.camera.DestinationType.FILE_URI
                 });
         },
