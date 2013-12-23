@@ -40,6 +40,8 @@ var ImageInOsm = (function(app) {
                 $('#btn4').prop('disabled', true);
             }
             app.routeur.navigate('maps', {trigger: true});
+            
+            $('.osm-selector-buttons').css('display', 'none');
         },
         // Main function
         init: function() {
