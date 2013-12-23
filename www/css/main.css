@@ -307,7 +307,7 @@ li {list-style: none;}
 .olControlAttribution {
     position      : absolute;
     font-size     : 10px;
-    bottom        : 7.9% !important;
+    bottom        : 0 !important;
     left         : 0 !important;
     background    : rgba(0,0,0,0.1);
     font-family   : sans-serif;
@@ -360,9 +360,6 @@ li {list-style: none;}
 
 @media (orientation: portrait) and (max-width: 359px){
     /* map tools */
-    .olControlAttribution {
-        bottom: 6.5% !important;
-    }
     .osm-selector-buttons {
         height: 6.5%;
     }
@@ -462,9 +459,6 @@ li {list-style: none;}
     }
     .olControlZoomOut {
         border-radius: 0 0 0 12px;
-    }
-    .olControlAttribution {
-        bottom: 4% !important;
     }
     .osm-selector-buttons {
         height: 4%;
