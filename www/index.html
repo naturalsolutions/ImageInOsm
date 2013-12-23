@@ -25,9 +25,18 @@ limitations under the License.
     <link rel="stylesheet" type="text/css" href="libs/bootstrap_2.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="libs/bootstrap_2.3.1/css/bootstrap-responsive.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
+    
+    <script>
+        function onBody(){
+            document.addEventListener("deviceready", onDeviceReady, false);
+        }
+        function onDeviceReady() {
+            navigator.splashscreen.hide();
+        }
+    </script>
   </head>
 
-  <body>
+  <body onload="onBody()">
     <div id="templates"></div>
     <div id="content">
         <div id="spinner-content">
