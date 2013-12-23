@@ -89,10 +89,12 @@ var ImageInOsm = (function(app) {
                 featureselected: function(data) {
                     app.models.pic.set({osmfeature: data.feature});
                     this.$el.find('.osm-selector-buttons button').prop('disabled', false);
+                    $('.osm-selector-buttons').css('display', 'block');
                 },
                 featureunselected: function() {
                     app.models.pic.set({osmfeature: null});
                     this.$el.find('.osm-selector-buttons button').prop('disabled', true);
+                    $('.osm-selector-buttons').css('display', 'none');
                 },
                 scope: this
             });
