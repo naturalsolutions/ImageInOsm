@@ -25,7 +25,7 @@ limitations under the License.
 
     <content src="index.html" />
 
-    <preference name="phonegap-version" value="3.0.0" />        <!-- All -->
+    <preference name="phonegap-version" value="3.5.0" />        <!-- All -->
     <preference name="loglevel" value="DEBUG" />                <!-- All -->
     <preference name="fullscreen" value="true" />               <!-- All -->
     <preference name="orientation" value="portrait" />          <!-- All -->
@@ -43,8 +43,8 @@ limitations under the License.
     <feature name="http://api.phonegap.com/1.0/inappbrowser" />
 
     <!-- Add reference to Cordova pugins for Phonegap Build -->
-    <gap:plugin name="org.apache.cordova.camera" version="0.2.3" />
-    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.2" />
+    <gap:plugin name="org.apache.cordova.camera" version="0.2.9" />
+    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
     <gap:plugin name="org.apache.cordova.file" version="0.2.4" />
     <gap:plugin name="org.apache.cordova.file-transfer" version="0.3.3" />
     <gap:plugin name="org.apache.cordova.inappbrowser" version="0.2.3" />
