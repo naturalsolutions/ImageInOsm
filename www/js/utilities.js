@@ -142,9 +142,9 @@ var ImageInOsm = (function(app) {
     app.utils.FlickrAPI.prototype = {
         initialize: function(options) {
             this.oauth = OAuth(_.extend({
-                requestTokenUrl: 'http://www.flickr.com/services/oauth/request_token',
-                authorizationUrl: 'http://www.flickr.com/services/oauth/authorize',
-                accessTokenUrl: 'http://www.flickr.com/services/oauth/access_token'
+                requestTokenUrl: 'https://www.flickr.com/services/oauth/request_token',
+                authorizationUrl: 'https://www.flickr.com/services/oauth/authorize',
+                accessTokenUrl: 'https://www.flickr.com/services/oauth/access_token'
             }, options));
             var storedToken = localStorage.getItem('FlickrAccessToken');
             if (storedToken !== null) {
@@ -197,7 +197,7 @@ var ImageInOsm = (function(app) {
             if (! params) params = {};
             params.method = method;
             this.oauth.get(
-                'http://api.flickr.com/services/rest?nojsoncallback=1&format=json&' + $.param(params),
+                'https://api.flickr.com/services/rest?nojsoncallback=1&format=json&' + $.param(params),
                 _.bind(function(data) {
                     var args = JSON.parse(data.text);
                     if (args.stat === 'ok') {
@@ -271,7 +271,7 @@ var ImageInOsm = (function(app) {
                                     }
                                     // Finally, send the data
                                     this.oauth.postPG(
-                                        'http://api.flickr.com/services/upload/',
+                                        'https://api.flickr.com/services/upload/',
                                         {
                                             uri: this.imageURI,
                                             key: 'photo',
