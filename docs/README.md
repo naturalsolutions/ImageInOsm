@@ -51,10 +51,15 @@ If you want to contribute to ImageInOsm, you will need to deploy a development e
     git remote add --track master origin git@github.com:NaturalSolutions/ImageInOsm.git
     git pull origin master
 
+    # Load 3rd-party dependencies
+    bower install
+
 The official [Cordova doc](http://cordova.apache.org/docs/en/3.0.0/index.html) may be useful.
 
 Notes about dependencies
 ========================
+
+Dependencies are normally managed with Bower. However, some 3rd-party modules has been customized.
 
 jQuery has been replaced by a custom build of Zepto (lighter with a compatible
 API). To update the build (newer version or adding modules), just follow the
@@ -63,6 +68,8 @@ API). To update the build (newer version or adding modules), just follow the
 A custom build of OpenLayers has been made. The file listing enabled
 components is `ImageInOsm.cfg`. To update the build, follow the guideline in
 OpenLayers `build` directory in the source package.
+
+jsOAuth has been patched to integrate PhoneGap special File API.
 
 Minifying JavaScript files
 ==========================

@@ -1,0 +1,10 @@
+{
+  "name": "ImageInOsm",
+  "version": "0.5.1",
+  "dependencies": {
+    "underscore": "~1.4.4",
+    "backbone": "~1.0.0",
+    "layoutmanager": "~0.8.7"
+  },
+  "devDependencies": {}
+}
