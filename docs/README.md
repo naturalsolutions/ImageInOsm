@@ -21,14 +21,6 @@ Built for:
 * Android 2.3.3 (API Level 10) and later.
 * iOS 3 and later.
 
-So far, application has been tested on:
-* Sony XPeria J
-* Samsung Galaxy Tab 8.9
-* Samsung Galaxy Tab2 10.1
-* SFR StartTrail II (Android 2.3.6)
-* iPhone 3GS
-* iPhone 4
-
 Development environment
 =======================
 
@@ -82,6 +74,20 @@ It includes JS/CSS minification and image optimization.
 
 To do before releasing a production app
 =======================================
+
+Choose a version number for the new release and put it into:
+- config.xml
+- package.json
+
+Add a few words about this release in the CHANGELOG.
+
+Commit this changes and tag this commit with the version number:
+
+    git add config.xml package.json CHANGELOG
+    git commit -m "Release version x.y.z"
+    git push origin master
+    git tag -a "x.y.z" -m "New release"
+    git push origin "x.y.z"
 
 Before building APK/IPA for online stores, you will need to manually do the
 following:
