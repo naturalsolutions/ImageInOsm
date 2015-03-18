@@ -32,7 +32,7 @@ So far, application has been tested on:
 Development environment
 =======================
 
-Code is currently developed against Cordova 3.0.
+Code is currently developed against Cordova 3.6.3.
 
 If you want to contribute to ImageInOsm, you will need to deploy a development environment. First, install cordova and its dependencies as well as a platform SDK (Android and/or iOS). Then, execute the following commands:
 

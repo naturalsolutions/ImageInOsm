@@ -104,12 +104,13 @@ NS.MediaWikiApiClient = (function() {
             formdata = new FormData(); 
         formdata.append("file", fileToUpload);
         formdata.append("text", filetxt);
+        formdata.append("token", token);
 
         $.ajax({
             type: 'POST',
             url: this.basePath +
-                 '?action=upload&format=json&filename=' + encodeURIComponent(fileName) +
-                 '&ignorewarnings=1&token=' + encodeURIComponent(token),
+                 '?action=upload&format=json&ignorewarnings=1' +
+                 '&filename=' + encodeURIComponent(fileName),
             contentType: false,
             processData: false,
             data: formdata,

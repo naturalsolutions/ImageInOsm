@@ -34,15 +34,13 @@ var ImageInOsm = (function(app) {
                     ft = new FileTransfer(),
                     options = new FileUploadOptions(),
                     url = this.basePath +
-                          '?action=upload&format=json&filename=' +
-                          encodeURIComponent(fileName) +
-                          '&ignorewarnings=1&token=' +
-                          encodeURIComponent(token);
+                          '?action=upload&format=json&ignorewarnings=1' +
+                          '&filename='+ encodeURIComponent(fileName);
 
                 options.fileKey = 'file';
                 options.fileName = fileName;
                 options.mimeType = fileToUpload.type;
-                options.params = {text: filetxt};
+                options.params = {text: filetxt, token: token};
                 options.chunkedMode = false;
 
                 ft.upload(
@@ -77,15 +75,18 @@ var ImageInOsm = (function(app) {
             this.feature = feature;
             this.title = title;
             this.description = description;
+            this.imageURI = imageURI;
             this.client.login(this.username, this.password).then(
                 _.bind(function() {
                     localStorage.setItem('mwUsername', this.username);
                     localStorage.setItem('mwPassword', this.password);
                     window.resolveLocalFileSystemURI(
-                        imageURI,
+                        this.imageURI,
                         _.bind(function(fe) {
                             fe.file(
                                 _.bind(function(f) {
+                                    this.file = f;
+                                    this.file.fullPath = this.imageURI;
                                     this.client.getUniqueFileName(this.title, f.type).done(_.bind(function(fileName) {
                                         var location = this.feature.geometry.getCentroid().transform('EPSG:3857', 'EPSG:4326'),
                                             content = '{{Information \n'+
@@ -99,7 +100,7 @@ var ImageInOsm = (function(app) {
                                                        (this.feature.geometry instanceof OpenLayers.Geometry.Point ? 'node' : 'way') +
                                                        '|OSM_ID=' + this.feature.osm_id + '}}\n\n' +
                                                        '[[Category:OSM]][[Category:ImageInOsm]]\n';
-                                        this.client.uploadFile(f, fileName, false, content).then(
+                                        this.client.uploadFile(this.file, fileName, false, content).then(
                                             _.bind(function(data) {
                                                 this.dfd.resolve('Picture was successfully uploaded under the name <a href="' +
                                                                  data.upload.imageinfo.descriptionurl +
@@ -277,6 +278,7 @@ var ImageInOsm = (function(app) {
                                             key: 'photo',
                                             name: f.name,
                                             type: f.type,
+                                            size: f.size,
                                             params: {is_public: '1', tags: this.tags}
                                         },
                                         _.bind(function (data) {

@@ -497,13 +497,17 @@ exports.OAuth = (function (global) {
                     url + '',
                     success,
                     failure,
-                    new FileUploadOptions(
-                        data.key,
-                        data.name,
-                        data.type,
-                        data.params,
-                        {Authorization: 'OAuth ' + toHeaderString(headerParams)}
-                    )
+                    {
+                        fileKey: data.key,
+                        fileName: data.name,
+                        mimeType: data.type,
+                        params: data.params,
+                        chunkedMode: false,
+                        headers: {
+                            'Authorization': 'OAuth ' + toHeaderString(headerParams),
+                            'Content-Length': data.size
+                        }
+                    }
                 );
             }
             // ----- jsOAuth extension for Flickr/PhoneGap (end) ---------------
