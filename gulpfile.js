@@ -85,21 +85,12 @@ gulp.task('imagemin2', function () {
 gulp.task('imagemin', ['imagemin1', 'imagemin2']);
 
 /*
- * Image optimizations
- */
-
-gulp.task('copy', function () {
-    return gulp.src(['src/config.xml'], {base: 'src'})
-        .pipe(gulp.dest('www/'));
-});
-
-/*
  * Tasks definition
  */
 
 var runSequence = require('run-sequence');
 
 gulp.task('build', function() {
-    runSequence('clean', ['usemin', 'templates', 'imagemin', 'copy']);
+    runSequence('clean', ['usemin', 'templates', 'imagemin']);
 });
 gulp.task('default', ['build']);

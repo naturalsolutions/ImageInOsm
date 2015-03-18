@@ -94,6 +94,7 @@ following:
     by:
 
         'http://commons.wikimedia.org/w/api.php'
-* in `www/config.xml`, also update the domain whitelist for the Wikimedia API.
+* in `config.xml`, also update the domain whitelist for the Wikimedia API.
 
-Then build your APK/IPA with the files in `www/`.
+Then build your APK/IPA with `config.xml`, `icon.png` and the files in `www/`
+and `res/`.
