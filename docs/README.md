@@ -74,18 +74,11 @@ jsOAuth has been patched to integrate PhoneGap special File API.
 Minifying JavaScript files
 ==========================
 
-So far, JavaScript compression is handled manually with Google Closure using
-these commands:
+Files are prepared by Gulp tasks:
 
-    cd www/libs/
-    java -jar ../../compiler.jar --js jsOAuth-1.3.1.js --js_output_file jsOAuth-1.3.1.min.js
-    java -jar ../../compiler.jar --js spinner.js --js_output_file spinner.min.js
-    cd backbone.layoutmanager_0.8.7/
-    java -jar ../../../compiler.jar --js backbone.layoutmanager.js --js_output_file backbone.layoutmanager.min.js
-    cd ../NS.MediaWikiApiClient
-    java -jar ../../../compiler.jar --js client.js --js_output_file client.min.js
-    cd ../../js/
-    java -jar ../../compiler.jar --js app.js --js map-view.js --js model.js --js router.js --js utilities.js --js view.js --js_output_file ImageInOsm.min.js
+    gulp build
+
+It includes JS/CSS minification and image optimization.
 
 To do before releasing a production app
 =======================================
@@ -93,11 +86,9 @@ To do before releasing a production app
 Before building APK/IPA for online stores, you will need to manually do the
 following:
 
-*   clone the code in a temporary directory and checkout the latest tagged
-    version
-*   remove all non-minified JS and CSS files
-*   update `www/index.html`, point to JS minified files
-*   in `www/js/utilities.js`, change the URL of the Wikimedia API, replace:
+*   checkout the latest tagged version
+*   gulp build
+*   in `www/postCordova.js`, change the URL of the Wikimedia API, replace:
 
         'http://test.wikipedia.org/w/api.php'
     by:
@@ -105,5 +96,4 @@ following:
         'http://commons.wikimedia.org/w/api.php'
 * in `www/config.xml`, also update the domain whitelist for the Wikimedia API.
 
-Don't commit that changes, just build your APK/IPA and drop this temporary
-workspace.
+Then build your APK/IPA with the files in `www/`.

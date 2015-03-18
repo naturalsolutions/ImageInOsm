@@ -3,3 +3,5 @@ merges
 platforms
 plugins
 compiler.jar
+www
+node_modules
