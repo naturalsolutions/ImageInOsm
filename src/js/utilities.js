@@ -80,7 +80,7 @@ var ImageInOsm = (function(app) {
                 _.bind(function() {
                     localStorage.setItem('mwUsername', this.username);
                     localStorage.setItem('mwPassword', this.password);
-                    window.resolveLocalFileSystemURI(
+                    window.resolveLocalFileSystemURL(
                         this.imageURI,
                         _.bind(function(fe) {
                             fe.file(
@@ -260,7 +260,7 @@ var ImageInOsm = (function(app) {
                 _.bind(function(args) {
                     this.maxSize = args.user.bandwidth.remainingkb;
                     // Obtain a file descriptor (async level 2)
-                    window.resolveLocalFileSystemURI(
+                    window.resolveLocalFileSystemURL(
                         this.imageURI,
                         _.bind(function (fe) {
                             // Convert to a sort of sub-descriptor... (async level 3)
