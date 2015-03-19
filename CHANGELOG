@@ -21,3 +21,8 @@ Version 0.5:
 
 Version 0.5.1:
 * Fix a regression on iOS (square resizing enabled)
+
+Version 0.6:
+* Update to the latest version of the Cordova framework
+* Improve development tools (Bower, Gulp)
+* Fix bugs on Flickr and Wikimedia uploaders
