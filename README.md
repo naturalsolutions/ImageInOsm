@@ -31,7 +31,7 @@ Screen dump
 Installing
 ----------
 
-ImageInOsm is available on [google play](https://play.google.com/store/apps/details?id=image.in.osm&hl=fr) and itunes [https://itunes.apple.com/fr/app/imageinosm/id786164827?mt=8].
+ImageInOsm is available on [google play](https://play.google.com/store/apps/details?id=image.in.osm&hl=fr) and [itunes] (https://itunes.apple.com/fr/app/imageinosm/id786164827?mt=8).
 
 Of course, you can also install it from the source using Apple XCode or Android Developer Tools (developer oriented).
 
