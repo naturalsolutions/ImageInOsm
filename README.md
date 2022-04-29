@@ -66,3 +66,7 @@ See also
 --------
 
 ImageInOsm on [Flickr App Garden](http://www.flickr.com/services/apps/72157633757559485/).
+
+## Information 
+- https://natural-solutions-world
+- https://www.natural-solutions.eu
